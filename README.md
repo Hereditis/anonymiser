@@ -4,6 +4,8 @@
 
 Les pièces de vos clients, sans leurs noms.
 
+**[Ouvrir l'outil](https://hereditis.github.io/anonymiser/)** · **[Télécharger pour un usage hors ligne](https://hereditis.github.io/anonymiser/Anonymiser.html)**
+
 Anonymiser est un outil gratuit proposé par Hereditis aux conseillers en gestion de patrimoine. Il pseudonymise les pièces d'un dossier (statuts, actes notariés, relevés, liasses, avis d'imposition) avant leur transmission à un tiers : chaque nom, société, adresse ou identifiant est remplacé par un libellé comme `[Client 1]` ou `[Société 1]`, le même dans toutes les pièces.
 
 Tout se passe dans le navigateur, sur le poste du conseiller. Aucune pièce n'est envoyée sur Internet.
@@ -17,6 +19,10 @@ En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, en télécha
 3. **Vérifier** : décochez ce qui ne doit pas être masqué, cochez les propositions utiles, ajustez les libellés.
 4. **Exporter** : téléchargez les pièces pseudonymisées et, pour les PDF et les photos, une copie caviardée en image. La table de correspondance reste chez vous.
 5. **Rétablir** : à réception du bilan, l'outil remet les vrais noms dans le document Word, PowerPoint ou Excel, avec votre table de correspondance.
+
+## Mises à jour
+
+La version en ligne est toujours la plus récente. Le fichier téléchargé, lui, ne consulte jamais Internet : le bouton « Vérifier les mises à jour » de son en-tête ouvre la version en ligne en lui transmettant seulement le numéro de version utilisé, et celle-ci indique s'il faut télécharger la nouvelle. Pour être prévenu par mail, suivez le dépôt sur GitHub (Watch, puis Releases).
 
 ## Confidentialité : comment le vérifier
 
@@ -69,6 +75,7 @@ Les tests n'utilisent que des personnes, sociétés et identifiants inventés (d
 | `src/prenoms.json` | liste des prénoms reconnus |
 | `scripts/build.py` | assemble la page autonome avec ses bibliothèques |
 | `docs/index.html` | page publiée (GitHub Pages) |
+| `docs/Anonymiser.html` | même page, proposée au téléchargement depuis la version en ligne |
 | `dist/Anonymiser.html` | même page, à télécharger |
 | `tests/` | tests de bout en bout et pièces fictives |
 | `assets/` | logo |

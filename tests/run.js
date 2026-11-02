@@ -108,7 +108,17 @@ function leaks(out, words){ return words.filter(w => out.toLowerCase().includes(
   check('liasse : champs de formulaire masqués', leaks(li, ['SOMMET', 'Fleuri', '81234567600017', 'MARCHAND', 'ANNECY']).length === 0, leaks(li, ['SOMMET', 'Fleuri', '81234567600017', 'MARCHAND', 'ANNECY']).join(', '));
   check('liasse : vocabulaire comptable intact', li.includes('COMPTE DE RESULTAT') && li.includes("Resultat de l'exercice 20 073") && li.includes('SOLDES INTERMEDIAIRES DE GESTION') && li.includes('Total general 202 340'));
 
-  // 7. Étanchéité réseau
+  // 7. Version et vérification des mises à jour
+  await page.goto(PAGE);
+  const upd = await page.evaluate(() => ({ href: document.querySelector('#updBtn').href, ver: document.querySelector('#verLabel').textContent }));
+  check('fichier local : le bouton ouvre la version en ligne avec le numéro de version', upd.href === 'https://hereditis.github.io/anonymiser/?v=' + upd.ver && /^\d+\.\d+$/.test(upd.ver), upd.href);
+  const older = await page.evaluate(() => { window.__anon.updateCheck('0.1', true); return document.querySelector('#updText').textContent; });
+  check('page en ligne : signale une version plus récente', older.includes('Vous utilisiez la version 0.1') && older.includes('est disponible'), older);
+  const same = await page.evaluate(() => { const v = document.querySelector('#verLabel').textContent; window.__anon.updateCheck(v, true); return document.querySelector('#updText').textContent; });
+  check('page en ligne : confirme une version à jour', same.includes('est la plus récente'), same);
+  await page.evaluate(() => document.querySelector('#updBanner').classList.add('hidden'));
+
+  // 8. Étanchéité réseau
   const blocked = await page.evaluate(async () => { try { await fetch('https://example.com/'); return false; } catch (e) { return true; } });
   check('aucune requête réseau possible depuis la page', blocked && network.length === 0, network.join(', '));
   check('aucune erreur JavaScript', errors.length === 0, errors.join(' | '));

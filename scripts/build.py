@@ -3,7 +3,7 @@
 Toutes les bibliothèques sont intégrées dans la page : elle ne charge rien depuis Internet.
 Usage : npm ci && python3 scripts/build.py
 """
-import base64, os, shutil
+import base64, datetime, json, os, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NM = os.path.join(ROOT, 'node_modules')
@@ -25,7 +25,15 @@ with open(os.path.join(ROOT, 'src', 'prenoms.json'), encoding='utf-8') as f:
 with open(os.path.join(NM, '@tesseract.js-data', 'fra', '4.0.0_best_int', 'fra.traineddata.gz'), 'rb') as f:
     fra = base64.b64encode(f.read()).decode()
 
+with open(os.path.join(ROOT, 'package.json'), encoding='utf-8') as f:
+    version = '.'.join(json.load(f)['version'].split('.')[:2])
+MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+d = datetime.date.today()
+build_date = f"{d.day} {MOIS[d.month - 1]} {d.year}"
+
 parts = {
+    '/*__VERSION__*/': version,
+    '/*__BUILD_DATE__*/': build_date,
     '/*__PRENOMS__*/': prenoms,
     '/*__FFLATE__*/': rd('fflate', 'umd', 'index.js'),
     '/*__PDFJS__*/': rd('pdfjs-dist', 'build', 'pdf.min.js'),
@@ -42,9 +50,9 @@ for k, v in parts.items():
     out = out.replace(k, v)
 assert '\u2014' not in out, 'tiret cadratin interdit'
 
-for path in (os.path.join(ROOT, 'dist', 'Anonymiser.html'), os.path.join(ROOT, 'docs', 'index.html')):
+for path in (os.path.join(ROOT, 'dist', 'Anonymiser.html'), os.path.join(ROOT, 'docs', 'index.html'), os.path.join(ROOT, 'docs', 'Anonymiser.html')):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         f.write(out)
 shutil.copy(os.path.join(ROOT, 'assets', 'logo.png'), os.path.join(ROOT, 'docs', 'logo.png'))
-print('Page construite :', len(out.encode()) // 1024, 'Ko')
+print('Page construite : version', version, 'du', build_date, ',', len(out.encode()) // 1024, 'Ko')

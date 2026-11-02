@@ -1,5 +1,11 @@
 # Journal des versions
 
+## 0.5 (2 novembre 2026)
+
+- Numéro de version affiché dans l'en-tête, date de construction au survol.
+- Bouton « Vérifier les mises à jour » : il ouvre la version en ligne en lui indiquant la version utilisée, et la page en ligne signale s'il en existe une plus récente. Le fichier local ne consulte jamais Internet de lui-même.
+- Sur la version en ligne, le bouton devient « Télécharger pour un usage hors ligne ».
+
 ## 0.4 (2 novembre 2026)
 
 - Liasses fiscales et formulaires Cerfa : les valeurs saisies dans les champs (dénomination, adresse, SIRET, dirigeant) sont lues, masquées dans le texte et noircies sur la copie caviardée.
