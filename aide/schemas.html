@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<style>
+body{margin:0;padding:20px;background:#fff;font-family:"Inter","Helvetica Neue",Arial,sans-serif;color:#13222E}
+.card{width:900px;border:2px solid #C9D3DC;border-radius:14px;overflow:hidden;margin-bottom:40px;background:#fff}
+.bar{display:flex;align-items:center;gap:14px;background:#E9EEF3;padding:14px 18px;border-bottom:1px solid #C9D3DC}
+.dots span{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:7px}
+.url{flex:1;background:#fff;border-radius:20px;padding:9px 18px;font-size:17px;color:#4A5B69}
+.ico{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.ring{outline:4px solid #D7443E;outline-offset:3px;background:#fff}
+.panel{position:absolute;right:18px;top:78px;width:430px;background:#fff;border:1px solid #C9D3DC;border-radius:12px;box-shadow:0 10px 30px rgba(19,34,46,.18);padding:16px}
+.panel h4{margin:0 0 12px;font-size:16px;color:#4A5B69;font-weight:600}
+.row{display:flex;align-items:center;gap:14px;padding:12px;border-radius:10px;background:#EEF4FC}
+.fi{width:38px;height:46px;border-radius:5px;background:#2C6FD1;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;box-sizing:border-box;position:relative}
+.fi:after{content:"";position:absolute;top:0;right:0;border-width:0 11px 11px 0;border-style:solid;border-color:#fff #fff #9CBDEB #9CBDEB}
+.name{font-weight:700;font-size:18px}
+.sub{font-size:14px;color:#4A5B69}
+.lab{display:inline-block;background:#D7443E;color:#fff;font-weight:700;font-size:20px;padding:8px 16px;border-radius:9px}
+.body{position:relative;height:290px;background:#F4F6F8}
+.side{width:210px;background:#E9EEF3;height:100%;padding:18px;box-sizing:border-box;font-size:17px;color:#4A5B69}
+.side div{padding:9px 12px;border-radius:8px;margin-bottom:4px}
+.side .on{background:#2C6FD1;color:#fff;font-weight:700}
+.files{position:absolute;left:250px;top:30px;display:flex;gap:46px}
+.big{display:flex;flex-direction:column;align-items:center;gap:10px;width:150px;text-align:center;font-size:16px}
+.bigfi{width:84px;height:104px;border-radius:8px;background:#fff;border:3px solid #13222E;position:relative;display:flex;align-items:center;justify-content:center}
+.bigfi b{font-size:15px;color:#2C6FD1}
+.sel .bigfi{outline:4px solid #D7443E;outline-offset:6px}
+.sel span{background:#2C6FD1;color:#fff;border-radius:5px;padding:2px 6px;font-weight:700}
+.grey .bigfi{border-color:#B8C3CD}
+.grey{color:#9AA7B2}
+</style></head><body>
+
+<!-- Schéma 1 : le fichier arrive dans les téléchargements -->
+<div class="card" id="s1">
+  <div class="bar">
+    <div class="dots"><span style="background:#ED6A5E"></span><span style="background:#F5BF4F"></span><span style="background:#61C554"></span></div>
+    <div class="url">hereditis.github.io/anonymiser</div>
+    <div class="ico ring">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#13222E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+    </div>
+  </div>
+  <div class="body" style="height:250px">
+    <div style="position:absolute;left:40px;top:40px;width:360px;font-size:20px;line-height:1.5;color:#13222E">
+      <div class="lab">La flèche de téléchargement</div>
+      <p style="margin-top:18px">En haut à droite du navigateur, une flèche apparaît. Cliquez dessus pour voir le fichier reçu.</p>
+    </div>
+    <div class="panel" style="top:30px">
+      <h4>Téléchargements récents</h4>
+      <div class="row">
+        <div class="fi">HTML</div>
+        <div><div class="name">Anonymiser.html</div><div class="sub">6,4 Mo · Terminé</div></div>
+      </div>
+      <div style="font-size:15px;color:#4A5B69;margin-top:12px">Cliquez sur le nom du fichier pour l'ouvrir.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Schéma 2 : le dossier Téléchargements et le double-clic -->
+<div class="card" id="s2">
+  <div class="bar">
+    <div class="dots"><span style="background:#ED6A5E"></span><span style="background:#F5BF4F"></span><span style="background:#61C554"></span></div>
+    <div style="font-weight:700;font-size:18px">Téléchargements</div>
+  </div>
+  <div class="body">
+    <div class="side">
+      <div>Bureau</div><div>Documents</div><div class="on">Téléchargements</div><div>Images</div>
+    </div>
+    <div class="files">
+      <div class="big grey"><div class="bigfi"><b style="color:#9AA7B2">PDF</b></div>facture.pdf</div>
+      <div class="big sel"><div class="bigfi"><b>HTML</b></div><span>Anonymiser.html</span></div>
+          </div>
+    <svg style="position:absolute;left:548px;top:80px" width="60" height="70" viewBox="0 0 24 28"><path d="M3 2 L3 22 L8 17 L11.5 25 L14.5 23.6 L11 16 L18 16 Z" fill="#fff" stroke="#13222E" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <div style="position:absolute;left:640px;top:70px"><div class="lab">Double-clic</div></div>
+    <div style="position:absolute;left:250px;bottom:24px;font-size:18px;color:#13222E">Le fichier s'ouvre dans votre navigateur habituel, même sans Internet.</div>
+  </div>
+</div>
+</body></html>

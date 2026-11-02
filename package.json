@@ -6,7 +6,8 @@
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "build": "python3 scripts/build.py",
-    "test": "node tests/run.js"
+    "test": "node tests/run.js",
+    "aide": "node aide/captures.js && node aide/guide.js && soffice --headless --convert-to pdf --outdir docs docs/Aide-installer-Anonymiser.docx"
   },
   "dependencies": {
     "@tesseract.js-data/fra": "1.0.0",
@@ -16,6 +17,7 @@
     "tesseract.js-core": "5.1.1"
   },
   "devDependencies": {
-    "playwright": "1.47.2"
+    "playwright": "1.47.2",
+    "docx": "9.5.1"
   }
 }

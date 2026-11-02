@@ -4,7 +4,7 @@
 
 Les pièces de vos clients, sans leurs noms.
 
-**[Ouvrir l'outil](https://hereditis.github.io/anonymiser/)** · **[Télécharger pour un usage hors ligne](https://hereditis.github.io/anonymiser/Anonymiser.html)**
+**[Ouvrir l'outil](https://hereditis.github.io/anonymiser/)** · **[Télécharger pour un usage hors ligne](https://hereditis.github.io/anonymiser/Anonymiser.html)** · **[Guide d'installation (PDF)](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf)**
 
 Anonymiser est un outil gratuit proposé par Hereditis aux conseillers en gestion de patrimoine. Il pseudonymise les pièces d'un dossier (statuts, actes notariés, relevés, liasses, avis d'imposition) avant leur transmission à un tiers : chaque nom, société, adresse ou identifiant est remplacé par un libellé comme `[Client 1]` ou `[Société 1]`, le même dans toutes les pièces.
 
@@ -12,7 +12,9 @@ Tout se passe dans le navigateur, sur le poste du conseiller. Aucune pièce n'es
 
 ## Utilisation
 
-En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, en téléchargeant le fichier `docs/index.html` et en l'ouvrant dans Chrome, Edge, Firefox ou Safari (version de 2023 ou plus récente).
+En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, avec le bouton « Télécharger pour un usage hors ligne » de la page en ligne : le fichier `Anonymiser.html` s'ouvre ensuite d'un double-clic dans Chrome, Edge, Firefox ou Safari (version de 2023 ou plus récente).
+
+Pour les utilisateurs peu familiers de l'informatique, un [guide d'installation illustré](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf) explique pas à pas comment télécharger et ouvrir le fichier ; il existe aussi en [version Word](docs/Aide-installer-Anonymiser.docx) à adapter. La page en ligne y renvoie par le lien « Comment l'installer ? ».
 
 1. **Le foyer** : saisissez les personnes et les sociétés du dossier, ou laissez l'outil les trouver avec « Détecter le foyer ».
 2. **Les pièces** : déposez des PDF (avec texte ou scannés), des photos, des fichiers Word ou du texte.
@@ -63,6 +65,7 @@ npm ci
 npm run build                     # produit dist/Anonymiser.html et docs/index.html
 npx playwright install chromium
 npm test                          # tests de bout en bout sur des données fictives
+npm run aide                      # guide d'installation : images, .docx et .pdf (LibreOffice requis)
 ```
 
 Les tests n'utilisent que des personnes, sociétés et identifiants inventés (dossier `tests/fixtures`).
@@ -76,6 +79,8 @@ Les tests n'utilisent que des personnes, sociétés et identifiants inventés (d
 | `scripts/build.py` | assemble la page autonome avec ses bibliothèques |
 | `docs/index.html` | page publiée (GitHub Pages) |
 | `docs/Anonymiser.html` | même page, proposée au téléchargement depuis la version en ligne |
+| `docs/Aide-installer-Anonymiser.pdf` et `.docx` | guide d'installation pour les non-informaticiens |
+| `aide/` | sources du guide : captures, schémas, script de génération |
 | `dist/Anonymiser.html` | même page, à télécharger |
 | `tests/` | tests de bout en bout et pièces fictives |
 | `assets/` | logo |

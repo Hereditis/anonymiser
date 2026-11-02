@@ -111,7 +111,10 @@ function leaks(out, words){ return words.filter(w => out.toLowerCase().includes(
   // 7. Version et vérification des mises à jour
   await page.goto(PAGE);
   const upd = await page.evaluate(() => ({ href: document.querySelector('#updBtn').href, ver: document.querySelector('#verLabel').textContent }));
+  check('fichier local : pas de lien vers le guide d\'installation', await page.locator('#helpLink').isHidden());
   check('fichier local : le bouton ouvre la version en ligne avec le numéro de version', upd.href === 'https://hereditis.github.io/anonymiser/?v=' + upd.ver && /^\d+\.\d+$/.test(upd.ver), upd.href);
+  await page.evaluate(() => window.__anon.updateCheck(null, true));
+  check('page en ligne : lien vers le guide d\'installation', await page.locator('#helpLink').isVisible() && (await page.getAttribute('#helpLink', 'href')) === 'Aide-installer-Anonymiser.pdf' && fs.existsSync(path.join(__dirname, '..', 'docs', 'Aide-installer-Anonymiser.pdf')));
   const older = await page.evaluate(() => { window.__anon.updateCheck('0.1', true); return document.querySelector('#updText').textContent; });
   check('page en ligne : signale une version plus récente', older.includes('Vous utilisiez la version 0.1') && older.includes('est disponible'), older);
   const same = await page.evaluate(() => { const v = document.querySelector('#verLabel').textContent; window.__anon.updateCheck(v, true); return document.querySelector('#updText').textContent; });

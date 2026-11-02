@@ -22,6 +22,8 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .updbtn{color:#fff;text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;white-space:nowrap}
 .updbtn:hover{background:rgba(255,255,255,.1)}
+.helplink{color:#C9D6E2;font-size:13px;text-decoration:underline;white-space:nowrap}
+.helplink:hover{color:#fff}
 .updbanner{background:#FFF4DE;border-bottom:1px solid #F1D9A6;color:#6B4A00}
 .updbanner .wrap{padding-top:12px;padding-bottom:12px;font-size:14px}
 .updbanner.ok{background:#E7F5EC;border-color:#C9E8D5;color:#1D5E39}
@@ -135,7 +137,7 @@ kbd{font:12px ui-monospace,Menlo,monospace;background:var(--soft);border:1px sol
 <rect x="95.5" y="152" width="9" height="10" rx="2.5" fill="#111A20"/>
 </g>
 </svg><div><strong>Anonymiser</strong><small>Les pièces de vos clients, sans leurs noms. Par Hereditis, version <span id="verLabel"></span></small></div></div>
-  <div class="hdr-right"><a class="updbtn" id="updBtn" href="#" target="_blank" rel="noopener">Vérifier les mises à jour</a><span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>100 % local</span></div>
+  <div class="hdr-right"><a class="helplink hidden" id="helpLink" href="Aide-installer-Anonymiser.pdf" target="_blank" rel="noopener">Comment l'installer ?</a><a class="updbtn" id="updBtn" href="#" target="_blank" rel="noopener">Vérifier les mises à jour</a><span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>100 % local</span></div>
 </div></header>
 <div class="updbanner hidden" id="updBanner"><div class="wrap" id="updText"></div></div>
 <div class="notice"><div class="wrap">Les pièces sont lues et traitées dans votre navigateur, sur votre poste. La page s'interdit tout accès à Internet par sa propre politique de sécurité : vous pouvez couper votre connexion avant de commencer. Rien n'est conservé à la fermeture de l'onglet.</div></div>
@@ -254,6 +256,7 @@ function updateCheck(fromVersion, online){
   if (online){
     btn.textContent = 'Télécharger pour un usage hors ligne';
     btn.href = 'Anonymiser.html'; btn.setAttribute('download', 'Anonymiser.html'); btn.removeAttribute('target');
+    document.getElementById('helpLink').classList.remove('hidden');
   } else btn.href = ONLINE_URL + '?v=' + encodeURIComponent(APP_VERSION);
   if (!online || !fromVersion || !/^[0-9.]{1,12}$/.test(fromVersion)) return;
   ban.classList.remove('hidden');
