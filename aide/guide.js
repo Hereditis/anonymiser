@@ -127,7 +127,7 @@ const children = [
   ...faq('Puis-je l\'utiliser sur téléphone ou tablette ?', [
     'Anonymiser est pensé pour un ordinateur (Windows ou Mac), où se trouvent en général les pièces des dossiers. Sur tablette, préférez la page en ligne.']),
   ...faq('Le logo représente un âne en smoking. Est-ce sérieux ?', [
-    'Tout à fait. Il protège vos clients avec la discrétion d\'un agent secret.']),
+    'Tout à fait. L\'ânon est le petit de l\'âne, et « anon » est l\'abréviation d\'« anonyme » sur Internet ; les plus anciens y reconnaîtront aussi un cousin de la mule d\'eMule. Le smoking est pour la discrétion d\'agent secret avec laquelle il traite vos dossiers.']),
 
   new Paragraph({ spacing: { before: 360 }, children: [] }),
   box([

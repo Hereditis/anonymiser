@@ -86,6 +86,10 @@ Les tests n'utilisent que des personnes, sociétés et identifiants inventés (d
 | `assets/` | logo |
 | `third_party/` | licences des composants tiers |
 
+## Pourquoi un âne ?
+
+L'ânon est le petit de l'âne, et « anon » est l'abréviation d'« anonymous » sur Internet. Les plus anciens y reconnaîtront aussi un cousin de la mule d'eMule, et les lecteurs de Shakespeare le « Anon, anon, sir! » des domestiques qui accourent : tout de suite. Le smoking et le loup sont pour la discrétion d'agent secret avec laquelle il traite vos dossiers.
+
 ## Licence
 
 Code publié pour transparence, tous droits réservés : voir [LICENSE](LICENSE). Les composants tiers restent sous leur propre licence : voir [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
