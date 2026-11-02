@@ -14,7 +14,7 @@ Tout se passe dans le navigateur, sur le poste du conseiller. Aucune pièce n'es
 
 En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, avec le bouton « Télécharger pour un usage hors ligne » de la page en ligne : le fichier `Anonymiser.html` s'ouvre ensuite d'un double-clic dans Chrome, Edge, Firefox ou Safari (version de 2023 ou plus récente).
 
-Pour les utilisateurs peu familiers de l'informatique, un [guide d'installation illustré](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf) explique pas à pas comment télécharger et ouvrir le fichier ; il existe aussi en [version Word](docs/Aide-installer-Anonymiser.docx) à adapter. La page en ligne y renvoie par le lien « Comment l'installer ? ».
+Pour les utilisateurs peu familiers de l'informatique, un [guide d'installation illustré](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf) explique pas à pas comment télécharger et ouvrir le fichier ; il existe aussi en [version Word](docs/Aide-installer-Anonymiser.docx) à adapter.
 
 1. **Le foyer** : saisissez les personnes et les sociétés du dossier, ou laissez l'outil les trouver avec « Détecter le foyer ».
 2. **Les pièces** : déposez des PDF (avec texte ou scannés), des photos, des fichiers Word ou du texte.

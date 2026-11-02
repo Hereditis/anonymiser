@@ -2,7 +2,7 @@
 
 ## 0.5 (2 novembre 2026)
 
-- Guide d'installation illustré pour les non-informaticiens, en PDF et en Word (`docs/`), avec ses sources (`aide/`). La version en ligne y renvoie par le lien « Comment l'installer ? ».
+- Guide d'installation illustré pour les non-informaticiens, en PDF et en Word (`docs/`), avec ses sources (`aide/`).
 - Numéro de version affiché dans l'en-tête, date de construction au survol.
 - Bouton « Vérifier les mises à jour » : il ouvre la version en ligne en lui indiquant la version utilisée, et la page en ligne signale s'il en existe une plus récente. Le fichier local ne consulte jamais Internet de lui-même.
 - Sur la version en ligne, le bouton devient « Télécharger pour un usage hors ligne ».
