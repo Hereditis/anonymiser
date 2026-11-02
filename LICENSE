@@ -1,0 +1,22 @@
+Anonymiser
+Copyright (c) 2026 Hereditis. Tous droits réservés.
+
+1. Objet de la publication
+
+Le code source d'Anonymiser est rendu public afin que chacun puisse vérifier son fonctionnement, et en particulier l'absence de toute transmission des pièces traitées. Sa publication ne vaut pas cession ni concession de droits au-delà de ce qui est prévu ci-dessous.
+
+2. Utilisation autorisée
+
+Toute personne peut utiliser gratuitement l'outil Anonymiser tel que publié par Hereditis, y compris dans un cadre professionnel, consulter son code source et l'exécuter pour en vérifier le fonctionnement.
+
+3. Utilisations soumises à autorisation
+
+Sont interdites sans l'autorisation écrite préalable d'Hereditis : la reproduction, la modification, l'adaptation, la traduction, la redistribution, la vente ou la location de tout ou partie du code source ou de la page construite, ainsi que leur intégration dans un autre produit ou service. Le nom « Anonymiser », le nom « Hereditis » et le logo ne peuvent pas être utilisés sans autorisation.
+
+4. Absence de garantie
+
+L'outil est fourni en l'état, sans garantie d'aucune sorte. Il aide à la pseudonymisation des documents mais ne dispense pas l'utilisateur de relire le résultat avant toute transmission. L'utilisateur demeure seul responsable des documents qu'il transmet et du respect de ses obligations en matière de protection des données personnelles.
+
+5. Composants tiers
+
+La page construite intègre des composants tiers qui restent soumis à leur propre licence, reproduite dans le dossier third_party et résumée dans THIRD_PARTY_NOTICES.md. Les présentes conditions ne restreignent aucun des droits accordés par ces licences sur ces composants.

@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src blob:; style-src 'unsafe-inline'; img-src data: blob:; font-src data: blob:; connect-src data: blob:; form-action 'none'; base-uri 'none'">
+<title>Anonymiser</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E %3Cdefs%3E%3CclipPath id="badge"%3E%3Ccircle cx="100" cy="100" r="91"/%3E%3C/clipPath%3E%3C/defs%3E %3Ccircle cx="100" cy="100" r="98" fill="#13222E"/%3E %3Ccircle cx="100" cy="100" r="93" fill="none" stroke="#E9A23B" stroke-width="3.5"/%3E %3Cg clip-path="url%28#badge%29"%3E %3Cpath d="M26 204 C30 162 58 147 100 147 C142 147 170 162 174 204 Z" fill="#05090C"/%3E %3Cpath d="M85 147 L100 188 L115 147 Z" fill="#F4F3EF"/%3E %3Cpath d="M85 147 L100 188 L76 204 L56 204 C62 178 71 159 85 147 Z" fill="#22313C"/%3E %3Cpath d="M115 147 L100 188 L124 204 L144 204 C138 178 129 159 115 147 Z" fill="#22313C"/%3E %3Cpath d="M66 72 C52 46 50 20 60 8 C74 16 82 42 84 66 Z" fill="#848D96"/%3E %3Cpath d="M68 64 C60 44 59 26 63 16 C71 26 76 44 77 60 Z" fill="#C7B3BA"/%3E %3Cpath d="M134 72 C148 46 150 20 140 8 C126 16 118 42 116 66 Z" fill="#848D96"/%3E %3Cpath d="M132 64 C140 44 141 26 137 16 C129 26 124 44 123 60 Z" fill="#C7B3BA"/%3E %3Cpath d="M70 62 C65 82 63 104 67 124 C71 146 84 157 100 157 C116 157 129 146 133 124 C137 104 135 82 130 62 C121 51 79 51 70 62 Z" fill="#9AA3AB"/%3E %3Cpath d="M85 58 C87 45 95 41 100 48 C105 39 113 44 115 58 C106 53 94 53 85 58 Z" fill="#3E4851"/%3E %3Cpath d="M71 117 C71 104 84 98 100 98 C116 98 129 104 129 117 C129 139 117 153 100 153 C83 153 71 139 71 117 Z" fill="#DCD5CB"/%3E %3Cellipse cx="88.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/%3E %3Cellipse cx="111.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/%3E %3Cpath d="M88 138 C96 143.5 106 142.5 115 134" stroke="#5B5450" stroke-width="3.2" fill="none" stroke-linecap="round"/%3E %3Cpath d="M66 83 L52 77 L55 90 Z" fill="#0A0F13"/%3E %3Cpath d="M134 83 L148 77 L145 90 Z" fill="#0A0F13"/%3E %3Cpath d="M63 80 C73 71 90 73 100 80 C110 73 127 71 137 80 C139 91 132 99 121 99 C111 99 106 93 100 91 C94 93 89 99 79 99 C68 99 61 91 63 80 Z" fill="#0A0F13"/%3E %3Cellipse cx="81" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/%3E %3Cellipse cx="119" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/%3E %3Ccircle cx="84.5" cy="86.5" r="3.2" fill="#13222E"/%3E %3Ccircle cx="122.5" cy="86.5" r="3.2" fill="#13222E"/%3E %3Cpath d="M110 69 C117 64.5 126 64.5 132 68.5" stroke="#3E4851" stroke-width="3.2" fill="none" stroke-linecap="round"/%3E %3Cpath d="M100 157 L83 148.5 L83 166.5 Z" fill="#000"/%3E %3Cpath d="M100 157 L117 148.5 L117 166.5 Z" fill="#000"/%3E %3Crect x="95.5" y="152" width="9" height="10" rx="2.5" fill="#111A20"/%3E %3C/g%3E %3C/svg%3E">
+<style>
+:root{--ink:#13222E;--muted:#4A5A66;--line:#DCE4EA;--bg:#F3F6F8;--card:#FFFFFF;--soft:#EEF3F6;--green:#2E9E5B;--blue:#2C6FD1;--red:#D7443E;--sun:#E9A23B;--slate:#1F3A4D;
+--m-p:#DCE9FB;--m-s:#DDF2E5;--m-a:#FCEFD6;--m-i:#F9DEDC;--m-d:#ECE3F7;--m-t:#E3E8EC}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+header.top{background:var(--ink);color:#fff}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:10px;background:var(--sun);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:20px}
+.brand strong{display:block;font-size:22px;letter-spacing:.01em}
+.brand svg{flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.brand small{color:#9FB3C1}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,158,91,.18);color:#BFF0D2;border:1px solid rgba(46,158,91,.5);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}
+.notice{background:#E7F5EC;border-bottom:1px solid #C9E8D5;color:#1D5E39}
+.notice .wrap{padding-top:12px;padding-bottom:12px;font-size:14px}
+main.wrap{padding-top:24px;padding-bottom:60px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px}
+.step h2{margin:0 0 6px;font-size:20px;display:flex;align-items:center;gap:10px}
+.num{width:30px;height:30px;border-radius:50%;background:var(--slate);color:#fff;display:grid;place-items:center;font-size:15px;flex:none}
+.step h3{margin:20px 0 8px;font-size:15px}
+.hint{color:var(--muted);margin:0 0 8px;font-size:14px}
+.hidden{display:none!important}
+table.grid{width:100%;border-collapse:collapse}
+table.grid th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:4px 6px;text-transform:uppercase;letter-spacing:.03em}
+table.grid td{padding:3px 4px}
+input[type=text],select,textarea{width:100%;font:inherit;color:inherit;border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:#fff}
+input[type=text]:focus,select:focus,textarea:focus{outline:2px solid rgba(44,111,209,.35);border-color:var(--blue)}
+textarea{min-height:90px;resize:vertical}
+textarea,input{font-variant-ligatures:none}
+.tablewrap{overflow-x:auto}
+@media (max-width:760px){.wrap{padding:0 14px}.step{padding:18px 16px}table.grid{min-width:640px}header.top .wrap{flex-wrap:wrap}.row label{flex-wrap:wrap}input[type=file]{max-width:100%}}
+button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid transparent;padding:9px 16px;font-weight:600}
+button.primary{background:var(--blue);color:#fff}
+button.primary:disabled{background:#9DB7DE;cursor:not-allowed}
+button.go{background:var(--green);color:#fff}
+button.ghost{background:transparent;color:var(--blue);border-color:#BCD0EE}
+button.ghost:hover{background:#F0F5FD}
+button.icon{background:transparent;color:var(--muted);padding:4px 8px;border-color:var(--line)}
+button.danger{background:transparent;color:var(--red);border-color:#EFC4C1}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 18px;margin-top:6px}
+.opts label{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+details summary{cursor:pointer;color:var(--blue);font-weight:600;margin-top:16px}
+.drop{border:2px dashed #B8C8D4;border-radius:12px;padding:26px;text-align:center;color:var(--muted);background:var(--soft);transition:.15s}
+.drop.over{border-color:var(--blue);background:#EAF1FC}
+.drop strong{color:var(--ink)}
+.docs{list-style:none;padding:0;margin:14px 0 0}
+.docs li{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+.docs .meta{color:var(--muted);font-size:13px}
+.warn{color:#9A5B00;font-size:13px}
+.paste{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--soft)}
+.review{display:grid;grid-template-columns:360px 1fr;gap:18px;margin-top:12px}
+@media (max-width:900px){.review{grid-template-columns:1fr}}
+.ents{border:1px solid var(--line);border-radius:12px;padding:10px;max-height:72vh;overflow:auto;background:#FBFCFD}
+.grp h4{margin:12px 4px 6px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.ent{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:center;padding:6px;border-radius:8px}
+.ent:hover{background:var(--soft)}
+.ent input[type=text]{padding:4px 7px;font-size:14px}
+.ent .forms{grid-column:2/4;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cnt{font-size:12px;color:var(--muted);min-width:28px;text-align:right}
+.viewer{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:400px}
+.vbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line);background:#FBFCFD}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{background:#fff;border:1px solid var(--line);color:var(--ink);padding:5px 10px;font-weight:500;font-size:13px}
+.tab.on{background:var(--slate);color:#fff;border-color:var(--slate)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border-radius:0;background:#fff;color:var(--ink);padding:5px 12px;font-weight:500;font-size:13px}
+.seg button.on{background:var(--blue);color:#fff}
+pre.doc{margin:0;padding:16px 18px;white-space:pre-wrap;word-wrap:break-word;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:68vh;overflow:auto;flex:1}
+mark{border-radius:4px;padding:0 2px;color:var(--ink)}
+mark.c-p{background:var(--m-p)} mark.c-s{background:var(--m-s)} mark.c-a{background:var(--m-a)} mark.c-i{background:var(--m-i)} mark.c-d{background:var(--m-d)} mark.c-t{background:var(--m-t)}
+.control{margin-top:16px;border-radius:12px;padding:12px 16px;border:1px solid var(--line)}
+.control.ok{background:#E7F5EC;border-color:#C9E8D5}
+.control.ko{background:#FDF0EF;border-color:#F2CBC7}
+.control ul{margin:6px 0 0;padding-left:20px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.alert{background:#FDF0EF;border:1px solid #F2CBC7;color:#8E2A24;border-radius:10px;padding:10px 14px;font-size:14px}
+.okbox{background:#E7F5EC;border:1px solid #C9E8D5;color:#1D5E39;border-radius:10px;padding:10px 14px;font-size:14px}
+.busy{position:fixed;inset:0;background:rgba(19,34,46,.55);display:grid;place-items:center;z-index:50}
+.busy div{background:#fff;border-radius:14px;padding:22px 28px;font-weight:600;min-width:280px;text-align:center}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;z-index:60;font-size:14px;max-width:90vw}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:10px 0 30px}
+kbd{font:12px ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="66" height="66" role="img" aria-label="Anonymiser">
+<defs><clipPath id="badge"><circle cx="100" cy="100" r="91"/></clipPath></defs>
+<circle cx="100" cy="100" r="98" fill="#13222E"/>
+<circle cx="100" cy="100" r="93" fill="none" stroke="#E9A23B" stroke-width="3.5"/>
+<g clip-path="url(#badge)">
+<path d="M26 204 C30 162 58 147 100 147 C142 147 170 162 174 204 Z" fill="#05090C"/>
+<path d="M85 147 L100 188 L115 147 Z" fill="#F4F3EF"/>
+<path d="M85 147 L100 188 L76 204 L56 204 C62 178 71 159 85 147 Z" fill="#22313C"/>
+<path d="M115 147 L100 188 L124 204 L144 204 C138 178 129 159 115 147 Z" fill="#22313C"/>
+<path d="M66 72 C52 46 50 20 60 8 C74 16 82 42 84 66 Z" fill="#848D96"/>
+<path d="M68 64 C60 44 59 26 63 16 C71 26 76 44 77 60 Z" fill="#C7B3BA"/>
+<path d="M134 72 C148 46 150 20 140 8 C126 16 118 42 116 66 Z" fill="#848D96"/>
+<path d="M132 64 C140 44 141 26 137 16 C129 26 124 44 123 60 Z" fill="#C7B3BA"/>
+<path d="M70 62 C65 82 63 104 67 124 C71 146 84 157 100 157 C116 157 129 146 133 124 C137 104 135 82 130 62 C121 51 79 51 70 62 Z" fill="#9AA3AB"/>
+<path d="M85 58 C87 45 95 41 100 48 C105 39 113 44 115 58 C106 53 94 53 85 58 Z" fill="#3E4851"/>
+<path d="M71 117 C71 104 84 98 100 98 C116 98 129 104 129 117 C129 139 117 153 100 153 C83 153 71 139 71 117 Z" fill="#DCD5CB"/>
+<ellipse cx="88.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/>
+<ellipse cx="111.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/>
+<path d="M88 138 C96 143.5 106 142.5 115 134" stroke="#5B5450" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+<path d="M66 83 L52 77 L55 90 Z" fill="#0A0F13"/>
+<path d="M134 83 L148 77 L145 90 Z" fill="#0A0F13"/>
+<path d="M63 80 C73 71 90 73 100 80 C110 73 127 71 137 80 C139 91 132 99 121 99 C111 99 106 93 100 91 C94 93 89 99 79 99 C68 99 61 91 63 80 Z" fill="#0A0F13"/>
+<ellipse cx="81" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/>
+<ellipse cx="119" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/>
+<circle cx="84.5" cy="86.5" r="3.2" fill="#13222E"/>
+<circle cx="122.5" cy="86.5" r="3.2" fill="#13222E"/>
+<path d="M110 69 C117 64.5 126 64.5 132 68.5" stroke="#3E4851" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+<path d="M100 157 L83 148.5 L83 166.5 Z" fill="#000"/>
+<path d="M100 157 L117 148.5 L117 166.5 Z" fill="#000"/>
+<rect x="95.5" y="152" width="9" height="10" rx="2.5" fill="#111A20"/>
+</g>
+</svg><div><strong>Anonymiser</strong><small>Les pièces de vos clients, sans leurs noms. Par Hereditis, version 0.4</small></div></div>
+  <span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>100 % local</span>
+</div></header>
+<div class="notice"><div class="wrap">Les pièces sont lues et traitées dans votre navigateur, sur votre poste. La page s'interdit tout accès à Internet par sa propre politique de sécurité : vous pouvez couper votre connexion avant de commencer. Rien n'est conservé à la fermeture de l'onglet.</div></div>
+
+<main class="wrap">
+
+<section class="step" id="s1">
+  <h2><span class="num">1</span>Le foyer</h2>
+  <p class="hint">Saisissez les personnes et les sociétés du dossier, ou laissez l'outil les trouver avec le bouton « Détecter le foyer » de l'étape 2. Tout ce qui figure ici sera masqué dans toutes les pièces ; le libellé est ce qui remplacera le nom.</p>
+  <h3>Personnes</h3>
+  <div class="tablewrap"><table class="grid" id="tPersons"><thead><tr><th style="width:15%">Libellé</th><th style="width:11%">Civilité</th><th>Prénom(s)</th><th>Nom d'usage</th><th>Nom de naissance</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
+  <button class="ghost" id="addPerson" type="button">+ Ajouter une personne</button>
+  <h3>Sociétés</h3>
+  <div class="tablewrap"><table class="grid" id="tSocs"><thead><tr><th style="width:15%">Libellé</th><th>Dénomination</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
+  <button class="ghost" id="addSoc" type="button">+ Ajouter une société</button>
+  <h3>Autres termes à masquer</h3>
+  <p class="hint">Un terme par ligne : un bien, un notaire, un cabinet, un lieu. Libellé facultatif après <kbd>=&gt;</kbd>.</p>
+  <textarea id="terms" placeholder="Chalet Les Gentianes => Résidence secondaire&#10;Cabinet Durand => Expert-comptable"></textarea>
+  <details><summary>Options de détection</summary>
+    <div class="opts">
+      <label><input type="checkbox" id="oFirst" checked> Masquer aussi les prénoms employés seuls</label>
+      <label><input type="checkbox" id="oBirth" checked> Remplacer les dates de naissance par l'âge</label>
+      <label><input type="checkbox" id="oDates"> Ramener les autres dates au mois et à l'année</label>
+      <label><input type="checkbox" id="oAddr" checked> Détecter les adresses et les communes</label>
+      <label><input type="checkbox" id="oCiv" checked> Détecter les personnes (Monsieur, Madame, Maître, prénoms connus)</label>
+      <label><input type="checkbox" id="oOrg" checked> Détecter les sociétés et cabinets sans forme juridique</label>
+      <label><input type="checkbox" id="oSugg" checked> Proposer les mots en capitales non reconnus</label>
+    </div>
+  </details>
+</section>
+
+<section class="step" id="s2">
+  <h2><span class="num">2</span>Les pièces</h2>
+  <p class="hint">PDF (avec texte ou scannés), photos et images (JPG, PNG), Word (.docx) ou texte brut. Les pièces scannées sont lues par reconnaissance de caractères, sur votre poste : comptez quelques secondes par page.</p>
+  <div class="drop" id="drop"><strong>Déposez vos pièces ici</strong><br>ou <button class="ghost" id="pick" type="button">choisissez des fichiers</button><input type="file" id="file" multiple accept=".pdf,.docx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff" class="hidden"></div>
+  <div class="row" style="margin-top:10px"><button class="ghost" id="showPaste" type="button">Coller un texte</button><button class="ghost" id="example" type="button">Charger un exemple fictif</button></div>
+  <div class="paste hidden" id="pasteBox">
+    <input type="text" id="pasteName" placeholder="Nom de la pièce, par exemple : extrait de statuts">
+    <textarea id="pasteText" style="margin-top:8px;min-height:140px" placeholder="Collez le texte ici"></textarea>
+    <div class="row" style="margin-top:8px"><button class="primary" id="pasteAdd" type="button">Ajouter la pièce</button></div>
+  </div>
+  <ul class="docs" id="docs"></ul>
+  <div class="row" style="margin-top:14px"><button class="ghost" id="prefill" type="button" disabled>Détecter le foyer</button><button class="primary" id="analyze" type="button" disabled>Analyser les pièces</button><span class="hint" id="analyzeHint"></span></div>
+</section>
+
+<section class="step hidden" id="s3">
+  <h2><span class="num">3</span>Vérifier</h2>
+  <p class="hint">Décochez ce qui ne doit pas être masqué, cochez les propositions utiles, modifiez un libellé si besoin. Le résultat se met à jour aussitôt.</p>
+  <div class="review">
+    <div class="ents" id="ents"></div>
+    <div class="viewer">
+      <div class="vbar"><div class="tabs" id="tabs"></div><div class="seg"><button id="vRes" class="on" type="button">Résultat</button><button id="vOrig" type="button">Original</button></div></div>
+      <pre class="doc" id="view"></pre>
+    </div>
+  </div>
+  <div class="legend"><span><i style="background:var(--m-p)"></i>Personnes</span><span><i style="background:var(--m-s)"></i>Sociétés</span><span><i style="background:var(--m-a)"></i>Adresses et communes</span><span><i style="background:var(--m-i)"></i>Identifiants et coordonnées</span><span><i style="background:var(--m-d)"></i>Dates</span><span><i style="background:var(--m-t)"></i>Termes libres</span></div>
+  <div class="control" id="control"></div>
+</section>
+
+<section class="step hidden" id="s4">
+  <h2><span class="num">4</span>Exporter</h2>
+  <p class="hint">Les pièces pseudonymisées sont prêtes à être transmises. La table de correspondance, elle, reste chez vous : c'est elle qui permet de rétablir les noms dans le bilan reçu.</p>
+  <div class="opts" style="margin-bottom:12px"><label><input type="checkbox" id="oRaster" checked> Joindre une copie caviardée en image des PDF et des photos (le texte d'origine en est supprimé)</label></div>
+  <div class="row">
+    <button class="go" id="expZip" type="button">Télécharger les pièces pseudonymisées (.zip)</button>
+    <button class="ghost" id="expCsv" type="button">Télécharger la table de correspondance (.csv)</button>
+  </div>
+  <h3>Pièce par pièce</h3>
+  <ul class="docs" id="expList"></ul>
+  <p class="alert" style="margin-top:12px">La table de correspondance contient les vrais noms. Conservez-la dans le dossier du client et ne la joignez jamais à l'envoi.</p>
+</section>
+
+<section class="step" id="s5">
+  <h2><span class="num">5</span>Rétablir les noms dans un document reçu</h2>
+  <p class="hint">Vous avez reçu le bilan avec des libellés comme [Client 1] ? Chargez votre table de correspondance et le document (.docx, .pptx, .xlsx ou .txt) : les vrais noms sont remis en place, sur votre poste.</p>
+  <div class="row">
+    <label class="ghost" style="display:inline-flex;gap:8px;align-items:center">Table (.csv) <input type="file" id="rTable" accept=".csv,.txt"></label>
+    <label class="ghost" style="display:inline-flex;gap:8px;align-items:center">Document <input type="file" id="rDoc" accept=".docx,.pptx,.xlsx,.txt,.md"></label>
+    <button class="primary" id="rGo" type="button">Rétablir</button>
+  </div>
+  <div id="rOut" style="margin-top:10px"></div>
+</section>
+
+<footer>Anonymiser, outil gratuit proposé par Hereditis. Aucune donnée n'est collectée ni transmise. <button class="danger" id="wipe" type="button" style="margin-left:8px;padding:4px 10px">Tout effacer</button><br><span style="font-size:12px">Intègre pdf.js, Tesseract.js et Tesseract.js-core (licence Apache 2.0), fflate et une liste de prénoms issue de Faker (licence MIT), données de langue française Tesseract.</span></footer>
+</main>
+
+<div class="busy hidden" id="busy"><div id="busyText">Traitement en cours</div></div>
+
+<script>
+/*__FFLATE__*/
+</script>
+<script>
+/*__PDFJS__*/
+</script>
+<script type="text/plain" id="pdfworker">/*__WORKER__*/</script>
+<script>
+/*__TESSERACT__*/
+</script>
+<script type="text/plain" id="ocrworker">/*__OCRWORKER__*/</script>
+<script type="text/plain" id="ocrcore">/*__OCRCORE__*/</script>
+<script type="text/plain" id="ocrfra">/*__OCRFRA__*/</script>
+<script>
+(function(){
+'use strict';
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pdfjs = window.pdfjsLib || window['pdfjs-dist/build/pdf'];
+let workerReady = false;
+function initWorker(){
+  if (workerReady || !pdfjs) return;
+  const src = document.getElementById('pdfworker').textContent;
+  pdfjs.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([src], {type:'text/javascript'}));
+  workerReady = true;
+}
+
+/* ---------------- normalisation et motifs ---------------- */
+const ACC = {a:'aàâäáãå', e:'eéèêë', i:'iîïíì', o:'oôöóòõ', u:'uùûüú', c:'cç', y:'yÿý', n:'nñ'};
+const stripMarks = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+function fold(s){ return stripMarks(String(s)).toLowerCase().replace(/[’`]/g, "'").replace(/[\s\-\u2010\u2011]+/g, ' ').trim(); }
+const SEP = '[\\s\\-\\u2010\\u2011]+';
+const HS = '[ \\t\\u00a0\\u202f]+';
+const HSO = '[ \\t\\u00a0\\u202f]*';
+const OCRC = {o:'0', i:'1lL|', l:'1iI|', s:'5', b:'8', g:'6', z:'2'};
+function cls(ch, upperOnly, ocr){
+  const b = stripMarks(ch).toLowerCase();
+  if (b.length === 1 && b >= 'a' && b <= 'z'){
+    const v = ACC[b] || b;
+    return '[' + (upperOnly ? v.toUpperCase() : v + v.toUpperCase()) + (ocr && OCRC[b] ? OCRC[b] : '') + ']';
+  }
+  if ("'’`".includes(ch)) return "['’`]";
+  if (ch === '.') return '\\.?';
+  return ch.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&');
+}
+function pat(term, firstUpperRule, ocr){
+  const t = String(term).trim().replace(/\s+/g, ' ');
+  if (!t) return null;
+  const firstUpper = firstUpperRule !== false && t[0] !== t[0].toLowerCase();
+  let out = '', start = true, prevSep = false;
+  for (const ch of t){
+    if (/[\s\-\u2010\u2011]/.test(ch)){ if (!prevSep && !start) out += SEP; prevSep = true; continue; }
+    prevSep = false;
+    out += cls(ch, start && firstUpper, ocr);
+    start = false;
+  }
+  return out;
+}
+const LB = '(?<![\\p{L}\\p{N}])', RB = '(?![\\p{L}\\p{N}])';
+/* un nom ne doit pas être pris au milieu d'un mot composé (Annecy dans Annecy-le-Vieux) ; pour les lieux, le composé entier est masqué */
+const LBW = '(?<![\\p{L}\\p{N}])(?<!\\p{L}-)', RBW = '(?![\\p{L}\\p{N}])(?!-\\p{L})', EXT = "(?:-[\\p{L}'’]+)*";
+function wordRe(term, firstUpperRule, ocr, ext){ const p = pat(term, firstUpperRule, ocr); return p ? new RegExp(LBW + p + (ext ? EXT : '') + RBW, 'gu') : null; }
+const K = w => pat(w, false);
+const alt = arr => arr.slice().sort((a, b) => b.length - a.length).map(K).join('|');
+
+const UP = 'A-ZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ';
+const NAMETOK = `[${UP}][\\p{L}'’\\-]*\\p{L}`;
+const PART = "(?:de|du|des|d'|d’|le|la|van|von|di|da|del|dos)";
+const NOTNAME = `(?!(?:Maire|Pr[ée]sident|Pr[ée]sidente|G[ée]rant|G[ée]rante|Directeur|Directrice|Notaire|Juge|Ministre|Pr[ée]fet|Le|La|Les|Et|Ou|Monsieur|Madame|Mademoiselle|Ma[îi]tre)(?![\\p{L}]))`;
+const NAME = `${NOTNAME}(?:${PART}${HSO})?${NAMETOK}(?:${HS}${NOTNAME}(?:${PART}${HSO})?${NAMETOK}){0,4}`;
+const CPART = "(?:sur|sous|l[èe]s|les|en|de|du|des|la|le|aux|au|d'|d’|l'|l’|et)";
+const COMMUNE = `[${UP}][\\p{L}'’]*\\p{L}(?:(?:${HS}|-)(?:${CPART}(?:${HS}|-))*[${UP}][\\p{L}'’]*\\p{L})*`;
+const STOPCOM = `(?:Euros?|EUROS?|EUR|Francs|Parts|Actions|Titres|Ares|Hectares|Centiares|M[èe]tres|CHF|USD|Dollars|Articles?|ARTICLES?|Lots?|Ans|Mois|Jours)(?![\\p{L}])`;
+const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const MOIS_F = MOIS.map(fold);
+const DATE = `(?:(?:1er|1ER|[0-3]?\\d)${HS}(?:${MOIS.map(m => K(m)).join('|')})${HS}(?:19|20)\\d{2}|[0-3]?\\d[\\/.\\-][01]?\\d[\\/.\\-](?:19|20)\\d{2})`;
+const CURR = `(?![\\s\\u00a0]*(?:€|[Ee]uros?|EUROS?|EUR|CHF|[Ff]rancs|\\$|USD))`;
+
+function parseDate(s){
+  let m = s.match(/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})/);
+  if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
+  m = fold(s).match(/(1er|\d{1,2}) ([a-z]+) (\d{4})/);
+  if (m){ const mi = MOIS_F.indexOf(m[2]); if (mi >= 0) return new Date(+m[3], mi, m[1] === '1er' ? 1 : +m[1]); }
+  return null;
+}
+function ageAt(d){ const r = new Date(); let a = r.getFullYear() - d.getFullYear(); const mm = r.getMonth() - d.getMonth(); if (mm < 0 || (mm === 0 && r.getDate() < d.getDate())) a--; return a; }
+function luhn(d){ let s = 0, alt2 = false; for (let i = d.length - 1; i >= 0; i--){ let n = +d[i]; if (alt2){ n *= 2; if (n > 9) n -= 9; } s += n; alt2 = !alt2; } return s % 10 === 0; }
+function ibanOk(v){
+  const s = v.replace(/\s/g, '').toUpperCase();
+  if (s.length < 15 || s.length > 34) return false;
+  const r = s.slice(4) + s.slice(0, 4); let m = 0;
+  for (const ch of r){ const code = /[A-Z]/.test(ch) ? String(ch.charCodeAt(0) - 55) : ch; for (const c of code) m = (m * 10 + (+c)) % 97; }
+  return m === 1;
+}
+const digits = s => s.replace(/\D/g, '');
+
+/* ---------------- état ---------------- */
+const S = { docs: [], ent: new Map(), over: new Map(), counters: {}, res: [], cur: 0, view: 'res', dico: null, analyzed: false };
+let docSeq = 0;
+
+const CATS = {
+  personne:      {name:'Personnes du foyer', c:'p'},
+  famille:       {name:'Noms de famille partagés', c:'p'},
+  personne_auto: {name:'Autres personnes détectées', c:'p'},
+  societe:       {name:'Sociétés', c:'s'},
+  notaire:       {name:'Notaires', c:'p'},
+  adresse:       {name:'Adresses', c:'a'},
+  commune:       {name:'Communes', c:'a'},
+  naissance:     {name:'Dates de naissance', c:'d'},
+  date:          {name:'Autres dates', c:'d'},
+  identifiant:   {name:'Identifiants', c:'i'},
+  contact:       {name:'Coordonnées', c:'i'},
+  terme:         {name:'Termes libres', c:'t'},
+  suggestion:    {name:'Mots en capitales à vérifier', c:'p'},
+  illisible:     {name:'Mots mal lus par la reconnaissance', c:'i'}
+};
+const CAT_ORDER = Object.keys(CATS);
+const SURFACE = new Set(['personne','famille','personne_auto','societe','notaire','adresse','commune','terme','suggestion']);
+const PARTICLES = new Set(['de','du','des',"d'",'le','la','van','von','di','da','del','dos']);
+
+function nextNum(prefix){ S.counters[prefix] = (S.counters[prefix] || 0) + 1; return S.counters[prefix]; }
+function letter(n){ let s = ''; n--; do { s = String.fromCharCode(65 + n % 26) + s; n = Math.floor(n / 26) - 1; } while (n >= 0); return s; }
+
+function makeEnt(key, cat, sub, label, value, extra){
+  let e = S.ent.get(key);
+  if (!e){
+    e = Object.assign({key, cat, sub: sub || '', label, primary: value, forms: new Set(), enabled: cat !== 'suggestion', count: 0, dirty: true, res: [], userLabel: false}, extra || {});
+    const o = S.over.get(key);
+    if (o){ if (o.label != null){ e.label = o.label; e.userLabel = true; } if (o.enabled != null) e.enabled = o.enabled; }
+    S.ent.set(key, e);
+  }
+  if (value && SURFACE.has(cat) && !e.forms.has(value)){ e.forms.add(value); e.dirty = true; }
+  return e;
+}
+
+/* ---------------- fiche foyer ---------------- */
+function personRow(p){
+  p = p || {};
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Client 1"></td>
+  <td><select data-f="civ"><option value=""></option><option value="M">M.</option><option value="F">Mme</option></select></td>
+  <td><input type="text" data-f="prenoms" placeholder="Jean Pierre"></td>
+  <td><input type="text" data-f="nom" placeholder="Dupont"></td>
+  <td><input type="text" data-f="naissance" placeholder="Martin"></td>
+  <td><button class="icon" type="button" title="Retirer">✕</button></td>`;
+  for (const k of ['label','civ','prenoms','nom','naissance']) if (p[k]) tr.querySelector(`[data-f=${k}]`).value = p[k];
+  tr.querySelector('button').onclick = () => tr.remove();
+  $('#tPersons tbody').appendChild(tr);
+}
+function socRow(s){
+  s = s || {};
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Société 1"></td><td><input type="text" data-f="denom" placeholder="LES PINS"></td><td><button class="icon" type="button" title="Retirer">✕</button></td>`;
+  for (const k of ['label','denom']) if (s[k]) tr.querySelector(`[data-f=${k}]`).value = s[k];
+  tr.querySelector('button').onclick = () => tr.remove();
+  $('#tSocs tbody').appendChild(tr);
+}
+function readRows(sel){
+  return Array.from(document.querySelectorAll(sel + ' tbody tr')).map(tr => {
+    const o = {}; tr.querySelectorAll('[data-f]').forEach(i => o[i.dataset.f] = i.value.trim()); return o;
+  });
+}
+const opt = id => $('#' + id).checked;
+
+function buildDico(){
+  const persons = readRows('#tPersons').filter(p => p.prenoms || p.nom || p.naissance);
+  const socs = readRows('#tSocs').filter(s => s.denom);
+  const surCount = {};
+  for (const p of persons) for (const l of [p.nom, p.naissance]) if (l) surCount[fold(l)] = (surCount[fold(l)] || 0) + 1;
+  const shared = new Set(Object.keys(surCount).filter(k => surCount[k] > 1));
+  const dp = [];
+  persons.forEach((p, i) => {
+    const label = p.label || ('Personne ' + letter(i + 1));
+    const key = 'dico|p|' + i;
+    const e = makeEnt(key, 'personne', '', label, null);
+    if (!S.over.has(key) || S.over.get(key).label == null) e.label = label;
+    const F = p.prenoms ? p.prenoms.split(/\s+/).filter(Boolean) : [];
+    const firsts = [...new Set([p.prenoms, F[0]].filter(Boolean))];
+    const lasts = [p.nom, p.naissance].filter(Boolean);
+    const add = v => { if (v && !e.forms.has(v)){ e.forms.add(v); e.dirty = true; } };
+    for (const f of firsts) for (const l of lasts){ add(f + ' ' + l); add(l + ' ' + f); }
+    for (const l of lasts){ if (!shared.has(fold(l))) add(l); }
+    if (opt('oFirst')){ add(p.prenoms); for (const t of F) if (stripMarks(t).replace(/[^A-Za-z]/g, '').length >= 3) add(t); }
+    const tokens = new Set(fold([p.prenoms, p.nom, p.naissance].join(' ')).split(' ').filter(t => t && !PARTICLES.has(t)));
+    const firstTok = new Set(fold(p.prenoms || '').split(' ').filter(Boolean));
+    dp.push({e, civ: p.civ, tokens, firstTok, lasts: lasts.map(fold)});
+  });
+  const fam = {};
+  for (const s of shared){
+    const orig = persons.map(p => [p.nom, p.naissance]).flat().find(l => l && fold(l) === s);
+    const key = 'fam|' + s;
+    const e = makeEnt(key, 'famille', '', S.ent.has(key) ? S.ent.get(key).label : 'Famille ' + nextNum('Famille'), orig);
+    fam[s] = e;
+  }
+  const ds = [];
+  socs.forEach((s, i) => {
+    const key = 'dico|s|' + i;
+    const label = s.label || ('Société ' + (i + 1));
+    const e = makeEnt(key, 'societe', '', label, s.denom);
+    if (!S.over.has(key) || S.over.get(key).label == null) e.label = label;
+    ds.push({e, f: fold(s.denom)});
+  });
+  S.counters['Société'] = Math.max(S.counters['Société'] || 0, socs.length);
+  let tn = 0;
+  for (const line of $('#terms').value.split('\n')){
+    const [term, lab] = line.split('=>').map(x => (x || '').trim());
+    if (!term) continue;
+    tn++;
+    const key = 'terme|' + fold(term);
+    const e = makeEnt(key, 'terme', '', lab || ('Terme ' + tn), term);
+    if (lab && !(S.over.get(key) || {}).label) e.label = lab;
+  }
+  const allTok = new Set(); dp.forEach(p => p.tokens.forEach(t => allTok.add(t)));
+  S.dico = {dp, ds, shared, fam, allTok};
+}
+
+function linkPerson(value, civWord){
+  const toks = fold(value).split(' ').filter(t => t && !PARTICLES.has(t));
+  const D = S.dico;
+  if (!toks.length) return null;
+  const unc = toks.filter(t => !D.allTok.has(t));
+  if (!unc.length){
+    const onlyShared = toks.every(t => D.shared.has(t));
+    if (onlyShared){
+      const g = civWord ? (/^(m|mm|monsieur|messieurs)$/i.test(civWord.replace('.', '')) ? 'M' : (/^(mme|mmes|madame|mesdames|mademoiselle|mlle|mlles)$/i.test(civWord.replace('.', '')) ? 'F' : '')) : '';
+      if (g){
+        const c = D.dp.filter(p => p.civ === g && toks.every(t => p.lasts.includes(t)));
+        if (c.length === 1) return c[0].e;
+      }
+      return D.fam[toks[0]] || null;
+    }
+    let best = null, bs = 0;
+    for (const p of D.dp){ let sc = 0; for (const t of toks) if (p.tokens.has(t)) sc += p.firstTok.has(t) ? 2 : 1; if (sc > bs){ bs = sc; best = p; } }
+    if (best) return best.e;
+  }
+  return null;
+}
+function linkSoc(value){
+  const f = fold(value);
+  for (const s of S.dico.ds) if (f === s.f || f.includes(s.f) || s.f.includes(f)) return s.e;
+  return null;
+}
+
+/* ---------------- détecteurs ---------------- */
+const RX = {};
+function R(name, src){ RX[name] = new RegExp(src, 'dgu'); }
+const VOIE_STRONG = ['rue','avenue','av.','boulevard','bd','chemin','allée','impasse','route','quai','lieu-dit','lieudit','faubourg','rond-point','sentier','montée','square','esplanade','ruelle'];
+const VOIE_WEAK = ['place','cours','parc','clos','domaine','villa','cité','zone','voie','résidence','hameau','promenade','traverse','carrefour','passage','za','zi','zac','tour','lotissement','centre','espace','pôle','technopole'];
+const VOIE_BUILD = ['bâtiment','batiment','bât.','bât','bat.','bat','immeuble'];
+const VSTRONG = new Set(VOIE_STRONG.concat(VOIE_BUILD).map(fold));
+const ADDR_STOP = new Set(['est','sont','a','ont','sera','seront','dont','qui','que','pour','par','avec','sans','dans','ou','où','mais','ainsi','soit','depuis','selon','lequel','laquelle','lesquels']);
+const APART = ['de','du','des','de la',"de l'","d'",'la','le','les',"l'",'aux','au'];
+const ANAME = ['de','du','des','la','le','les',"l'","d'",'et','aux','au','sur','sous','en'];
+R('email', `[\\p{L}\\p{N}._%+\\-]+@[\\p{L}\\p{N}\\-]+(?:\\.[\\p{L}\\p{N}\\-]+)*\\.[A-Za-z]{2,}`);
+R('telfr', `(?<![\\d+])(?:(?:\\+|00)33[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?[1-9]|0[1-9])(?:[\\s.\\-]?\\d{2}){4}(?!\\d)`);
+R('telch', `(?<![\\d+])(?:\\+|00)41[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?\\d{2}[\\s.\\-]?\\d{3}(?:[\\s.\\-]?\\d{2}){2}(?!\\d)`);
+R('iban', `(?<![A-Z0-9])[A-Z]{2}\\d{2}(?:[ \\u00a0]?[A-Z0-9]{4}){2,7}(?:[ \\u00a0]?[A-Z0-9]{1,4})?(?![A-Z0-9])`);
+R('bic', `(?<![\\p{L}])BIC${HSO}:?${HSO}([A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?)(?![A-Z0-9])`);
+R('nir', `(?<!\\d)[12][\\s.]?\\d{2}[\\s.]?(?:0[1-9]|1[0-2]|[2-9]\\d)[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3}[\\s.]?\\d{2}(?!\\d)${CURR}`);
+R('nirctx', `(?:${K('sécurité sociale')}|NIR|INSEE)[^\\n\\d]{0,25}([12][\\s.]?\\d{2}[\\s.]?\\d{2}[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3})(?![\\s.]?\\d)`);
+R('siret', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{5}(?![\\s.\\u00a0]?\\d)${CURR}`);
+R('siren', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}(?![\\s.\\u00a0]?\\d)${CURR}`);
+R('fiscal', `(?<!\\d[\\s.]?)[0-3]\\d(?:[\\s\\u00a0]?\\d){11}(?![\\s.]?\\d)${CURR}`);
+R('contrat', `(?<![\\p{L}])(?:${alt(['contrat','police','adhésion','compte','dossier','client','référence','réf.','souscription'])})[^\\n]{0,40}?(?<![\\p{L}])(?:n°|N°|nº|no\\.?|${K('numéro')}|num\\.)${HSO}:?${HSO}([A-Z0-9][A-Z0-9\\-\\/.]{2,30}[A-Z0-9])`);
+R('cadastre', `(?<![\\p{L}])(?:${K('section')}|${K('cadastré')}e?s?(?:${HS}${K('section')})?)${HS}([A-Z]{1,2})${HSO}(?:n°|N°|nº|no|${K('numéros')}|${K('numéro')}|nos|n°s)?${HSO}(\\d{1,5}(?:${HSO}(?:,|et|à|&)${HSO}(?:n°)?${HSO}\\d{1,5})*)`);
+R('publi1', `(?<![\\p{L}])${K('volume')}${HS}\\d{3,4}${HSO}P?,?${HSO}(?:n°|N°|nº|${K('numéro')})${HSO}\\d{1,6}`);
+R('publi2', `(?<!\\d)\\d{4}${HSO}P${HSO}(?:n°${HSO})?\\d{2,6}(?!\\d)`);
+R('birth1', `(?<![\\p{L}])[nN][ée]e?s?${HS}(?:${K('le')}${HS})?(${DATE})(?:${HSO},?${HSO}(?:à|a)${HS}(${COMMUNE}))?`);
+R('birth2', `(?<![\\p{L}])[nN][ée]e?s?${HS}(?:à|a)${HS}(${COMMUNE})(?:${HSO}\\(\\d{2,3}\\))?,?${HS}(?:${K('le')}${HS})?(${DATE})`);
+R('birth3', `${K('naissance')}${HSO}:?${HSO}(?:${K('le')}${HS})?(${DATE})`);
+R('birthplace', `${K('lieu de naissance')}${HSO}:?${HSO}(${COMMUNE})`);
+R('date', `(?<![\\p{L}\\d])(${DATE})`);
+R('adresse', `(?<![\\p{L}\\d])(\\d{1,4}${HSO}(?:(?:${alt(['bis','ter','quater'])})|[A-D](?![\\p{L}]))?${HSO},?${HSO})?(${alt(VOIE_STRONG.concat(VOIE_WEAK, VOIE_BUILD))})(?![\\p{L}])((?:${HS}[\\p{L}0-9'’][\\p{L}0-9'’\\-.]*){1,9})`);
+R('bp', `(?<![\\p{L}])(?:BP|CS|B\\.P\\.)${HSO}\\d{1,6}(?!\\d)`);
+R('cp', `(?<!\\d[\\s.\\u00a0]?)(\\d{2})(\\d{3})${HS}(?!${STOPCOM})(${COMMUNE})(?:${HS}${K('cedex')}(?:${HSO}\\d{1,2})?)?(?=[ \\t\\u00a0]*(?:[,;()\\n\\r]|$))`);
+R('ctxcom', `(?<![\\p{L}])(?:${alt(['demeurant','domicilié','domiciliée','domiciliés','domiciliées','résidant','sis','sise','sises','situé','située','situés','situées','notaire','exerçant','établi','établie','fait','siège','siège social','siège social est fixé','siège est fixé','siège social est','siège est','célébré','célébrée','mariés','mariage'])})${HS}(?:${K("à la mairie d'")}|${K('à la mairie de')}|${K("sur la commune d'")}|${K('sur la commune de')}|à|au|en)${HSO}(?!${STOPCOM})(${COMMUNE})(?:${HSO}\\((\\d{2})\\d{3}\\))?`);
+R('rcs', `(?<![\\p{L}])R\\.?${HSO}C\\.?${HSO}S\\.?${HS}(?:${K('de')}${HS}|${K("d'")}${HSO})?(${COMMUNE})`);
+R('civ', `(?<![\\p{L}])((?:[Mm]onsieur|[Mm]adame|[Mm]ademoiselle|[Mm]essieurs|[Mm]esdames|MM\\.|M\\.|Mme|Mmes|Mlle|Mlles|[Dd]octeur|Dr|[Pp]rofesseur|Pr))${HS}(${NAME})`);
+R('notaire', `(?<![\\p{L}])(?:Ma[îi]tre|MA[ÎI]TRE|Me)${HS}(${NAME})`);
+const FORMS = 'SCI|SCPI|SCEA|SCM|SCP|SC|SARL|SASU|SAS|EURL|SNC|SELARL|SELAS|SELAFA|EARL|GAEC|GFA|GFV|GFR|OPCI|GIE';
+const CNAME = `[${UP}0-9][\\p{L}0-9'’&\\-]*(?:${HS}(?:(?:DE|DU|DES|LA|LE|LES|ET|D'|L'|&|de|du|des|la|le|les|et|d'|l')${HSO})?[${UP}0-9][\\p{L}0-9'’&\\-]*){0,4}`;
+R('socform', `(?<![\\p{L}])(?:${FORMS})(?![\\p{L}])${HS}(?:${K('dénommée')}${HS})?(?:[«"“]${HSO}([^»"”\\n]{2,60}?)${HSO}[»"”]|(${CNAME}))`);
+R('socquote', `(?<![\\p{L}])(?:${alt(['société','dénommée','dénomination','dénomination sociale','raison sociale'])})(?:${HS}(?:${alt(['civile','immobilière','commerciale','à responsabilité limitée','par actions simplifiée','unipersonnelle','anonyme','en nom collectif','de gestion','familiale','holding','de construction vente','agricole'])}))*${HSO}:?${HSO}(?:${K('dénommée')}${HSO})?[«"“]${HSO}([^»"”\\n]{2,60}?)${HSO}[»"”]`);
+const PRENOMS = new Set(/*__PRENOMS__*/);
+const isPrenom = w => { const parts = fold(w).split(' ').filter(Boolean); return parts.length > 0 && (PRENOMS.has(parts.join('-')) || parts.every(x => PRENOMS.has(x))); };
+const CAPTOK = `[${UP}][\\p{Ll}'’]+(?:-[${UP}][\\p{Ll}'’]+)?`;
+const CAPSTOK = `[${UP}][${UP}'’]+(?:-[${UP}][${UP}'’]+)*`;
+R('prenomNOM', `(?<![\\p{L}])(${CAPTOK}(?:${HS}${CAPTOK}){0,2})${HS}((?:(?:DE|DU|D'|D’|LE|LA|VAN|VON|DI|DA)${HSO})?${CAPSTOK}(?:${HS}${CAPSTOK})?)(?![\\p{L}])`);
+R('NOMprenom', `(?<![\\p{L}])(${CAPSTOK})${HS}(${CAPTOK}(?:${HS}${CAPTOK})?)(?![\\p{L}])`);
+R('prenomNom', `(?<![\\p{L}])(${CAPTOK})${HS}([${UP}][\\p{Ll}'’]{2,}(?:-[${UP}][\\p{Ll}'’]+)?)(?![\\p{L}])`);
+const ORGKW = new Set(['conseil','conseils','patrimoine','gestion','finance','finances','immobilier','immobiliere','holding','invest','investissement','investissements','groupe','cabinet','expertise','audit','associes','partenaires','consulting','services','developpement','participations','avocats','notaires','comptable','comptables','assurances','courtage','capital','partners','advisors','family','office']);
+R('capsCP', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?=${HSO},?${HSO}\\d{5}(?!\\d|[\\s\\u00a0]\\d))`);
+R('capsOrg', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?![\\p{L}\\p{N}])`);
+R('kwOrg', `(?<![\\p{L}])(?:[Cc]abinet|CABINET|[ÉéEe]tude|[Ee]xpert-comptable|[Cc]ommissaire aux comptes)${HS}(?!(?:[Nn]otarial|[Dd]e|[Dd]u|[Dd]es|[Ll]a|[Ll]e)(?![\\p{L}]))(${CAPTOK}|${CAPSTOK})((?:${HS}(?:&|et|de|du|des)?${HSO}(?:${CAPTOK}|${CAPSTOK})){0,3})`);
+const CAPS = new RegExp(`(?<![\\p{L}\\p{N}])[${UP}][${UP}'’\\-]{2,}(?![\\p{L}\\p{N}])`, 'gu');
+const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh').split(' '));
+
+function detectRaw(doc){
+  const t = doc.text, out = [];
+  const push = (s, e, cat, sub, value, prio, rep, dept) => { if (e > s) out.push({s, e, cat, sub, value, prio, rep, dept}); };
+  const each = (name, fn) => { const re = RX[name]; re.lastIndex = 0; let m; while ((m = re.exec(t))){ const nx = fn(m); if (typeof nx === 'number' && nx > m.index) re.lastIndex = nx; else if (!m[0].length) re.lastIndex++; } };
+  const g = (m, i) => m.indices[i];
+  each('email', m => push(m.index, m.index + m[0].length, 'contact', 'Courriel', m[0], 2));
+  each('telfr', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
+  each('telch', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
+  each('iban', m => {
+    const ctx = /IBAN/i.test(t.slice(Math.max(0, m.index - 25), m.index));
+    let v = m[0];
+    while (!ibanOk(v) && /\s/.test(v)) v = v.replace(/\s*\S+$/, '');
+    if (ibanOk(v)) push(m.index, m.index + v.length, 'identifiant', 'IBAN', v, 2);
+    else if (ctx) push(m.index, m.index + m[0].length, 'identifiant', 'IBAN', m[0], 2);
+  });
+  each('bic', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'BIC', m[1], 2));
+  each('nir', m => push(m.index, m.index + m[0].length, 'identifiant', 'N° de sécurité sociale', m[0], 2));
+  each('nirctx', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de sécurité sociale', m[1], 2));
+  each('siret', m => { if (luhn(digits(m[0])) || /(SIRET|SIREN|RCS|R\.C\.S|immatricul)/i.test(t.slice(Math.max(0, m.index - 40), m.index))) push(m.index, m.index + m[0].length, 'identifiant', 'SIRET', m[0], 2); });
+  each('siren', m => {
+    const ctx = /(SIREN|RCS|R\.C\.S|immatricul|num[ée]ro)/i.test(t.slice(Math.max(0, m.index - 40), m.index));
+    if (luhn(digits(m[0])) || ctx) push(m.index, m.index + m[0].length, 'identifiant', 'SIREN', m[0], 2);
+  });
+  each('fiscal', m => push(m.index, m.index + m[0].length, 'identifiant', 'N° fiscal', m[0], 2));
+  each('contrat', m => { if (/\d/.test(m[1])) push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de contrat', m[1], 2); });
+  each('cadastre', m => push(g(m,1)[0], g(m,2)[1], 'identifiant', 'Parcelle', t.slice(g(m,1)[0], g(m,2)[1]), 2));
+  each('publi1', m => push(m.index, m.index + m[0].length, 'identifiant', 'Réf. publication', m[0], 2));
+  each('publi2', m => push(m.index, m.index + m[0].length, 'identifiant', 'Réf. publication', m[0], 2));
+  const birthDate = (s, e, str) => {
+    if (!opt('oBirth')) return;
+    const d = parseDate(str);
+    push(s, e, 'naissance', '', str, 3, d ? `[âge : ${ageAt(d)} ans]` : '[date de naissance]');
+  };
+  each('birth1', m => { birthDate(g(m,1)[0], g(m,1)[1], m[1]); if (m[2] && opt('oAddr')) push(g(m,2)[0], g(m,2)[1], 'commune', '', m[2], 5); });
+  each('birth2', m => { if (opt('oAddr')) push(g(m,1)[0], g(m,1)[1], 'commune', '', m[1], 5); birthDate(g(m,2)[0], g(m,2)[1], m[2]); });
+  each('birth3', m => birthDate(g(m,1)[0], g(m,1)[1], m[1]));
+  if (opt('oDates')) each('date', m => { const d = parseDate(m[1]); if (d) push(g(m,1)[0], g(m,1)[1], 'date', '', 'all', 8, MOIS[d.getMonth()] + ' ' + d.getFullYear()); });
+  if (opt('oAddr')){
+    each('birthplace', m => push(g(m,1)[0], g(m,1)[1], 'commune', '', m[1], 5));
+    each('adresse', m => {
+      const num = !!m[1], kw = m[2];
+      const kwEnd = g(m,2)[1];
+      if (!num && !VSTRONG.has(fold(kw)) && kw[0] === kw[0].toLowerCase()) return kwEnd;
+      const t0 = g(m,3)[0], re = /\S+/gu; let tk, last = -1;
+      while ((tk = re.exec(m[3]))){
+        const w = tk[0].replace(/\.+$/, '');
+        if (ADDR_STOP.has(fold(w))) break;
+        if (/^(?:[dlDL]['’])?[A-ZÀ-ÝÆŒ0-9]/.test(w)) last = tk.index + w.length;
+        if (/\.$/.test(tk[0]) && w.length > 3) break;
+      }
+      if (last < 0) return kwEnd;
+      const end = t0 + last;
+      push(m.index, end, 'adresse', '', t.slice(m.index, end).replace(/\s+/g, ' '), 4);
+      return end;
+    });
+    each('bp', m => push(m.index, m.index + m[0].length, 'adresse', '', m[0], 4));
+    each('cp', m => push(m.index, m.index + m[0].length, 'commune', '', m[3], 5, null, m[1]));
+    each('ctxcom', m => push(g(m,1)[0], m[2] ? m.index + m[0].length : g(m,1)[1], 'commune', '', m[1], 5, null, m[2]));
+    each('rcs', m => push(g(m,1)[0], g(m,1)[1], 'commune', '', m[1], 5));
+  }
+  if (opt('oCiv')){
+    each('civ', m => push(g(m,2)[0], g(m,2)[1], 'personne_auto', m[1], m[2], 6));
+    const notStop = w => { const f = fold(w); return !STOP.has(f) && !ORGKW.has(f) && !PRENOMS.has(f) && f.length >= 2; };
+    each('prenomNOM', m => {
+      const firsts = m[1].split(/\s+/), noms = m[2].split(/\s+/).filter(x => !/^(DE|DU|D'|D’|LE|LA|VAN|VON|DI|DA)$/.test(x));
+      if (!isPrenom(firsts[0]) || !noms.length || !noms.every(notStop)) return;
+      push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 6);
+    });
+    each('NOMprenom', m => {
+      const firsts = m[2].split(/\s+/);
+      if (!notStop(m[1]) || !isPrenom(firsts[0])) return;
+      push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 6);
+    });
+    each('prenomNom', m => {
+      if (!isPrenom(m[1]) || !notStop(m[2]) || MOIS_F.includes(fold(m[2]))) return g(m,1)[1];
+      push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 7);
+    });
+    each('notaire', m => push(g(m,1)[0], g(m,1)[1], 'notaire', '', m[1], 6));
+  }
+  each('socform', m => { const i = m[1] ? 1 : 2; push(g(m,i)[0], g(m,i)[1], 'societe', '', m[i].trim(), 6); });
+  each('socquote', m => push(g(m,1)[0], g(m,1)[1], 'societe', '', m[1].trim(), 6));
+  if (opt('oOrg')){
+    const orgOk = v => { const ws = fold(v).split(' ').filter(w => w !== '&'); return ws.some(w => !STOP.has(w) && !ORGKW.has(w)); };
+    each('capsCP', m => { if (orgOk(m[1])) push(g(m,1)[0], g(m,1)[1], 'societe', '', m[1].replace(/\s+/g, ' '), 6); });
+    each('capsOrg', m => { const ws = fold(m[1]).split(' '); if (ws.length <= 3 && !ws.some(w => /^(de|du|des|d'|la|le|les|et|aux|au|en|sur|l')$/.test(w)) && ws.some(w => ORGKW.has(w)) && orgOk(m[1])) push(g(m,1)[0], g(m,1)[1], 'societe', '', m[1].replace(/\s+/g, ' '), 6); });
+    each('kwOrg', m => { const v = (m[1] + (m[2] || '')).replace(/\s+/g, ' ').trim(); if (orgOk(v)) push(g(m,1)[0], g(m,1)[0] + m[1].length + (m[2] || '').length, 'societe', '', v, 6); });
+  }
+  return out;
+}
+
+/* un mot du vocabulaire comptable ou juridique n'est jamais pris pour un nom ou une commune */
+function commonWords(v){ const ws = fold(v).split(' ').filter(w => w && !PARTICLES.has(w) && w !== '&'); return ws.length > 0 && ws.every(w => STOP.has(w)); }
+function attach(raw){
+  const r = [];
+  for (const sp of raw){
+    let e = null;
+    if (['commune','personne_auto','societe','notaire','adresse'].includes(sp.cat) && commonWords(sp.value)) continue;
+    if (sp.cat === 'personne_auto'){
+      const toks = fold(sp.value).split(' ').filter(t => t && !PARTICLES.has(t));
+      const onlyShared = toks.length > 0 && toks.every(t => S.dico.shared.has(t));
+      e = linkPerson(sp.value, sp.sub);
+      if (e){
+        if (!onlyShared && !e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+        r.push({s: sp.s, e: sp.e, key: e.key, prio: onlyShared && e.cat === 'personne' ? 0 : sp.prio});
+        continue;
+      } else {
+        const key = 'pa|' + fold(sp.value);
+        const pre = S.dico.dp.length ? 'Tiers' : 'Personne';
+        e = S.ent.get(key) || makeEnt(key, 'personne_auto', '', pre + ' ' + nextNum(pre), sp.value);
+        if (!e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+      }
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+      continue;
+    }
+    if (sp.cat === 'societe'){
+      e = linkSoc(sp.value);
+      if (!e){ const key = 'so|' + fold(sp.value); e = S.ent.get(key) || makeEnt(key, 'societe', '', 'Société ' + nextNum('Société'), sp.value); }
+      if (!e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+      continue;
+    }
+    if (sp.cat === 'notaire'){
+      const pe = linkPerson(sp.value, '');
+      if (pe){ if (!pe.forms.has(sp.value)){ pe.forms.add(sp.value); pe.dirty = true; } r.push({s: sp.s, e: sp.e, key: pe.key, prio: sp.prio}); continue; }
+      const key = 'no|' + fold(sp.value);
+      e = S.ent.get(key) || makeEnt(key, 'notaire', '', 'Notaire ' + nextNum('Notaire'), sp.value);
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+      continue;
+    }
+    if (sp.cat === 'commune'){
+      const key = 'co|' + fold(sp.value);
+      e = S.ent.get(key);
+      if (!e) e = makeEnt(key, 'commune', '', 'Commune ' + nextNum('Commune'), sp.value);
+      else if (!e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+      if (sp.dept && !e.dept){ e.dept = sp.dept; if (!e.userLabel) e.label = e.label + ' (' + sp.dept + ')'; }
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+      continue;
+    }
+    if (sp.cat === 'adresse'){
+      const key = 'ad|' + fold(sp.value);
+      e = S.ent.get(key) || makeEnt(key, 'adresse', '', 'Adresse ' + nextNum('Adresse'), sp.value);
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+      continue;
+    }
+    if (sp.cat === 'naissance'){
+      const key = 'na|' + fold(sp.value);
+      e = S.ent.get(key) || makeEnt(key, 'naissance', '', sp.rep.replace(/^\[|\]$/g, ''), sp.value);
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio, rep: sp.rep});
+      continue;
+    }
+    if (sp.cat === 'date'){
+      e = S.ent.get('date|all') || makeEnt('date|all', 'date', '', 'Ramenées au mois et à l\'année', 'toutes');
+      r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio, rep: sp.rep});
+      continue;
+    }
+    const norm = (sp.cat === 'contact' && sp.sub === 'Courriel') ? sp.value.toLowerCase() : digits(sp.value).length >= 6 ? digits(sp.value) : fold(sp.value);
+    const key = 'id|' + sp.sub + '|' + norm;
+    e = S.ent.get(key) || makeEnt(key, sp.cat, sp.sub, sp.sub + ' ' + nextNum(sp.sub), sp.value.replace(/\s+/g, ' '));
+    r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
+  }
+  return r;
+}
+
+/* ---------------- calcul ---------------- */
+function compileEnt(e){
+  if (!e.dirty) return;
+  const forms = [...e.forms].filter(f => f && fold(f).length >= 2).sort((a, b) => b.length - a.length);
+  const ext = ['commune','adresse','terme','societe'].includes(e.cat);
+  e.res = forms.map(f => wordRe(f, true, false, ext)).filter(Boolean);
+  e.resOcr = forms.map(f => wordRe(f, true, fold(f).length >= 4, ext)).filter(Boolean);
+  e.dirty = false;
+}
+/* lecture par OCR : un nom mal lu (Annacy pour Annecy) est rattaché au nom connu le plus proche */
+function lev(a, b, max){
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let v0 = Array.from({length: b.length + 1}, (_, i) => i), v1 = new Array(b.length + 1);
+  for (let i = 0; i < a.length; i++){
+    v1[0] = i + 1; let mn = v1[0];
+    for (let j = 0; j < b.length; j++){ v1[j + 1] = Math.min(v1[j] + 1, v0[j + 1] + 1, v0[j] + (a[i] === b[j] ? 0 : 1)); if (v1[j + 1] < mn) mn = v1[j + 1]; }
+    if (mn > max) return max + 1;
+    [v0, v1] = [v1, v0];
+  }
+  return v0[b.length];
+}
+const FUZZ = new RegExp(`(?<![\\p{L}\\p{N}])(?:[dDlL]['’])?([${UP}][\\p{L}\\-]{5,})(?![\\p{L}\\p{N}])`, 'dgu');
+function fuzzyOcr(text, cand){
+  const toks = new Map();
+  for (const e of S.ent.values()){
+    if (!e.enabled || !SURFACE.has(e.cat) || e.cat === 'suggestion') continue;
+    for (const f of e.forms) for (const t of fold(f).split(' ')) if (t.replace(/[^a-z]/g, '').length >= 6 && !STOP.has(t)) toks.set(t, e.key);
+  }
+  if (!toks.size) return;
+  FUZZ.lastIndex = 0; let m;
+  while ((m = FUZZ.exec(text))){
+    const w = fold(m[1]); if (toks.has(w)) continue;
+    for (const [t, key] of toks){
+      const max = t.length >= 9 ? 2 : 1;
+      if (Math.abs(t.length - w.length) <= max && lev(w, t, max) <= max){ cand.push({s: m.indices[1][0], e: m.indices[1][1], key, prio: 7}); break; }
+    }
+  }
+}
+function computeText(text, raw, ocr){
+  const cand = [];
+  for (const sp of raw){ const e = S.ent.get(sp.key); if (e && e.enabled) cand.push(sp); }
+  for (const e of S.ent.values()){
+    if (!e.enabled || !SURFACE.has(e.cat)) continue;
+    compileEnt(e);
+    for (const re of (ocr ? e.resOcr : e.res)){ re.lastIndex = 0; let m; while ((m = re.exec(text))){ cand.push({s: m.index, e: m.index + m[0].length, key: e.key, prio: 1}); if (!m[0].length) re.lastIndex++; } }
+  }
+  if (ocr) fuzzyOcr(text, cand);
+  cand.sort((a, b) => (b.e - b.s) - (a.e - a.s) || a.prio - b.prio || a.s - b.s);
+  const taken = new Uint8Array(text.length + 1), acc = [];
+  for (const c of cand){
+    let ok = true;
+    for (let i = c.s; i < c.e; i++) if (taken[i]){ ok = false; break; }
+    if (!ok) continue;
+    taken.fill(1, c.s, c.e);
+    acc.push(c);
+  }
+  acc.sort((a, b) => a.s - b.s);
+  const merged = [];
+  for (const c of acc){
+    const last = merged[merged.length - 1];
+    if (last && last.key === c.key && !last.rep && !c.rep && /^\s*$/.test(text.slice(last.e, c.s))) last.e = c.e;
+    else merged.push(Object.assign({}, c));
+  }
+  let out = '', pos = 0; const map = [];
+  for (const c of merged){
+    out += text.slice(pos, c.s);
+    const e = S.ent.get(c.key);
+    const rep = c.rep || ('[' + e.label + ']');
+    map.push({os: c.s, oe: c.e, ns: out.length, ne: out.length + rep.length, key: c.key});
+    out += rep; pos = c.e;
+  }
+  out += text.slice(pos);
+  return {out, spans: merged, map, taken};
+}
+function computeAll(){
+  for (const e of S.ent.values()) e.count = 0;
+  S.res = S.docs.map(d => {
+    const r = computeText(d.text, d.attached || [], d.ocr);
+    for (const sp of r.spans) S.ent.get(sp.key).count++;
+    return r;
+  });
+}
+function findSuggestions(){
+  const known = new Set();
+  for (const e of S.ent.values()) for (const f of e.forms) fold(f).split(' ').forEach(x => known.add(x));
+  const cnt = new Map();
+  S.docs.forEach((d, i) => {
+    const taken = S.res[i].taken; CAPS.lastIndex = 0; let m;
+    while ((m = CAPS.exec(d.text))){
+      const w = m[0]; const f = fold(w);
+      const f2 = f.replace(/^[dl]'/, '');
+      if (taken[m.index] || STOP.has(f) || STOP.has(f2) || known.has(f) || /^[IVXLCDM]+$/.test(w) || f.replace(/[^a-z]/g, '').length < 3) continue;
+      cnt.set(w, (cnt.get(w) || 0) + 1);
+    }
+  });
+  [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 40).forEach(([w]) => {
+    const key = 'sg|' + fold(w);
+    const e = S.ent.get(key) || makeEnt(key, 'suggestion', '', 'Nom ' + nextNum('Nom'), w);
+    if (!e.forms.has(w)){ e.forms.add(w); e.dirty = true; }
+  });
+}
+
+/* ---------------- contrôle final ---------------- */
+function control(){
+  const issues = [], infos = [];
+  const rx = f => new RegExp(LB + f.trim().replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&').replace(/\s+/g, SEP) + RB, 'giu');
+  S.docs.forEach((d, i) => {
+    const out = S.res[i].out;
+    for (const e of S.ent.values()){
+      if (!e.enabled || !SURFACE.has(e.cat) || e.cat === 'suggestion') continue;
+      for (const f of e.forms){
+        if (fold(f).length < 3) continue;
+        const n = (out.match(rx(f)) || []).length;
+        if (n) issues.push(`« ${f} » reste visible ${n} fois dans ${d.name}`);
+      }
+    }
+    const strict = [['email','une adresse électronique'],['telfr','un numéro de téléphone'],['nir','un numéro de sécurité sociale']];
+    for (const [k, lab] of strict){ const re = new RegExp(RX[k].source, 'gu'); const m = out.match(re); if (m) issues.push(`${d.name} contient encore ${lab} : ${m[0]}`); }
+    const ib = (out.match(new RegExp(RX.iban.source, 'gu')) || []).filter(ibanOk); if (ib.length) issues.push(`${d.name} contient encore un IBAN`);
+    const sir = (out.match(new RegExp(RX.siren.source, 'gu')) || []).filter(x => luhn(digits(x))); if (sir.length) issues.push(`${d.name} contient encore un numéro qui ressemble à un SIREN : ${sir[0]}`);
+    if (d.scanned) issues.push(`${d.name} : au moins une page n'a pas pu être lue, ne la transmettez pas telle quelle`);
+    if (d.ocr) infos.push(`${d.name} a été lu par reconnaissance de caractères (fiabilité ${d.conf} %) : une erreur de lecture peut déformer un nom, relisez cette pièce avec attention.`);
+  });
+  const sugg = [...S.ent.values()].filter(e => e.cat === 'suggestion' && !e.enabled).length;
+  if (sugg) infos.push(`${sugg} mot(s) en capitales non reconnu(s) restent visibles : vérifiez s'il s'agit de noms`);
+  infos.push('Relisez le résultat : l\'outil aide, il ne remplace pas votre relecture.');
+  const box = $('#control');
+  box.className = 'control ' + (issues.length ? 'ko' : 'ok');
+  box.innerHTML = (issues.length ? `<strong>Contrôle final : ${issues.length} point(s) à revoir</strong><ul>${issues.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<strong>Contrôle final : aucune donnée identifiante détectée dans le résultat</strong>')
+    + `<ul>${infos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  return issues;
+}
+
+/* ---------------- affichage ---------------- */
+function renderEnts(){
+  const box = $('#ents'); box.innerHTML = '';
+  const groups = {};
+  for (const e of S.ent.values()){ if (e.cat !== 'personne' && e.cat !== 'societe' && e.cat !== 'terme' && e.count === 0 && e.cat !== 'suggestion') continue; (groups[e.cat] = groups[e.cat] || []).push(e); }
+  for (const cat of CAT_ORDER){
+    const list = groups[cat]; if (!list || !list.length) continue;
+    const gdiv = document.createElement('div'); gdiv.className = 'grp';
+    gdiv.innerHTML = `<h4>${esc(CATS[cat].name)}</h4>`;
+    for (const e of list){
+      const row = document.createElement('div'); row.className = 'ent';
+      const dateLike = cat === 'naissance' || cat === 'date';
+      const forms = cat === 'date' ? 'chaque date devient mois et année' : [...(e.forms.size ? e.forms : [e.primary])].join(' · ');
+      row.innerHTML = `<input type="checkbox" ${e.enabled ? 'checked' : ''} title="Masquer"><input type="text" value="${esc(e.label)}" ${dateLike ? 'disabled' : ''}><span class="cnt" title="Occurrences">${cat === 'suggestion' ? e.forms.size ? sugCount(e) : '' : e.count}</span><div class="forms" title="${esc(forms)}">${esc(forms)}</div>`;
+      const [cb, inp] = row.querySelectorAll('input');
+      cb.onchange = () => { e.enabled = cb.checked; setOver(e.key, {enabled: cb.checked}); refresh(false); };
+      inp.oninput = debounce(() => { e.label = inp.value.trim() || e.label; e.userLabel = true; setOver(e.key, {label: e.label}); refresh(false, true); }, 250);
+      gdiv.appendChild(row);
+    }
+    box.appendChild(gdiv);
+  }
+}
+function sugCount(e){ let n = 0; const re = wordRe([...e.forms][0], true); S.docs.forEach(d => { n += (d.text.match(re) || []).length; }); return n; }
+function setOver(key, o){ S.over.set(key, Object.assign(S.over.get(key) || {}, o)); }
+function renderTabs(){
+  const box = $('#tabs'); box.innerHTML = '';
+  S.docs.forEach((d, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'tab' + (i === S.cur ? ' on' : ''); b.textContent = d.name.length > 34 ? d.name.slice(0, 32) + '…' : d.name; b.onclick = () => { S.cur = i; renderTabs(); renderView(); }; box.appendChild(b); });
+}
+function renderView(){
+  const d = S.docs[S.cur], r = S.res[S.cur]; if (!d || !r) { $('#view').textContent = ''; return; }
+  let html = '', pos = 0;
+  if (S.view === 'res'){
+    for (const m of r.map){ const e = S.ent.get(m.key); html += esc(r.out.slice(pos, m.ns)) + `<mark class="c-${CATS[e.cat].c}" title="${esc(d.text.slice(m.os, m.oe))}">${esc(r.out.slice(m.ns, m.ne))}</mark>`; pos = m.ne; }
+    html += esc(r.out.slice(pos));
+  } else {
+    for (const m of r.map){ const e = S.ent.get(m.key); html += esc(d.text.slice(pos, m.os)) + `<mark class="c-${CATS[e.cat].c}" title="${esc(r.out.slice(m.ns, m.ne))}">${esc(d.text.slice(m.os, m.oe))}</mark>`; pos = m.oe; }
+    html += esc(d.text.slice(pos));
+  }
+  $('#view').innerHTML = html;
+}
+function refresh(full, keepPanel){
+  computeAll();
+  if (full) findSuggestions();
+  if (!keepPanel) renderEnts();
+  renderTabs(); renderView(); control();
+  if (!keepPanel) renderExpList();
+}
+function renderExpList(){
+  const ul = $('#expList'); ul.innerHTML = '';
+  S.docs.forEach((d, i) => {
+    const li = document.createElement('li');
+    const canPdf = (d.type === 'pdf' && !d.scanned) || d.type === 'image';
+    li.innerHTML = `<div><strong>${esc(docBase(i))}</strong> <span class="meta">${esc(d.name)}</span></div><div class="row"><button class="ghost" type="button" data-k="txt">Texte (.txt)</button>${canPdf ? '<button class="go" type="button" data-k="pdf">PDF caviardé</button>' : ''}</div>`;
+    li.querySelector('[data-k=txt]').onclick = () => download(enc(S.res[i].out), docBase(i) + '.txt', 'text/plain;charset=utf-8');
+    const bp = li.querySelector('[data-k=pdf]');
+    if (bp) bp.onclick = async () => {
+      try { const bytes = d.type === 'image' ? await redactImage(d, S.res[i].spans) : await redactPdf(d, S.res[i].spans); download(bytes, docBase(i) + '-caviarde.pdf', 'application/pdf'); }
+      catch (err){ console.error(err); toast('Caviardage impossible : ' + err.message); }
+      busy();
+    };
+    ul.appendChild(li);
+  });
+}
+function docBase(i){ return 'Piece-' + String(i + 1).padStart(2, '0') + '-' + safeName(S.docs[i].name); }
+function debounce(fn, ms){ let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+function busy(msg){ const b = $('#busy'); if (msg){ $('#busyText').textContent = msg; b.classList.remove('hidden'); } else b.classList.add('hidden'); }
+function toast(msg){ const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3800); }
+const tick = () => new Promise(r => setTimeout(r, 20));
+
+/* ---------------- lecture des pièces ---------------- */
+function layoutPage(tc){
+  let pt = '', last = null; const items = [];
+  for (const it of tc.items){
+    if (typeof it.str !== 'string') continue;
+    const x = it.transform[4], y = it.transform[5];
+    const fs = Math.hypot(it.transform[2], it.transform[3]) || it.height || 10;
+    if (last && it.str){
+      if (Math.abs(y - last.y) > fs * 0.5) pt += '\n';
+      else if (x - last.xe > fs * 0.15 && !/\s$/.test(pt) && !/^\s/.test(it.str)) pt += ' ';
+    }
+    const s = pt.length; pt += it.str;
+    if (it.str){
+      items.push({s, e: pt.length, x, y, w: it.width, h: fs, str: it.str, fn: it.fontName, fam: (tc.styles[it.fontName] || {}).fontFamily || 'sans-serif'});
+      last = {y, xe: x + it.width};
+    }
+    if (it.hasEOL){ if (!/\n$/.test(pt)) pt += '\n'; last = null; }
+  }
+  return {pt, items};
+}
+/* champs de formulaire (liasses fiscales, Cerfa) : leurs valeurs ne sont pas dans le texte de la page */
+async function annotItems(page, base){
+  let txt = ''; const items = [];
+  try {
+    const fields = [];
+    for (const a of await page.getAnnotations()){
+      let v = '';
+      if (a.subtype === 'Widget'){ if (typeof a.fieldValue === 'string') v = a.fieldValue; else if (Array.isArray(a.fieldValue)) v = a.fieldValue.join(' '); }
+      else if (a.subtype === 'FreeText' && a.contentsObj) v = a.contentsObj.str || '';
+      v = (v || '').replace(/\s+/g, ' ').trim();
+      if (v && a.rect && !/^(Off|On|Yes|No|0)$/.test(v)) fields.push({v, rect: a.rect});
+    }
+    fields.sort((a, b) => (Math.abs(b.rect[3] - a.rect[3]) > 4 ? b.rect[3] - a.rect[3] : a.rect[0] - b.rect[0]));
+    let top = null;
+    for (const f of fields){
+      if (top !== null) txt += Math.abs(f.rect[3] - top) > 4 ? '\n' : ' ';
+      top = f.rect[3];
+      const s = base + txt.length; txt += f.v;
+      items.push({s, e: base + txt.length, rect: f.rect});
+    }
+    if (txt) txt += '\n';
+  } catch (err){ console.error(err); }
+  return {text: txt, items};
+}
+async function readPdf(file){
+  initWorker();
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const pdf = await pdfjs.getDocument({data: bytes.slice(), isEvalSupported: false}).promise;
+  let text = ''; const pages = []; let nOcr = 0, confSum = 0, failed = false;
+  for (let p = 1; p <= pdf.numPages; p++){
+    const page = await pdf.getPage(p);
+    let {pt, items} = layoutPage(await page.getTextContent());
+    const tlen = pt.length;
+    const ann = await annotItems(page, tlen + 1);
+    if (ann.text) pt += '\n' + ann.text;
+    let pg = {items, ann: ann.items, tlen};
+    if (pt.replace(/\s/g, '').length < 25){
+      try {
+        const scale = OCR_SCALE, vp = page.getViewport({scale});
+        const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+        const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
+        await page.render({canvasContext: ctx, viewport: vp}).promise;
+        const r = await ocrCanvas(cv, `${file.name}, page ${p} sur ${pdf.numPages}`);
+        pt = r.pt; pg = {ocr: true, scale, items: r.items}; nOcr++; confSum += r.conf;
+      } catch (err){ console.error(err); failed = true; pt = ''; pg = {items: []}; }
+    }
+    pages.push(Object.assign(pg, {offset: text.length, len: pt.length}));
+    text += pt + '\n\n';
+  }
+  const conf = nOcr ? Math.round(confSum / nOcr) : null;
+  let meta = pdf.numPages + ' page(s)';
+  if (nOcr) meta += `, dont ${nOcr} lue(s) par reconnaissance de caractères (fiabilité ${conf} %)`;
+  return {type: 'pdf', text, pages, bytes, scanned: failed, ocr: nOcr > 0, conf, meta, lowconf: lowConf(pages)};
+}
+async function readImage(file){
+  const bmp = await createImageBitmap(file);
+  const scale = bmp.width < 1600 ? Math.min(3, 1600 / bmp.width) : 1;
+  const cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * scale); cv.height = Math.round(bmp.height * scale);
+  const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); ctx.drawImage(bmp, 0, 0, cv.width, cv.height);
+  const r = await ocrCanvas(cv, file.name);
+  const conf = Math.round(r.conf);
+  const pages = [{ocr: true, scale, items: r.items, offset: 0, len: r.pt.length}];
+  return {type: 'image', text: r.pt + '\n', pages, lowconf: lowConf(pages), blob: file, ocr: true, conf, scanned: false, meta: `Image lue par reconnaissance de caractères (fiabilité ${conf} %)`};
+}
+const OCR_SCALE = 3, LOW_CONF = 60;
+function lowConf(pages){ const out = []; for (const pg of pages) if (pg.ocr) for (const it of pg.items) if (it.conf < LOW_CONF && /[\p{L}\p{N}]/u.test(it.str || 'x')) out.push({s: pg.offset + it.s, e: pg.offset + it.e}); return out; }
+function withTimeout(pr, ms, msg){ return Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error(msg)), ms))]); }
+let ocrWorker = null, ocrLabel = '';
+async function getOcr(){
+  if (ocrWorker) return ocrWorker;
+  if (!window.Tesseract) throw new Error('Reconnaissance de caractères indisponible');
+  const txt = id => document.getElementById(id).textContent;
+  /* moteur et script du worker dans un seul fichier : aucun chargement externe */
+  const workerUrl = URL.createObjectURL(new Blob([txt('ocrcore'), '\n;\n', txt('ocrworker')], {type: 'text/javascript'}));
+  const bin = Uint8Array.from(atob(txt('ocrfra').trim()), c => c.charCodeAt(0));
+  const init = Tesseract.createWorker([{code: 'fra', data: bin}], 1, {
+    workerPath: workerUrl, corePath: 'inclus.js', workerBlobURL: false, cacheMethod: 'none', gzip: true,
+    logger: m => { if (m.status === 'recognizing text') busy(`Reconnaissance des caractères : ${ocrLabel} (${Math.round(m.progress * 100)} %)`); },
+    errorHandler: err => console.error(err)
+  });
+  ocrWorker = await withTimeout(init, 90000, 'Le moteur de reconnaissance ne démarre pas dans ce navigateur');
+  return ocrWorker;
+}
+async function ocrCanvas(cv, label){
+  ocrLabel = label;
+  if (!ocrWorker) busy('Préparation de la reconnaissance des caractères');
+  const w = await getOcr();
+  busy(`Reconnaissance des caractères : ${label}`);
+  const {data} = await withTimeout(w.recognize(cv, {}, {text: true, blocks: true}), 180000, 'Reconnaissance trop longue sur ' + label);
+  let pt = ''; const items = [];
+  for (const b of data.blocks || []) for (const par of b.paragraphs || []){
+    for (const line of par.lines || []){
+      let first = true;
+      for (const wd of line.words || []){
+        const t = (wd.text || '').trim(); if (!t) continue;
+        if (!first) pt += ' ';
+        first = false;
+        const s = pt.length; pt += t;
+        items.push({s, e: pt.length, box: [wd.bbox.x0, wd.bbox.y0, wd.bbox.x1, wd.bbox.y1], conf: wd.confidence});
+      }
+      pt += '\n';
+    }
+    pt += '\n';
+  }
+  return {pt: pt.replace(/\n+$/, '\n'), items, conf: data.confidence || 0};
+}
+function readDocx(bytes){
+  const files = fflate.unzipSync(bytes, {filter: f => /^word\/(document|header\d*|footer\d*|footnotes|endnotes)\.xml$/.test(f.name)});
+  const W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+  const rank = n => n.includes('header') ? 0 : n.includes('document') ? 1 : n.includes('foot') && !n.includes('notes') ? 2 : 3;
+  let text = '';
+  for (const name of Object.keys(files).sort((a, b) => rank(a) - rank(b))){
+    const dom = new DOMParser().parseFromString(new TextDecoder().decode(files[name]), 'application/xml');
+    let part = '';
+    for (const p of dom.getElementsByTagNameNS(W, 'p')){
+      let line = '';
+      for (const el of p.getElementsByTagNameNS(W, '*')){
+        if (el.localName === 't') line += el.textContent;
+        else if (el.localName === 'tab') line += '\t';
+        else if (el.localName === 'br' || el.localName === 'cr') line += '\n';
+      }
+      part += line + '\n';
+    }
+    if (!part.trim()) continue;
+    if (rank(name) === 0) text += '[En-tête]\n' + part + '\n';
+    else if (rank(name) === 2) text += '\n[Pied de page]\n' + part;
+    else if (rank(name) === 3) text += '\n[Notes]\n' + part;
+    else text += part;
+  }
+  return {type: 'docx', text, meta: 'Word'};
+}
+async function addFiles(list){
+  for (const f of list){
+    const ext = (f.name.split('.').pop() || '').toLowerCase();
+    try {
+      busy('Lecture de ' + f.name); await tick();
+      let r;
+      if (ext === 'pdf') r = await readPdf(f);
+      else if (ext === 'docx') r = readDocx(new Uint8Array(await f.arrayBuffer()));
+      else if (['jpg','jpeg','png','webp','heic','heif','tif','tiff'].includes(ext)) r = await readImage(f);
+      else if (['txt','md','csv'].includes(ext)) r = {type: 'txt', text: (await f.text()).replace(/\r\n?/g, '\n'), meta: 'Texte'};
+      else { toast(f.name + ' : format non pris en charge'); continue; }
+      S.docs.push(Object.assign({id: ++docSeq, name: f.name}, r));
+    } catch (err){ console.error(err); toast('Lecture impossible : ' + f.name); }
+  }
+  busy(); renderDocs();
+}
+function renderDocs(){
+  const ul = $('#docs'); ul.innerHTML = '';
+  S.docs.forEach(d => {
+    const li = document.createElement('li');
+    li.innerHTML = `<div><strong>${esc(d.name)}</strong> <span class="meta">${esc(d.meta || '')}, ${d.text.length.toLocaleString('fr-FR')} caractères</span>${d.scanned ? '<div class="warn">Au moins une page n\'a pas pu être lue.</div>' : ''}${d.ocr ? '<div class="warn">Lue par reconnaissance de caractères : relisez attentivement le résultat.</div>' : ''}</div><button class="icon" type="button">Retirer</button>`;
+    li.querySelector('button').onclick = () => { S.docs = S.docs.filter(x => x !== d); renderDocs(); if (S.analyzed) analyze(); };
+    ul.appendChild(li);
+  });
+  $('#analyze').disabled = !S.docs.length; $('#prefill').disabled = !S.docs.length;
+  $('#analyzeHint').textContent = S.docs.length ? '' : 'Ajoutez au moins une pièce.';
+}
+
+/* ---------------- analyse ---------------- */
+function analyze(){
+  S.ent = new Map(); S.counters = {};
+  buildDico();
+  for (const d of S.docs){
+    d.attached = attach(detectRaw(d));
+    if (d.lowconf && d.lowconf.length){
+      const e = makeEnt('il|all', 'illisible', '', 'illisible', 'mots mal lus');
+      for (const x of d.lowconf) d.attached.push({s: x.s, e: x.e, key: e.key, prio: 9});
+    }
+  }
+  if (S.cur >= S.docs.length) S.cur = 0;
+  refresh(true);
+  S.analyzed = true;
+  $('#s3').classList.remove('hidden'); $('#s4').classList.remove('hidden');
+}
+
+/* ---------------- export ---------------- */
+function download(data, name, type){
+  const url = URL.createObjectURL(new Blob([data], {type}));
+  const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+const enc = s => new TextEncoder().encode(s);
+function safeName(s){
+  let r = s;
+  const forms = [];
+  for (const e of S.ent.values()) if (e.enabled && SURFACE.has(e.cat)) for (const f of e.forms) if (fold(f).length >= 3) forms.push([f, e.label]);
+  forms.sort((a, b) => b[0].length - a[0].length);
+  for (const [f, lab] of forms){ const re = wordRe(f, false); if (re) r = r.replace(re, lab); }
+  return r.replace(/\.[a-z0-9]{2,4}$/i, '').replace(/[\[\]]/g, '').replace(/\d{5,}/g, '').replace(/[^\p{L}\p{N}_-]+/gu, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'piece';
+}
+function buildPdf(pages){
+  const chunks = [], offs = []; let len = 0;
+  const w = x => { const b = typeof x === 'string' ? enc(x) : x; chunks.push(b); len += b.length; };
+  const obj = (n, body) => { offs[n] = len; w(n + ' 0 obj\n'); body(); w('\nendobj\n'); };
+  w('%PDF-1.4\n'); w(new Uint8Array([37, 226, 227, 207, 211, 10]));
+  const n = pages.length;
+  obj(1, () => w('<< /Type /Catalog /Pages 2 0 R >>'));
+  obj(2, () => w(`<< /Type /Pages /Count ${n} /Kids [${pages.map((_, i) => (3 + i * 3) + ' 0 R').join(' ')}] >>`));
+  pages.forEach((p, i) => {
+    const po = 3 + i * 3, co = po + 1, io = po + 2;
+    const W2 = p.wPt.toFixed(2), H2 = p.hPt.toFixed(2);
+    obj(po, () => w(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W2} ${H2}] /Resources << /XObject << /Im0 ${io} 0 R >> >> /Contents ${co} 0 R >>`));
+    const cs = `q ${W2} 0 0 ${H2} 0 0 cm /Im0 Do Q`;
+    obj(co, () => { w(`<< /Length ${cs.length} >>\nstream\n`); w(cs); w('\nendstream'); });
+    obj(io, () => { w(`<< /Type /XObject /Subtype /Image /Width ${p.w} /Height ${p.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.jpg.length} >>\nstream\n`); w(p.jpg); w('\nendstream'); });
+  });
+  const xref = len, total = 3 + n * 3;
+  let x = `xref\n0 ${total}\n0000000000 65535 f \n`;
+  for (let i = 1; i < total; i++) x += String(offs[i]).padStart(10, '0') + ' 00000 n \n';
+  w(x + `trailer\n<< /Size ${total} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
+  const outb = new Uint8Array(len); let o = 0; for (const c of chunks){ outb.set(c, o); o += c.length; }
+  return outb;
+}
+const MCTX = document.createElement('canvas').getContext('2d');
+function drawOcrBoxes(ctx, pg, spans, f){
+  for (const sp of spans){
+    const s = sp.s - pg.offset, e = sp.e - pg.offset;
+    if (e <= 0 || s >= pg.len) continue;
+    for (const it of pg.items){
+      if (it.e <= s || it.s >= e) continue;
+      const [x0, y0, x1, y1] = it.box, pad = Math.max(3, (y1 - y0) * 0.2);
+      ctx.fillRect((x0 - pad) * f, (y0 - pad) * f, (x1 - x0 + 2 * pad) * f, (y1 - y0 + 2 * pad) * f);
+    }
+  }
+}
+async function redactImage(doc, spans){
+  busy('Caviardage de ' + doc.name); await tick();
+  const pg = doc.pages[0], bmp = await createImageBitmap(doc.blob);
+  const cv = document.createElement('canvas'); cv.width = bmp.width; cv.height = bmp.height;
+  const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); ctx.drawImage(bmp, 0, 0);
+  ctx.fillStyle = '#000'; drawOcrBoxes(ctx, pg, spans, 1 / pg.scale);
+  const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.88));
+  return buildPdf([{jpg: new Uint8Array(await blob.arrayBuffer()), w: cv.width, h: cv.height, wPt: 595, hPt: 595 * cv.height / cv.width}]);
+}
+async function redactPdf(doc, spans){
+  initWorker();
+  const pdf = await pdfjs.getDocument({data: doc.bytes.slice(), isEvalSupported: false}).promise;
+  const pages = [];
+  for (let p = 0; p < pdf.numPages; p++){
+    busy(`Caviardage de ${doc.name}, page ${p + 1} sur ${pdf.numPages}`); await tick();
+    const page = await pdf.getPage(p + 1);
+    const scale = 2, vp = page.getViewport({scale});
+    const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+    const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
+    await page.render({canvasContext: ctx, viewport: vp}).promise;
+    ctx.fillStyle = '#000';
+    const pg = doc.pages[p];
+    if (pg.ocr){ drawOcrBoxes(ctx, pg, spans, scale / pg.scale); }
+    else {
+    const fresh = layoutPage(await page.getTextContent());
+    const loadedFonts = new Set();
+    document.fonts.forEach(f => { if (f.status === 'loaded') loadedFonts.add(f.family.replace(/^["']|["']$/g, '')); });
+    const items = fresh.pt.length === (pg.tlen != null ? pg.tlen : pg.len) ? fresh.items : pg.items;
+    for (const sp of spans){
+      const s = sp.s - pg.offset, e = sp.e - pg.offset;
+      if (e <= 0 || s >= pg.len) continue;
+      for (const it of items){
+        if (it.e <= s || it.s >= e) continue;
+        const a = Math.max(s, it.s) - it.s, b = Math.min(e, it.e) - it.s;
+        const own = it.fn && loadedFonts.has(it.fn);
+        MCTX.font = own ? '100px "' + it.fn + '"' : '100px ' + it.fam;
+        const full = MCTX.measureText(it.str).width || 1;
+        const pad = it.h * (own ? 0.12 : 0.4);
+        const x0 = it.x + it.w * MCTX.measureText(it.str.slice(0, a)).width / full - pad;
+        const x1 = it.x + it.w * MCTX.measureText(it.str.slice(0, b)).width / full + pad;
+        const r = vp.convertToViewportRectangle([x0, it.y - it.h * 0.3, x1, it.y + it.h * 0.95]);
+        ctx.fillRect(Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.abs(r[2] - r[0]) + 4, Math.abs(r[3] - r[1]) + 4);
+      }
+      for (const it of pg.ann || []){
+        if (it.e <= s || it.s >= e) continue;
+        const r = vp.convertToViewportRectangle(it.rect);
+        ctx.fillRect(Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.abs(r[2] - r[0]) + 4, Math.abs(r[3] - r[1]) + 4);
+      }
+    }
+    }
+    const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.85));
+    pages.push({jpg: new Uint8Array(await blob.arrayBuffer()), w: cv.width, h: cv.height, wPt: vp.width / scale, hPt: vp.height / scale});
+  }
+  return buildPdf(pages);
+}
+async function exportZip(){
+  if (!S.analyzed) return;
+  const issues = control();
+  if (issues.length && !confirm('Le contrôle final signale ' + issues.length + ' point(s) à revoir. Exporter quand même ?')) return;
+  const files = {}, names = [];
+  try {
+    for (let i = 0; i < S.docs.length; i++){
+      const d = S.docs[i], r = S.res[i];
+      const base = docBase(i);
+      files[base + '.txt'] = enc(r.out); names.push(base + '.txt');
+      if (d.type === 'pdf' && !d.scanned && opt('oRaster')){ files[base + '-caviarde.pdf'] = await redactPdf(d, r.spans); names.push(base + '-caviarde.pdf'); }
+      if (d.type === 'image' && opt('oRaster')){ files[base + '-caviarde.pdf'] = await redactImage(d, r.spans); names.push(base + '-caviarde.pdf'); }
+    }
+    files['LISEZ-MOI.txt'] = enc(['Pièces pseudonymisées avec Anonymiser, par Hereditis (version 0.4).', '',
+      'Chaque nom, société, adresse ou identifiant a été remplacé par un libellé entre crochets, par exemple [Client 1] ou [Société 1].',
+      'Un même libellé désigne la même personne ou la même entité dans toutes les pièces.',
+      'Les dates de naissance ont été remplacées par l\'âge à la date du traitement.',
+      'Les fichiers « caviardé » sont des copies en image des PDF et des photos, dont le texte d\'origine a été supprimé.', '',
+      'La table de correspondance n\'est pas jointe : elle reste chez le conseiller.', '', 'Fichiers :', ...names.map(n => ' - ' + n)].join('\r\n'));
+    busy('Préparation de l\'archive'); await tick();
+    download(fflate.zipSync(files, {level: 6}), 'pieces-pseudonymisees.zip', 'application/zip');
+    toast('Archive téléchargée');
+  } catch (err){ console.error(err); toast('Export impossible : ' + err.message); }
+  busy();
+}
+function csvCell(v){ v = String(v == null ? '' : v); return /[;"\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function exportCsv(){
+  if (!S.analyzed) return;
+  const rows = [['Libellé','Catégorie','Forme principale','Autres formes','Occurrences']];
+  for (const e of S.ent.values()){
+    if (!e.enabled || e.cat === 'date' || e.cat === 'illisible' || (e.count === 0 && e.cat !== 'personne' && e.cat !== 'societe')) continue;
+    const forms = [...e.forms];
+    let primary = e.primary || forms[0] || '';
+    if (e.cat === 'personne') primary = forms.find(f => /\s/.test(f)) || forms[0] || '';
+    rows.push([e.label, CATS[e.cat].name + (e.sub && e.cat !== 'personne_auto' ? ' / ' + e.sub : ''), primary, forms.filter(f => f !== primary).join(' | '), e.count]);
+  }
+  download('\ufeff' + rows.map(r => r.map(csvCell).join(';')).join('\r\n'), 'table-de-correspondance-A-CONSERVER.csv', 'text/csv;charset=utf-8');
+  toast('Table téléchargée : conservez-la chez vous');
+}
+
+/* ---------------- rétablissement ---------------- */
+function parseCsv(txt){
+  txt = txt.replace(/^\ufeff/, ''); const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < txt.length; i++){
+    const c = txt[i];
+    if (q){ if (c === '"'){ if (txt[i + 1] === '"'){ cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ';'){ row.push(cell); cell = ''; }
+    else if (c === '\n'){ row.push(cell.replace(/\r$/, '')); rows.push(row); row = []; cell = ''; }
+    else cell += c;
+  }
+  if (cell || row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+const xmlEsc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+async function restore(){
+  const tf = $('#rTable').files[0], df = $('#rDoc').files[0], box = $('#rOut');
+  if (!tf || !df){ box.innerHTML = '<div class="alert">Choisissez la table de correspondance et le document.</div>'; return; }
+  const rows = parseCsv(await tf.text());
+  const map = new Map();
+  for (const r of rows.slice(1)) if (r[0] && r[2] && !/^âge/.test(r[0].trim())) map.set(r[0].trim(), r[2].trim());
+  if (!map.size){ box.innerHTML = '<div class="alert">Table de correspondance illisible.</div>'; return; }
+  let n = 0; const missing = new Set();
+  const rep = (s, x) => s.replace(/\[([^\[\]<>\n]{1,60})\]/g, (m, lab) => { const v = map.get(lab.trim()); if (v){ n++; return x ? xmlEsc(v) : v; } if (/^(Client|Personne|Tiers|Famille|Société|Notaire|Adresse|Commune|SIREN|SIRET|IBAN|N°|Parcelle|Courriel|Téléphone|Terme|Nom)\b/.test(lab)) missing.add(lab); return m; });
+  const ext = df.name.split('.').pop().toLowerCase();
+  const outName = df.name.replace(/(\.[^.]+)$/, '-noms-retablis$1');
+  try {
+    if (['docx','pptx','xlsx'].includes(ext)){
+      const files = fflate.unzipSync(new Uint8Array(await df.arrayBuffer()));
+      for (const k of Object.keys(files)){
+        if (!/\.xml$/.test(k) || !/^(word|ppt|xl)\//.test(k)) continue;
+        files[k] = enc(rep(new TextDecoder().decode(files[k]), true));
+      }
+      const types = {docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pptx:'application/vnd.openxmlformats-officedocument.presentationml.presentation', xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'};
+      download(fflate.zipSync(files, {level: 6}), outName, types[ext]);
+    } else download(rep(await df.text(), false), outName, 'text/plain;charset=utf-8');
+    box.innerHTML = `<div class="okbox">${n} libellé(s) remplacé(s) par les vrais noms. Fichier téléchargé : ${esc(outName)}.</div>` + (missing.size ? `<div class="alert" style="margin-top:8px">Libellés absents de la table : ${esc([...missing].join(', '))}</div>` : '');
+  } catch (err){ console.error(err); box.innerHTML = '<div class="alert">Document illisible : ' + esc(err.message) + '</div>'; }
+}
+
+/* ---------------- détection du foyer ---------------- */
+function prefill(){
+  if (!S.docs.length) return;
+  S.ent = new Map(); S.counters = {}; buildDico();
+  const CAPSW = /^[A-ZÀ-ÝÆŒ][A-ZÀ-ÝÆŒ'’\-]+$/;
+  const people = new Map(), socs = new Map();
+  S.docs.forEach(d => {
+    for (const sp of detectRaw(d)){
+      if (sp.cat === 'societe'){ const k = fold(sp.value); socs.set(k, Object.assign(socs.get(k) || {denom: sp.value, n: 0}, {})); socs.get(k).n++; continue; }
+      if (sp.cat !== 'personne_auto') continue;
+      const toks = sp.value.split(/\s+/).filter(t => !PARTICLES.has(fold(t)));
+      let caps = toks.filter(t => CAPSW.test(t)), firsts = toks.filter(t => !CAPSW.test(t));
+      if (!caps.length && firsts.length >= 2) caps = [firsts.pop()];
+      if (!caps.length || !firsts.length || !isPrenom(firsts[0])) continue;
+      let nom = caps.join(' '), naissance = '';
+      const after = d.text.slice(sp.e, sp.e + 60);
+      const mu = after.match(/^,?\s*(?:épouse|ép\.|veuve)\s+([A-ZÀ-ÝÆŒ][A-ZÀ-ÝÆŒ'’\-]+)/);
+      if (mu){ naissance = nom; nom = mu[1]; }
+      const mn = !mu && after.match(/^,?\s*née?\s+([A-ZÀ-ÝÆŒ][A-ZÀ-ÝÆŒ'’\-]+)/);
+      if (mn) naissance = mn[1];
+      const key = fold(firsts[0]) + '|' + fold(naissance || nom);
+      const civ = /^(m|mm|monsieur)\.?$/i.test(sp.sub) ? 'M' : /^(mme|madame|mademoiselle|mlle)\.?$/i.test(sp.sub) ? 'F' : '';
+      const p = people.get(key) || {prenoms: '', nom, naissance, civ: '', n: 0};
+      if (firsts.join(' ').length > p.prenoms.length) p.prenoms = firsts.join(' ');
+      if (naissance && !p.naissance){ p.naissance = naissance; p.nom = nom; }
+      if (civ) p.civ = civ;
+      p.n++;
+      people.set(key, p);
+    }
+  });
+  const have = new Set(readRows('#tPersons').filter(r => r.nom || r.naissance).map(r => fold((r.prenoms || '').split(/\s+/)[0] || '') + '|' + fold(r.naissance || r.nom)));
+  [...document.querySelectorAll('#tPersons tbody tr')].forEach(tr => { const o = {}; tr.querySelectorAll('[data-f]').forEach(i => o[i.dataset.f] = i.value.trim()); if (!o.prenoms && !o.nom && !o.naissance) tr.remove(); });
+  let n = $('#tPersons tbody').children.length, added = 0;
+  [...people.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([k, p]) => {
+    if (have.has(k)) return;
+    n++; added++;
+    personRow({label: 'Personne ' + letter(n), civ: p.civ, prenoms: p.prenoms, nom: p.nom, naissance: p.naissance});
+  });
+  const haveS = new Set(readRows('#tSocs').filter(r => r.denom).map(r => fold(r.denom)));
+  [...document.querySelectorAll('#tSocs tbody tr')].forEach(tr => { if (!tr.querySelector('[data-f=denom]').value.trim()) tr.remove(); });
+  let ns = $('#tSocs tbody').children.length, addedS = 0;
+  [...socs.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([k, so]) => { if (haveS.has(k)) return; ns++; addedS++; socRow({label: 'Société ' + ns, denom: so.denom}); });
+  if (!$('#tPersons tbody').children.length) personRow({label: 'Client 1'});
+  if (!$('#tSocs tbody').children.length) socRow({label: 'Société 1'});
+  S.ent = new Map(); S.counters = {};
+  toast(`${added} personne(s) et ${addedS} société(s) ajoutées au foyer : vérifiez-les, puis analysez`);
+  $('#s1').scrollIntoView({behavior: 'smooth'});
+}
+
+/* ---------------- exemple fictif ---------------- */
+const EXEMPLE = `STATUTS DE LA SOCIÉTÉ CIVILE IMMOBILIÈRE « LES GENTIANES »
+
+ENTRE LES SOUSSIGNÉS :
+
+Monsieur Bertrand Jean-Marc LEFORESTIER, retraité, né le 14 mars 1961 à Chambéry (73), demeurant 12 bis chemin des Gentianes, 74940 Annecy-le-Vieux, numéro de sécurité sociale 1 61 03 73 065 123 46,
+
+Madame Hélène Marie VARENNES, épouse LEFORESTIER, née le 2 septembre 1963 à Lyon (69), demeurant avec son époux.
+
+Mariés sous le régime de la communauté réduite aux acquêts à défaut de contrat préalable à leur union célébrée à la mairie d'Annecy le 18 juin 1988.
+
+ARTICLE 1 - FORME
+Il est formé une société civile immobilière dénommée « LES GENTIANES », au capital de 1 500 euros, dont le siège social est fixé à Annecy-le-Vieux (74940), 12 bis chemin des Gentianes. La société sera immatriculée au RCS d'Annecy sous le numéro 812 345 676.
+
+ARTICLE 2 - APPORTS
+Monsieur LEFORESTIER apporte à la société le bien dénommé Chalet Les Gentianes, cadastré section AB n° 245 et 246, d'une valeur de 450 000 euros.
+
+ARTICLE 3 - DONATION
+Par acte reçu par Maître Antoine ROCHEMONT, notaire à Faverges, le 3 février 2019, publié au service de la publicité foncière volume 2019 P n° 1532, les époux LEFORESTIER ont donné à leur fille Mademoiselle Camille LEFORESTIER, née le 21 avril 1992, la nue-propriété de 500 parts sociales de la SCI LES GENTIANES.
+
+ARTICLE 4 - CONTRAT D'ASSURANCE VIE
+Monsieur Bertrand LEFORESTIER est titulaire du contrat d'assurance vie n° AV-2019-55831 souscrit le 10 mai 2019, d'une valeur de rachat de 312 450 euros. Bénéficiaires : son épouse, à défaut ses enfants.
+
+ARTICLE 5 - DIVERS
+Les comptes de la société sont tenus par le cabinet GIRAUDIER.
+Coordonnées bancaires de la société : IBAN FR76 3000 6000 0112 3456 7890 189.
+Contact : bertrand.leforestier@exemple.fr, 06 12 34 56 78.
+Numéro fiscal de Monsieur : 3012345678901.
+
+Fait à Annecy, le 15 octobre 2026.`;
+function loadExample(){
+  $('#tPersons tbody').innerHTML = ''; $('#tSocs tbody').innerHTML = '';
+  personRow({label: 'Client 1', civ: 'M', prenoms: 'Bertrand Jean-Marc', nom: 'LEFORESTIER'});
+  personRow({label: 'Client 2', civ: 'F', prenoms: 'Hélène Marie', nom: 'LEFORESTIER', naissance: 'VARENNES'});
+  socRow({label: 'Société 1', denom: 'LES GENTIANES'});
+  $('#terms').value = 'Chalet Les Gentianes => Résidence secondaire';
+  S.docs = S.docs.filter(d => !d.example);
+  S.docs.push({id: ++docSeq, name: 'Exemple fictif, extrait de statuts.txt', type: 'txt', text: EXEMPLE, meta: 'Texte', example: true});
+  renderDocs();
+  toast('Exemple chargé : cliquez sur « Analyser les pièces »');
+}
+
+/* ---------------- câblage ---------------- */
+personRow({label: 'Client 1'}); personRow({label: 'Client 2'}); socRow({label: 'Société 1'});
+$('#addPerson').onclick = () => personRow({label: 'Client ' + ($('#tPersons tbody').children.length + 1)});
+$('#addSoc').onclick = () => socRow({label: 'Société ' + ($('#tSocs tbody').children.length + 1)});
+$('#pick').onclick = () => $('#file').click();
+$('#file').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
+const drop = $('#drop');
+['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', e => addFiles([...e.dataTransfer.files]));
+window.addEventListener('dragover', e => e.preventDefault()); window.addEventListener('drop', e => e.preventDefault());
+$('#showPaste').onclick = () => $('#pasteBox').classList.toggle('hidden');
+$('#pasteAdd').onclick = () => {
+  const t = $('#pasteText').value; if (!t.trim()) return;
+  S.docs.push({id: ++docSeq, name: ($('#pasteName').value.trim() || 'Texte collé ' + (S.docs.length + 1)), type: 'txt', text: t.replace(/\r\n?/g, '\n'), meta: 'Texte collé'});
+  $('#pasteText').value = ''; $('#pasteName').value = ''; $('#pasteBox').classList.add('hidden'); renderDocs();
+};
+$('#example').onclick = loadExample;
+$('#prefill').onclick = prefill;
+$('#analyze').onclick = () => { analyze(); $('#s3').scrollIntoView({behavior: 'smooth'}); };
+$('#vRes').onclick = () => { S.view = 'res'; $('#vRes').classList.add('on'); $('#vOrig').classList.remove('on'); renderView(); };
+$('#vOrig').onclick = () => { S.view = 'orig'; $('#vOrig').classList.add('on'); $('#vRes').classList.remove('on'); renderView(); };
+$('#expZip').onclick = exportZip;
+$('#expCsv').onclick = exportCsv;
+$('#rGo').onclick = restore;
+$('#wipe').onclick = () => { if (confirm('Effacer toutes les pièces et la saisie ?')) location.reload(); };
+if (!pdfjs) toast('Lecture des PDF indisponible dans ce navigateur');
+window.__anon = {S, analyze, computeAll, control, exportCsv, exportZip, loadExample};
+})();
+</script>
+</body>
+</html>

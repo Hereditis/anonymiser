@@ -1,0 +1,21 @@
+{
+  "name": "anonymiser",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Anonymiser : pseudonymisation locale des pièces patrimoniales, par Hereditis",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "node tests/run.js"
+  },
+  "dependencies": {
+    "@tesseract.js-data/fra": "1.0.0",
+    "fflate": "0.8.2",
+    "pdfjs-dist": "3.11.174",
+    "tesseract.js": "5.1.1",
+    "tesseract.js-core": "5.1.1"
+  },
+  "devDependencies": {
+    "playwright": "1.47.2"
+  }
+}
