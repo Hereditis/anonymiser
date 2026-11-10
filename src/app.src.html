@@ -7,103 +7,162 @@
 <title>Anonymiser</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E %3Cdefs%3E%3CclipPath id="badge"%3E%3Ccircle cx="100" cy="100" r="91"/%3E%3C/clipPath%3E%3C/defs%3E %3Ccircle cx="100" cy="100" r="98" fill="#13222E"/%3E %3Ccircle cx="100" cy="100" r="93" fill="none" stroke="#E9A23B" stroke-width="3.5"/%3E %3Cg clip-path="url%28#badge%29"%3E %3Cpath d="M26 204 C30 162 58 147 100 147 C142 147 170 162 174 204 Z" fill="#05090C"/%3E %3Cpath d="M85 147 L100 188 L115 147 Z" fill="#F4F3EF"/%3E %3Cpath d="M85 147 L100 188 L76 204 L56 204 C62 178 71 159 85 147 Z" fill="#22313C"/%3E %3Cpath d="M115 147 L100 188 L124 204 L144 204 C138 178 129 159 115 147 Z" fill="#22313C"/%3E %3Cpath d="M66 72 C52 46 50 20 60 8 C74 16 82 42 84 66 Z" fill="#848D96"/%3E %3Cpath d="M68 64 C60 44 59 26 63 16 C71 26 76 44 77 60 Z" fill="#C7B3BA"/%3E %3Cpath d="M134 72 C148 46 150 20 140 8 C126 16 118 42 116 66 Z" fill="#848D96"/%3E %3Cpath d="M132 64 C140 44 141 26 137 16 C129 26 124 44 123 60 Z" fill="#C7B3BA"/%3E %3Cpath d="M70 62 C65 82 63 104 67 124 C71 146 84 157 100 157 C116 157 129 146 133 124 C137 104 135 82 130 62 C121 51 79 51 70 62 Z" fill="#9AA3AB"/%3E %3Cpath d="M85 58 C87 45 95 41 100 48 C105 39 113 44 115 58 C106 53 94 53 85 58 Z" fill="#3E4851"/%3E %3Cpath d="M71 117 C71 104 84 98 100 98 C116 98 129 104 129 117 C129 139 117 153 100 153 C83 153 71 139 71 117 Z" fill="#DCD5CB"/%3E %3Cellipse cx="88.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/%3E %3Cellipse cx="111.5" cy="122" rx="4" ry="5.5" fill="#5B5450"/%3E %3Cpath d="M88 138 C96 143.5 106 142.5 115 134" stroke="#5B5450" stroke-width="3.2" fill="none" stroke-linecap="round"/%3E %3Cpath d="M66 83 L52 77 L55 90 Z" fill="#0A0F13"/%3E %3Cpath d="M134 83 L148 77 L145 90 Z" fill="#0A0F13"/%3E %3Cpath d="M63 80 C73 71 90 73 100 80 C110 73 127 71 137 80 C139 91 132 99 121 99 C111 99 106 93 100 91 C94 93 89 99 79 99 C68 99 61 91 63 80 Z" fill="#0A0F13"/%3E %3Cellipse cx="81" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/%3E %3Cellipse cx="119" cy="86" rx="7.5" ry="5" fill="#FFFFFF"/%3E %3Ccircle cx="84.5" cy="86.5" r="3.2" fill="#13222E"/%3E %3Ccircle cx="122.5" cy="86.5" r="3.2" fill="#13222E"/%3E %3Cpath d="M110 69 C117 64.5 126 64.5 132 68.5" stroke="#3E4851" stroke-width="3.2" fill="none" stroke-linecap="round"/%3E %3Cpath d="M100 157 L83 148.5 L83 166.5 Z" fill="#000"/%3E %3Cpath d="M100 157 L117 148.5 L117 166.5 Z" fill="#000"/%3E %3Crect x="95.5" y="152" width="9" height="10" rx="2.5" fill="#111A20"/%3E %3C/g%3E %3C/svg%3E">
 <style>
-:root{--ink:#13222E;--muted:#4A5A66;--line:#DCE4EA;--bg:#F3F6F8;--card:#FFFFFF;--soft:#EEF3F6;--green:#2E9E5B;--blue:#2C6FD1;--red:#D7443E;--sun:#E9A23B;--slate:#1F3A4D;
---m-p:#DCE9FB;--m-s:#DDF2E5;--m-a:#FCEFD6;--m-i:#F9DEDC;--m-d:#ECE3F7;--m-t:#E3E8EC}
+/* Anonymiser : mêmes couleurs que hereditis.eu (noir, blanc, or). Aucune police externe. */
+:root{--ink:#111111;--ink2:#2A2A2A;--muted:#62605B;--line:#E4E0D8;--bg:#F7F5F0;--paper:#FFFFFF;--gold:#B8934A;--goldd:#876829;--tint:#F3EBD9;--top:68px}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
-header.top{background:var(--ink);color:#fff}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:40px;height:40px;border-radius:10px;background:var(--sun);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:20px}
-.brand strong{display:block;font-size:22px;letter-spacing:.01em}
-.brand svg{flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
-.brand small{color:#9FB3C1}
-.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.updbtn{color:#fff;text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;white-space:nowrap}
-.updbtn:hover{background:rgba(255,255,255,.1)}
-.updbanner{background:#FFF4DE;border-bottom:1px solid #F1D9A6;color:#6B4A00}
-.updbanner .wrap{padding-top:12px;padding-bottom:12px;font-size:14px}
-.updbanner.ok{background:#E7F5EC;border-color:#C9E8D5;color:#1D5E39}
-.updbanner a{color:inherit;font-weight:700}
-.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,158,91,.18);color:#BFF0D2;border:1px solid rgba(46,158,91,.5);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}
-.notice{background:#E7F5EC;border-bottom:1px solid #C9E8D5;color:#1D5E39}
-.notice .wrap{padding-top:12px;padding-bottom:12px;font-size:14px}
-main.wrap{padding-top:24px;padding-bottom:60px}
-.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px}
-.step h2{margin:0 0 6px;font-size:20px;display:flex;align-items:center;gap:10px}
-.num{width:30px;height:30px;border-radius:50%;background:var(--slate);color:#fff;display:grid;place-items:center;font-size:15px;flex:none}
-.step h3{margin:20px 0 8px;font-size:15px}
-.hint{color:var(--muted);margin:0 0 8px;font-size:14px}
+html,body{margin:0}
+body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
 .hidden{display:none!important}
-table.grid{width:100%;border-collapse:collapse}
-table.grid th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:4px 6px;text-transform:uppercase;letter-spacing:.03em}
-table.grid td{padding:3px 4px}
-input[type=text],select,textarea{width:100%;font:inherit;color:inherit;border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:#fff}
-input[type=text]:focus,select:focus,textarea:focus{outline:2px solid rgba(44,111,209,.35);border-color:var(--blue)}
+.ic{width:20px;height:20px;flex:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:8px 14px;z-index:90}
+.skip:focus{left:8px;top:8px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.015em;line-height:1.2}
+/* en-tête */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;height:var(--top);border-bottom:1px solid var(--line);background:#fff}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand svg{flex:none}
+.brand strong{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.par{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;white-space:nowrap}
+.hmark{width:20px;height:20px}
+.par .w{letter-spacing:.3em;font-weight:300;color:var(--ink);font-size:12px}
+.modes{display:flex;gap:26px;align-self:stretch}
+.modes button{background:none;border:0;border-bottom:2px solid transparent;border-top:2px solid transparent;color:var(--muted);font-size:15px;padding:0;white-space:nowrap}
+.modes button.on{color:var(--ink);border-bottom-color:var(--gold)}
+.hdr-right{display:flex;align-items:center;gap:16px}
+.local{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--ink2);white-space:nowrap}
+.local .ic{width:18px;height:18px;color:var(--goldd)}
+.maj{font-size:13.5px;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;white-space:nowrap}
+.maj:hover{color:var(--ink);text-decoration-color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:12px 26px;font-weight:600;font-size:16px;line-height:1.2;text-decoration:none;white-space:nowrap}
+.btn:hover{background:#000;border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--goldd)}
+.btn.small{padding:8px 18px;font-size:14px}
+.btn .ic{width:18px;height:18px}
+.lien{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px;font-size:15px}
+.lien:hover{color:var(--goldd)}
+.note{font-size:13.5px;color:var(--muted)}
+.updbanner{background:var(--tint);border-bottom:1px solid var(--line);padding:10px 28px;font-size:14px}
+.updbanner a{color:inherit;font-weight:600}
+/* écran de dépôt */
+.plein{min-height:calc(100vh - var(--top));display:grid;padding:28px}
+.drop{border:1.5px dashed var(--gold);border-radius:6px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:40px 20px;transition:background .15s}
+.drop.over,body.glisse .drop{background:var(--tint)}
+.drop>.ic{width:44px;height:44px;stroke-width:1.1}
+.drop h1{font-size:30px}
+.sous{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+/* atelier */
+.app{display:grid;grid-template-columns:380px minmax(0,1fr);background:var(--bg)}
+.rail{background:#fff;border-right:1px solid var(--line);padding:22px 24px 16px;display:flex;flex-direction:column;gap:22px;position:sticky;top:var(--top);height:calc(100vh - var(--top));overflow:auto}
+.rail h2{font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:4px}
+.docs{list-style:none;margin:0;padding:0}
+.docs li{display:flex;align-items:center;border-top:1px solid var(--line)}
+.docs .sel{flex:1;min-width:0;display:flex;align-items:center;gap:10px;background:none;border:0;padding:9px 0;text-align:left;font-size:14.5px}
+.docs .sel .ic{width:18px;height:18px;color:var(--muted)}
+.docs .nom{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.docs .meta{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.docs li.on .nom{font-weight:600}
+.docs .x{background:none;border:0;color:var(--muted);padding:6px 4px 6px 10px;font-size:15px;line-height:1}
+.docs .x:hover{color:var(--ink)}
+.lig{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;border-top:1px solid var(--line);padding:9px 0;color:var(--muted);font-size:14.5px;text-align:left}
+.lig:hover{color:var(--ink)}
+.lig .ic{width:18px;height:18px}
+.add{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:6px;padding:0 12px;margin:8px 0 14px;background:#fff;color:var(--muted)}
+.add:focus-within{border-color:var(--gold)}
+.add .ic{width:16px;height:16px}
+.add input[type=text]{flex:1;min-width:0;border:0;border-radius:0;outline:0;background:none;padding:9px 0;font-size:14.5px;color:var(--ink)}
+.grp{margin:0 0 16px}
+.grp h3{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 6px}
+.ent{display:grid;grid-template-columns:18px auto minmax(0,1fr) auto;gap:9px;align-items:center;padding:6px 0;border-top:1px solid var(--line);font-size:14.5px}
+.ent input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:#111111}
+.ent input.lab{border:1px solid transparent;border-radius:4px;background:none;padding:2px 4px;margin-left:-5px;font-weight:600;font-size:14.5px;min-width:4ch;max-width:200px}
+.ent input.lab:hover:not(:disabled){border-color:var(--line)}
+.ent input.lab:focus{border-color:var(--gold);outline:0;background:#fff}
+.ent input.lab:disabled{color:var(--ink);-webkit-text-fill-color:var(--ink);opacity:1}
+.ent .mot{font-weight:600}
+.ent .val{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ent .cnt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.pied{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 20px}
+.pied .lien{font-size:13.5px}
+.vue{padding:22px 34px 40px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.vbar{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:860px;width:100%;margin:0 auto}
+.vbar strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;flex:none}
+.seg button{border:0;background:none;padding:6px 14px;font-size:13.5px;color:var(--muted)}
+.seg button.on{background:var(--ink);color:#fff}
+.control{max-width:860px;width:100%;margin:0 auto;font-size:14px;color:var(--ink2);border-left:2px solid var(--gold);padding:2px 0 2px 14px}
+.control.ok{border-left-color:var(--line);color:var(--muted)}
+.control ul{margin:4px 0 0;padding-left:18px}
+pre.doc{margin:0 auto;max-width:860px;width:100%;background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(17,17,17,.04);padding:34px 38px;white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#333;min-height:60vh;tab-size:4}
+pre.doc mark{background:#111111;color:#fff;font-size:11.5px;padding:2px 6px;border-radius:2px;white-space:nowrap}
+pre.doc.orig mark{background:var(--tint);color:var(--ink);font-size:inherit;padding:1px 2px;white-space:normal;box-shadow:inset 0 -1.5px 0 var(--gold)}
+.bas{display:none}
+/* remettre les noms */
+.col{max-width:720px;margin:0 auto;padding:56px 24px 60px}
+.col h1{font-size:30px;margin-bottom:26px}
+.choix{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.fich{display:block;border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:var(--bg)}
+.fich span{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
+.fich input{max-width:100%;font-size:14px}
+.msg{margin-top:20px;border-left:2px solid var(--gold);padding:4px 0 4px 14px;font-size:15px}
+/* fenêtres */
+dialog{border:1px solid var(--line);border-radius:6px;padding:26px 28px;max-width:min(820px,calc(100vw - 28px));width:100%;color:var(--ink);box-shadow:0 18px 50px rgba(17,17,17,.18)}
+dialog::backdrop{background:rgba(17,17,17,.35)}
+dialog.etroit{max-width:min(520px,calc(100vw - 28px))}
+dialog h2{font-size:22px;margin-bottom:18px}
+dialog h3{font-size:14px;font-weight:600;margin:20px 0 8px}
+.dfin{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}
+.dfin .lien{margin-left:auto}
+input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:#fff}
+input[type=text]:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold)}
 textarea{min-height:90px;resize:vertical}
 textarea,input{font-variant-ligatures:none}
 .tablewrap{overflow-x:auto}
-@media (max-width:760px){.wrap{padding:0 14px}.step{padding:18px 16px}table.grid{min-width:640px}header.top .wrap{flex-wrap:wrap}.row label{flex-wrap:wrap}input[type=file]{max-width:100%}}
-button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid transparent;padding:9px 16px;font-weight:600}
-button.primary{background:var(--blue);color:#fff}
-button.primary:disabled{background:#9DB7DE;cursor:not-allowed}
-button.go{background:var(--green);color:#fff}
-button.ghost{background:transparent;color:var(--blue);border-color:#BCD0EE}
-button.ghost:hover{background:#F0F5FD}
-button.icon{background:transparent;color:var(--muted);padding:4px 8px;border-color:var(--line)}
-button.danger{background:transparent;color:var(--red);border-color:#EFC4C1}
+table.grid{width:100%;border-collapse:collapse}
+table.grid th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:600;padding:4px 6px}
+table.grid td{padding:3px 4px}
+button.icon{background:transparent;border:1px solid var(--line);border-radius:6px;color:var(--muted);padding:5px 9px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 18px}
+.opts label{display:flex;gap:8px;align-items:flex-start;font-size:14.5px}
+.opts input{accent-color:#111111;margin-top:4px}
+.exp{list-style:none;margin:0;padding:0}
+.exp li{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:9px 0;font-size:14.5px}
+.exp li>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exp .row{display:flex;gap:8px;flex:none}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 18px;margin-top:6px}
-.opts label{display:flex;gap:8px;align-items:flex-start;font-size:14px}
-details summary{cursor:pointer;color:var(--blue);font-weight:600;margin-top:16px}
-.drop{border:2px dashed #B8C8D4;border-radius:12px;padding:26px;text-align:center;color:var(--muted);background:var(--soft);transition:.15s}
-.drop.over{border-color:var(--blue);background:#EAF1FC}
-.drop strong{color:var(--ink)}
-.docs{list-style:none;padding:0;margin:14px 0 0}
-.docs li{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px}
-.docs .meta{color:var(--muted);font-size:13px}
-.warn{color:#9A5B00;font-size:13px}
-.paste{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--soft)}
-.review{display:grid;grid-template-columns:360px 1fr;gap:18px;margin-top:12px}
-@media (max-width:900px){.review{grid-template-columns:1fr}}
-.ents{border:1px solid var(--line);border-radius:12px;padding:10px;max-height:72vh;overflow:auto;background:#FBFCFD}
-.grp h4{margin:12px 4px 6px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.ent{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:center;padding:6px;border-radius:8px}
-.ent:hover{background:var(--soft)}
-.ent input[type=text]{padding:4px 7px;font-size:14px}
-.ent .forms{grid-column:2/4;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cnt{font-size:12px;color:var(--muted);min-width:28px;text-align:right}
-.viewer{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:400px}
-.vbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line);background:#FBFCFD}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{background:#fff;border:1px solid var(--line);color:var(--ink);padding:5px 10px;font-weight:500;font-size:13px}
-.tab.on{background:var(--slate);color:#fff;border-color:var(--slate)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
-.seg button{border-radius:0;background:#fff;color:var(--ink);padding:5px 12px;font-weight:500;font-size:13px}
-.seg button.on{background:var(--blue);color:#fff}
-pre.doc{margin:0;padding:16px 18px;white-space:pre-wrap;word-wrap:break-word;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:68vh;overflow:auto;flex:1}
-mark{border-radius:4px;padding:0 2px;color:var(--ink)}
-mark.c-p{background:var(--m-p)} mark.c-s{background:var(--m-s)} mark.c-a{background:var(--m-a)} mark.c-i{background:var(--m-i)} mark.c-d{background:var(--m-d)} mark.c-t{background:var(--m-t)}
-.control{margin-top:16px;border-radius:12px;padding:12px 16px;border:1px solid var(--line)}
-.control.ok{background:#E7F5EC;border-color:#C9E8D5}
-.control.ko{background:#FDF0EF;border-color:#F2CBC7}
-.control ul{margin:6px 0 0;padding-left:20px}
-.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
-.legend span{display:inline-flex;align-items:center;gap:5px}
-.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
-.alert{background:#FDF0EF;border:1px solid #F2CBC7;color:#8E2A24;border-radius:10px;padding:10px 14px;font-size:14px}
-.okbox{background:#E7F5EC;border:1px solid #C9E8D5;color:#1D5E39;border-radius:10px;padding:10px 14px;font-size:14px}
-.busy{position:fixed;inset:0;background:rgba(19,34,46,.55);display:grid;place-items:center;z-index:50}
-.busy div{background:#fff;border-radius:14px;padding:22px 28px;font-weight:600;min-width:280px;text-align:center}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;z-index:60;font-size:14px;max-width:90vw}
-footer{color:var(--muted);font-size:13px;text-align:center;padding:10px 0 30px}
-kbd{font:12px ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+/* attente, messages, pied */
+.busy{position:fixed;inset:0;background:rgba(255,255,255,.88);display:grid;place-items:center;z-index:50}
+.busy div{font-weight:500;text-align:center;padding:0 24px 16px;max-width:560px;border-bottom:2px solid var(--gold)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;z-index:60;font-size:14px;max-width:90vw}
+footer{border-top:1px solid var(--line);padding:14px 28px 22px;font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 22px;background:#fff}
+footer summary{cursor:pointer}
+footer details p{margin:8px 0 0;max-width:820px}
+kbd{font:12px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+@media (max-width:1080px){.local span{display:none}.par{display:none}}
+@media (max-width:820px){
+  :root{--top:104px}
+  .top{flex-wrap:wrap;height:auto;padding:10px 16px 0;gap:8px 12px;align-items:center}
+  .modes{order:3;width:100%;gap:22px;align-self:auto}.modes button{padding:8px 0 9px}
+  #expZip{display:none!important}
+  .plein{padding:16px;min-height:calc(100vh - var(--top))}.drop h1{font-size:23px}
+  .app{grid-template-columns:1fr}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px 16px 14px}
+  .vue{padding:18px 16px 24px}pre.doc{padding:20px 18px;min-height:0}
+  .bas{display:block;position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;z-index:15}.bas .btn{width:100%}
+  .col{padding:30px 16px 40px}.col h1{font-size:24px}.choix{grid-template-columns:1fr}
+  dialog{padding:20px 18px}table.grid{min-width:600px}footer{padding:14px 16px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="66" height="66" role="img" aria-label="Anonymiser">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="top">
+  <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="40" height="40" role="img" aria-label="Anonymiser">
 <defs><clipPath id="badge"><circle cx="100" cy="100" r="91"/></clipPath></defs>
 <circle cx="100" cy="100" r="98" fill="#13222E"/>
 <circle cx="100" cy="100" r="93" fill="none" stroke="#E9A23B" stroke-width="3.5"/>
@@ -134,95 +193,95 @@ kbd{font:12px ui-monospace,Menlo,monospace;background:var(--soft);border:1px sol
 <path d="M100 157 L117 148.5 L117 166.5 Z" fill="#000"/>
 <rect x="95.5" y="152" width="9" height="10" rx="2.5" fill="#111A20"/>
 </g>
-</svg><div><strong>Anonymiser</strong><small>Les pièces de vos clients, sans leurs noms. Par Hereditis, version <span id="verLabel"></span></small></div></div>
-  <div class="hdr-right"><a class="updbtn" id="updBtn" href="#" target="_blank" rel="noopener">Vérifier les mises à jour</a><span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>100 % local</span></div>
-</div></header>
-<div class="updbanner hidden" id="updBanner"><div class="wrap" id="updText"></div></div>
-<div class="notice"><div class="wrap">Les pièces sont lues et traitées dans votre navigateur, sur votre poste. La page s'interdit tout accès à Internet par sa propre politique de sécurité : vous pouvez couper votre connexion avant de commencer. Rien n'est conservé à la fermeture de l'onglet.</div></div>
+</svg><strong>Anonymiser</strong><span class="par">par <svg class="hmark" viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mh"><circle cx="50" cy="50" r="50"/></clipPath></defs><circle cx="50" cy="50" r="50" fill="#111111"/><g clip-path="url(#mh)" stroke="#ffffff" stroke-width="6.8" stroke-linecap="round" fill="none"><path d="M29 -6V75"/><path d="M29 49H71"/><path d="M71 25V106"/></g></svg><span class="w">HEREDITIS</span></span></div>
+  <nav class="modes" aria-label="Que voulez-vous faire ?"><button type="button" id="mAnon" class="on">Anonymiser</button><button type="button" id="mRetab">Remettre les noms</button></nav>
+  <div class="hdr-right"><span class="local" title="Les pièces sont lues et traitées dans votre navigateur. La page s'interdit tout accès à Internet : vous pouvez couper votre connexion."><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.6v5.2c0 4.4-3 7.9-7 9.7-4-1.8-7-5.3-7-9.7V5.6z"/><path d="M9 12l2.2 2.2L15 10.4"/></svg><span>Rien ne quitte ce poste</span></span><a class="maj" id="updBtn" href="#" target="_blank" rel="noopener">Mises à jour</a><button class="btn small hidden" id="expZip" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>Télécharger</button></div>
+</header>
+<div class="updbanner hidden" id="updBanner"><div id="updText"></div></div>
 
-<main class="wrap">
-
-<section class="step" id="s1">
-  <h2><span class="num">1</span>Le foyer</h2>
-  <p class="hint">Saisissez les personnes et les sociétés du dossier, ou laissez l'outil les trouver avec le bouton « Détecter le foyer » de l'étape 2. Tout ce qui figure ici sera masqué dans toutes les pièces ; le libellé est ce qui remplacera le nom.</p>
-  <h3>Personnes</h3>
-  <div class="tablewrap"><table class="grid" id="tPersons"><thead><tr><th style="width:15%">Libellé</th><th style="width:11%">Civilité</th><th>Prénom(s)</th><th>Nom d'usage</th><th>Nom de naissance</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
-  <button class="ghost" id="addPerson" type="button">+ Ajouter une personne</button>
-  <h3>Sociétés</h3>
-  <div class="tablewrap"><table class="grid" id="tSocs"><thead><tr><th style="width:15%">Libellé</th><th>Dénomination</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
-  <button class="ghost" id="addSoc" type="button">+ Ajouter une société</button>
-  <h3>Autres termes à masquer</h3>
-  <p class="hint">Un terme par ligne : un bien, un notaire, un cabinet, un lieu. Libellé facultatif après <kbd>=&gt;</kbd>.</p>
-  <textarea id="terms" placeholder="Chalet Les Gentianes => Résidence secondaire&#10;Cabinet Durand => Expert-comptable"></textarea>
-  <details><summary>Options de détection</summary>
-    <div class="opts">
-      <label><input type="checkbox" id="oFirst" checked> Masquer aussi les prénoms employés seuls</label>
-      <label><input type="checkbox" id="oBirth" checked> Remplacer les dates de naissance par l'âge</label>
-      <label><input type="checkbox" id="oDates"> Ramener les autres dates au mois et à l'année</label>
-      <label><input type="checkbox" id="oAddr" checked> Détecter les adresses et les communes</label>
-      <label><input type="checkbox" id="oCiv" checked> Détecter les personnes (Monsieur, Madame, Maître, prénoms connus)</label>
-      <label><input type="checkbox" id="oOrg" checked> Détecter les sociétés et cabinets sans forme juridique</label>
-      <label><input type="checkbox" id="oSugg" checked> Proposer les mots en capitales non reconnus</label>
+<main id="contenu">
+<section id="vAnon">
+  <div class="plein" id="vide">
+    <div class="drop" id="drop"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg><h1>Déposez les pièces du dossier</h1><button class="btn small ghost" id="pick" type="button">Choisir des fichiers</button><span class="note">PDF, scans, photos, Word</span>
+      <div class="sous"><button class="lien" id="showPaste" type="button">Coller un texte</button><button class="lien" id="example" type="button">Essayer avec un exemple</button></div>
     </div>
-  </details>
-</section>
-
-<section class="step" id="s2">
-  <h2><span class="num">2</span>Les pièces</h2>
-  <p class="hint">PDF (avec texte ou scannés), photos et images (JPG, PNG), Word (.docx) ou texte brut. Les pièces scannées sont lues par reconnaissance de caractères, sur votre poste : comptez quelques secondes par page.</p>
-  <div class="drop" id="drop"><strong>Déposez vos pièces ici</strong><br>ou <button class="ghost" id="pick" type="button">choisissez des fichiers</button><input type="file" id="file" multiple accept=".pdf,.docx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff" class="hidden"></div>
-  <div class="row" style="margin-top:10px"><button class="ghost" id="showPaste" type="button">Coller un texte</button><button class="ghost" id="example" type="button">Charger un exemple fictif</button></div>
-  <div class="paste hidden" id="pasteBox">
-    <input type="text" id="pasteName" placeholder="Nom de la pièce, par exemple : extrait de statuts">
-    <textarea id="pasteText" style="margin-top:8px;min-height:140px" placeholder="Collez le texte ici"></textarea>
-    <div class="row" style="margin-top:8px"><button class="primary" id="pasteAdd" type="button">Ajouter la pièce</button></div>
   </div>
-  <ul class="docs" id="docs"></ul>
-  <div class="row" style="margin-top:14px"><button class="ghost" id="prefill" type="button" disabled>Détecter le foyer</button><button class="primary" id="analyze" type="button" disabled>Analyser les pièces</button><span class="hint" id="analyzeHint"></span></div>
-</section>
-
-<section class="step hidden" id="s3">
-  <h2><span class="num">3</span>Vérifier</h2>
-  <p class="hint">Décochez ce qui ne doit pas être masqué, cochez les propositions utiles, modifiez un libellé si besoin. Le résultat se met à jour aussitôt.</p>
-  <div class="review">
-    <div class="ents" id="ents"></div>
-    <div class="viewer">
-      <div class="vbar"><div class="tabs" id="tabs"></div><div class="seg"><button id="vRes" class="on" type="button">Résultat</button><button id="vOrig" type="button">Original</button></div></div>
+  <div class="app hidden" id="atelier">
+    <aside class="rail">
+      <div><h2 id="nDocs">Pièces</h2><ul class="docs" id="docs"></ul><button class="lig" id="pick2" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Ajouter une pièce</button></div>
+      <div><h2 id="nEnts">Éléments masqués</h2>
+        <form class="add" id="addForm"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><input type="text" id="addTerm" placeholder="Ajouter un nom ou un numéro" aria-label="Ajouter un nom ou un numéro à masquer" autocomplete="off"></form>
+        <div id="ents"></div>
+      </div>
+      <div class="pied"><button class="lien" id="openFoyer" type="button">Foyer et réglages</button><button class="lien" id="openDl" type="button">Table et pièce par pièce</button><button class="lien" id="wipe" type="button">Tout effacer</button></div>
+    </aside>
+    <section class="vue" aria-label="Aperçu de la pièce">
+      <div class="vbar"><strong id="docName"></strong><div class="seg"><button id="vRes" class="on" type="button">Après</button><button id="vOrig" type="button">Avant</button></div></div>
+      <div class="control" id="control"></div>
       <pre class="doc" id="view"></pre>
+    </section>
+  </div>
+  <div class="bas hidden" id="bas"><button class="btn" id="expZipM" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>Télécharger les pièces</button></div>
+</section>
+
+<section id="vRetab" class="hidden">
+  <div class="col">
+    <h1>Remettre les noms dans le bilan reçu</h1>
+    <div class="choix">
+      <label class="fich"><span>Table de correspondance</span><input type="file" id="rTable" accept=".csv,.txt"></label>
+      <label class="fich"><span>Bilan reçu</span><input type="file" id="rDoc" accept=".docx,.pptx,.xlsx,.txt,.md"></label>
     </div>
+    <button class="btn" id="rGo" type="button">Remettre les noms</button>
+    <div id="rOut"></div>
   </div>
-  <div class="legend"><span><i style="background:var(--m-p)"></i>Personnes</span><span><i style="background:var(--m-s)"></i>Sociétés</span><span><i style="background:var(--m-a)"></i>Adresses et communes</span><span><i style="background:var(--m-i)"></i>Identifiants et coordonnées</span><span><i style="background:var(--m-d)"></i>Dates</span><span><i style="background:var(--m-t)"></i>Termes libres</span></div>
-  <div class="control" id="control"></div>
 </section>
-
-<section class="step hidden" id="s4">
-  <h2><span class="num">4</span>Exporter</h2>
-  <p class="hint">Les pièces pseudonymisées sont prêtes à être transmises. La table de correspondance, elle, reste chez vous : c'est elle qui permet de rétablir les noms dans le bilan reçu.</p>
-  <div class="opts" style="margin-bottom:12px"><label><input type="checkbox" id="oRaster" checked> Joindre une copie caviardée en image des PDF et des photos (le texte d'origine en est supprimé)</label></div>
-  <div class="row">
-    <button class="go" id="expZip" type="button">Télécharger les pièces pseudonymisées (.zip)</button>
-    <button class="ghost" id="expCsv" type="button">Télécharger la table de correspondance (.csv)</button>
-  </div>
-  <h3>Pièce par pièce</h3>
-  <ul class="docs" id="expList"></ul>
-  <p class="alert" style="margin-top:12px">La table de correspondance contient les vrais noms. Conservez-la dans le dossier du client et ne la joignez jamais à l'envoi.</p>
-</section>
-
-<section class="step" id="s5">
-  <h2><span class="num">5</span>Rétablir les noms dans un document reçu</h2>
-  <p class="hint">Vous avez reçu le bilan avec des libellés comme [Client 1] ? Chargez votre table de correspondance et le document (.docx, .pptx, .xlsx ou .txt) : les vrais noms sont remis en place, sur votre poste.</p>
-  <div class="row">
-    <label class="ghost" style="display:inline-flex;gap:8px;align-items:center">Table (.csv) <input type="file" id="rTable" accept=".csv,.txt"></label>
-    <label class="ghost" style="display:inline-flex;gap:8px;align-items:center">Document <input type="file" id="rDoc" accept=".docx,.pptx,.xlsx,.txt,.md"></label>
-    <button class="primary" id="rGo" type="button">Rétablir</button>
-  </div>
-  <div id="rOut" style="margin-top:10px"></div>
-</section>
-
-<footer>Anonymiser, outil gratuit proposé par Hereditis. Aucune donnée n'est collectée ni transmise. <button class="danger" id="wipe" type="button" style="margin-left:8px;padding:4px 10px">Tout effacer</button><br><span style="font-size:12px">Intègre pdf.js, Tesseract.js et Tesseract.js-core (licence Apache 2.0), fflate et une liste de prénoms issue de Faker (licence MIT), données de langue française Tesseract.</span></footer>
 </main>
+<input type="file" id="file" multiple accept=".pdf,.docx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff" class="hidden">
 
-<div class="busy hidden" id="busy"><div id="busyText">Traitement en cours</div></div>
+<dialog id="pasteBox" class="etroit">
+  <h2>Coller un texte</h2>
+  <input type="text" id="pasteName" placeholder="Nom de la pièce" aria-label="Nom de la pièce">
+  <textarea id="pasteText" style="margin-top:10px;min-height:200px" placeholder="Collez le texte ici" aria-label="Texte de la pièce"></textarea>
+  <div class="dfin"><button class="btn small" id="pasteAdd" type="button">Ajouter la pièce</button><button class="lien" type="button" data-close>Annuler</button></div>
+</dialog>
+
+<dialog id="dlgFoyer">
+  <h2>Foyer et réglages</h2>
+  <p class="note" style="margin:-8px 0 0">Le foyer est détecté dans les pièces. Corrigez un nom ou un libellé ici si besoin.</p>
+  <h3>Personnes</h3>
+  <div class="tablewrap"><table class="grid" id="tPersons"><thead><tr><th style="width:17%">Libellé</th><th style="width:12%">Civilité</th><th>Prénoms</th><th>Nom d'usage</th><th>Nom de naissance</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
+  <button class="lien" id="addPerson" type="button" style="margin-top:8px">Ajouter une personne</button>
+  <h3>Sociétés</h3>
+  <div class="tablewrap"><table class="grid" id="tSocs"><thead><tr><th style="width:17%">Libellé</th><th>Dénomination</th><th style="width:44px"></th></tr></thead><tbody></tbody></table></div>
+  <button class="lien" id="addSoc" type="button" style="margin-top:8px">Ajouter une société</button>
+  <h3>Autres mots à masquer</h3>
+  <textarea id="terms" aria-label="Autres mots à masquer, un par ligne" placeholder="Un mot par ligne. Libellé facultatif : Chalet Les Gentianes => Résidence secondaire"></textarea>
+  <h3>Détection</h3>
+  <div class="opts">
+    <label><input type="checkbox" id="oCiv" checked> Personnes</label>
+    <label><input type="checkbox" id="oFirst" checked> Prénoms employés seuls</label>
+    <label><input type="checkbox" id="oOrg" checked> Sociétés et cabinets</label>
+    <label><input type="checkbox" id="oAddr" checked> Adresses et communes</label>
+    <label><input type="checkbox" id="oBirth" checked> Dates de naissance remplacées par l'âge</label>
+    <label><input type="checkbox" id="oDates"> Autres dates réduites au mois et à l'année</label>
+    <label><input type="checkbox" id="oSugg" checked> Proposer les mots en capitales inconnus</label>
+  </div>
+  <div class="dfin"><button class="btn small" id="analyze" type="button" autofocus>Appliquer</button><button class="btn small ghost" id="prefill" type="button">Détecter à nouveau</button><button class="lien" type="button" data-close>Fermer</button></div>
+</dialog>
+
+<dialog id="dlgDl" class="etroit">
+  <h2>La table reste chez vous</h2>
+  <p class="note" style="margin:-8px 0 16px">Elle contient les vrais noms et sert à les remettre dans le bilan. Ne la joignez pas à l'envoi.</p>
+  <button class="btn small" id="expCsv" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>Télécharger la table</button>
+  <h3>Pièce par pièce</h3>
+  <ul class="exp" id="expList"></ul>
+  <div class="opts" style="margin-top:14px"><label><input type="checkbox" id="oRaster" checked> Joindre la copie en image des PDF et des photos</label></div>
+  <div class="dfin"><button class="lien" type="button" data-close>Fermer</button></div>
+</dialog>
+
+<footer><span>Anonymiser <span id="verLabel"></span>, outil gratuit d'Hereditis</span><details><summary>À propos</summary><p>Les pièces sont lues et traitées dans votre navigateur, sur votre poste. La page s'interdit tout accès à Internet par sa propre politique de sécurité. Rien n'est conservé à la fermeture de l'onglet.</p><p>Intègre pdf.js, Tesseract.js et Tesseract.js-core (licence Apache 2.0), fflate et une liste de prénoms issue de Faker (licence MIT), données de langue française Tesseract.</p></details></footer>
+
+<div class="busy hidden" id="busy" role="status"><div id="busyText">Traitement en cours</div></div>
 
 <script>
 /*__FFLATE__*/
@@ -252,14 +311,14 @@ function updateCheck(fromVersion, online){
   document.getElementById('verLabel').textContent = APP_VERSION;
   btn.title = 'Version ' + APP_VERSION + ' du ' + BUILD_DATE;
   if (online){
-    btn.textContent = 'Télécharger pour un usage hors ligne';
+    btn.textContent = 'Version hors ligne';
     btn.href = 'Anonymiser.html'; btn.setAttribute('download', 'Anonymiser.html'); btn.removeAttribute('target');
   } else btn.href = ONLINE_URL + '?v=' + encodeURIComponent(APP_VERSION);
   if (!online || !fromVersion || !/^[0-9.]{1,12}$/.test(fromVersion)) return;
   ban.classList.remove('hidden');
   if (cmpVer(fromVersion, APP_VERSION) < 0){
     ban.classList.remove('ok');
-    txt.innerHTML = `Vous utilisiez la version ${esc(fromVersion)}. La version ${esc(APP_VERSION)} du ${esc(BUILD_DATE)} est disponible : vous pouvez l'utiliser directement sur cette page, ou <a href="Anonymiser.html" download="Anonymiser.html">la télécharger pour un usage hors ligne</a> et supprimer l'ancien fichier.`;
+    txt.innerHTML = `Vous utilisiez la version ${esc(fromVersion)}. La version ${esc(APP_VERSION)} du ${esc(BUILD_DATE)} est disponible : vous pouvez l'utiliser directement sur cette page, ou <a href="Anonymiser.html" download="Anonymiser.html">la télécharger</a> et supprimer l'ancien fichier.`;
   } else {
     ban.classList.add('ok');
     txt.textContent = `Votre version ${fromVersion} est la plus récente. Vous pouvez fermer cet onglet et continuer avec votre fichier.`;
@@ -280,6 +339,9 @@ function fold(s){ return stripMarks(String(s)).toLowerCase().replace(/[’`]/g, 
 const SEP = '[\\s\\-\\u2010\\u2011]+';
 const HS = '[ \\t\\u00a0\\u202f]+';
 const HSO = '[ \\t\\u00a0\\u202f]*';
+const NS = '[ .\\u00a0\\u202f]?', G1 = '[ \\u00a0\\u202f]';
+/* blanc horizontal quelconque, y compris le séparateur de colonnes d'une page lue par OCR (espace cadratin U+2003, absent de HS) */
+const WS = '[^\\S\\n]*', COLSEP = '\u2003';
 const OCRC = {o:'0', i:'1lL|', l:'1iI|', s:'5', b:'8', g:'6', z:'2'};
 function cls(ch, upperOnly, ocr){
   const b = stripMarks(ch).toLowerCase();
@@ -307,11 +369,19 @@ function pat(term, firstUpperRule, ocr){
 const LB = '(?<![\\p{L}\\p{N}])', RB = '(?![\\p{L}\\p{N}])';
 /* un nom ne doit pas être pris au milieu d'un mot composé (Annecy dans Annecy-le-Vieux) ; pour les lieux, le composé entier est masqué */
 const LBW = '(?<![\\p{L}\\p{N}])(?<!\\p{L}-)', RBW = '(?![\\p{L}\\p{N}])(?!-\\p{L})', EXT = "(?:-[\\p{L}'’]+)*";
-function wordRe(term, firstUpperRule, ocr, ext){ const p = pat(term, firstUpperRule, ocr); return p ? new RegExp(LBW + p + (ext ? EXT : '') + RBW, 'gu') : null; }
+function wordRe(term, firstUpperRule, ocr, ext){ const p = pat(term, firstUpperRule, ocr); return p ? new RegExp(LBW + p + (ext === 'c' ? EXTC : ext ? EXT : '') + RBW, 'gu') : null; }
+/* numéro saisi à la main : retrouvé quels que soient les espaces, les points ou les tirets (3012345678901 comme 30 12 345 678 901) */
+const OCRD = {'0':'0OoQ', '1':'1lI|', '5':'5S', '8':'8B'};
+function idRe(term, ocr){
+  const c = String(term).replace(/[\s.\-\u00a0\u202f\u2010\u2011]/g, '');
+  if (c.length < 5 || !/^[0-9A-Za-z]+$/.test(c) || (c.match(/\d/g) || []).length < 4) return null;
+  return new RegExp('(?<![\\p{L}\\p{N}])' + [...c].map(ch => /\d/.test(ch) ? (ocr && OCRD[ch] ? '[' + OCRD[ch] + ']' : ch) : '[' + ch.toLowerCase() + ch.toUpperCase() + ']').join('[ .\\-\\u00a0\\u202f]{0,2}') + '(?![\\p{L}\\p{N}])', 'gu');
+}
 const K = w => pat(w, false);
 const alt = arr => arr.slice().sort((a, b) => b.length - a.length).map(K).join('|');
 
 const UP = 'A-ZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ';
+const EXTC = EXT + `(?:(?:[ \\u00a0]|-)(?:LE|LA|LES|L[EÈ]S|SUR|SOUS|EN|DE|DU|DES|AUX|AU)(?:[ \\u00a0]|-)[${UP}][${UP}'’\\-]+)*`;
 const NAMETOK = `[${UP}][\\p{L}'’\\-]*\\p{L}`;
 const PART = "(?:de|du|des|d'|d’|le|la|van|von|di|da|del|dos)";
 const NOTNAME = `(?!(?:Maire|Pr[ée]sident|Pr[ée]sidente|G[ée]rant|G[ée]rante|Directeur|Directrice|Notaire|Juge|Ministre|Pr[ée]fet|Le|La|Les|Et|Ou|Monsieur|Madame|Mademoiselle|Ma[îi]tre)(?![\\p{L}]))`;
@@ -341,26 +411,27 @@ function ibanOk(v){
   return m === 1;
 }
 const digits = s => s.replace(/\D/g, '');
+const ocrDigits = s => s.replace(/[OoQ]/g, '0').replace(/[Il|]/g, '1').replace(/S/g, '5').replace(/B/g, '8');
 
 /* ---------------- état ---------------- */
 const S = { docs: [], ent: new Map(), over: new Map(), counters: {}, res: [], cur: 0, view: 'res', dico: null, analyzed: false };
 let docSeq = 0;
 
 const CATS = {
-  personne:      {name:'Personnes du foyer', c:'p'},
-  famille:       {name:'Noms de famille partagés', c:'p'},
-  personne_auto: {name:'Autres personnes détectées', c:'p'},
+  personne:      {name:'Personnes', c:'p'},
+  famille:       {name:'Familles', c:'p'},
+  personne_auto: {name:'Autres personnes', c:'p'},
   societe:       {name:'Sociétés', c:'s'},
   notaire:       {name:'Notaires', c:'p'},
   adresse:       {name:'Adresses', c:'a'},
   commune:       {name:'Communes', c:'a'},
   naissance:     {name:'Dates de naissance', c:'d'},
   date:          {name:'Autres dates', c:'d'},
-  identifiant:   {name:'Identifiants', c:'i'},
+  identifiant:   {name:'Numéros', c:'i'},
   contact:       {name:'Coordonnées', c:'i'},
-  terme:         {name:'Termes libres', c:'t'},
-  suggestion:    {name:'Mots en capitales à vérifier', c:'p'},
-  illisible:     {name:'Mots mal lus par la reconnaissance', c:'i'}
+  terme:         {name:'Ajoutés à la main', c:'t'},
+  suggestion:    {name:'À vérifier', c:'p'},
+  illisible:     {name:'Mots mal lus', c:'i'}
 };
 const CAT_ORDER = Object.keys(CATS);
 const SURFACE = new Set(['personne','famille','personne_auto','societe','notaire','adresse','commune','terme','suggestion']);
@@ -382,30 +453,34 @@ function makeEnt(key, cat, sub, label, value, extra){
 }
 
 /* ---------------- fiche foyer ---------------- */
-function personRow(p){
+function personRow(p, auto){
   p = p || {};
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Client 1"></td>
-  <td><select data-f="civ"><option value=""></option><option value="M">M.</option><option value="F">Mme</option></select></td>
-  <td><input type="text" data-f="prenoms" placeholder="Jean Pierre"></td>
-  <td><input type="text" data-f="nom" placeholder="Dupont"></td>
-  <td><input type="text" data-f="naissance" placeholder="Martin"></td>
-  <td><button class="icon" type="button" title="Retirer">✕</button></td>`;
+  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Client 1" aria-label="Libellé"></td>
+  <td><select data-f="civ" aria-label="Civilité"><option value=""></option><option value="M">M.</option><option value="F">Mme</option></select></td>
+  <td><input type="text" data-f="prenoms" placeholder="Jean Pierre" aria-label="Prénoms"></td>
+  <td><input type="text" data-f="nom" placeholder="Dupont" aria-label="Nom d'usage"></td>
+  <td><input type="text" data-f="naissance" placeholder="Martin" aria-label="Nom de naissance"></td>
+  <td><button class="icon" type="button" title="Retirer" aria-label="Retirer">✕</button></td>`;
   for (const k of ['label','civ','prenoms','nom','naissance']) if (p[k]) tr.querySelector(`[data-f=${k}]`).value = p[k];
+  if (auto) tr.dataset.auto = '1';
+  tr.addEventListener('input', () => { delete tr.dataset.auto; });
   tr.querySelector('button').onclick = () => tr.remove();
   $('#tPersons tbody').appendChild(tr);
 }
-function socRow(s){
+function socRow(s, auto){
   s = s || {};
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Société 1"></td><td><input type="text" data-f="denom" placeholder="LES PINS"></td><td><button class="icon" type="button" title="Retirer">✕</button></td>`;
+  tr.innerHTML = `<td><input type="text" data-f="label" placeholder="Société 1" aria-label="Libellé"></td><td><input type="text" data-f="denom" placeholder="LES PINS" aria-label="Dénomination"></td><td><button class="icon" type="button" title="Retirer" aria-label="Retirer">✕</button></td>`;
   for (const k of ['label','denom']) if (s[k]) tr.querySelector(`[data-f=${k}]`).value = s[k];
+  if (auto) tr.dataset.auto = '1';
+  tr.addEventListener('input', () => { delete tr.dataset.auto; });
   tr.querySelector('button').onclick = () => tr.remove();
   $('#tSocs tbody').appendChild(tr);
 }
 function readRows(sel){
   return Array.from(document.querySelectorAll(sel + ' tbody tr')).map(tr => {
-    const o = {}; tr.querySelectorAll('[data-f]').forEach(i => o[i.dataset.f] = i.value.trim()); return o;
+    const o = {auto: !!tr.dataset.auto}; tr.querySelectorAll('[data-f]').forEach(i => o[i.dataset.f] = i.value.trim()); return o;
   });
 }
 const opt = id => $('#' + id).checked;
@@ -420,7 +495,7 @@ function buildDico(){
   persons.forEach((p, i) => {
     const label = p.label || ('Personne ' + letter(i + 1));
     const key = 'dico|p|' + i;
-    const e = makeEnt(key, 'personne', '', label, null);
+    const e = makeEnt(key, 'personne', '', label, null); e.auto = p.auto;
     if (!S.over.has(key) || S.over.get(key).label == null) e.label = label;
     const F = p.prenoms ? p.prenoms.split(/\s+/).filter(Boolean) : [];
     const firsts = [...new Set([p.prenoms, F[0]].filter(Boolean))];
@@ -444,7 +519,7 @@ function buildDico(){
   socs.forEach((s, i) => {
     const key = 'dico|s|' + i;
     const label = s.label || ('Société ' + (i + 1));
-    const e = makeEnt(key, 'societe', '', label, s.denom);
+    const e = makeEnt(key, 'societe', '', label, s.denom); e.auto = s.auto;
     if (!S.over.has(key) || S.over.get(key).label == null) e.label = label;
     ds.push({e, f: fold(s.denom)});
   });
@@ -495,6 +570,8 @@ function R(name, src){ RX[name] = new RegExp(src, 'dgu'); }
 const VOIE_STRONG = ['rue','avenue','av.','boulevard','bd','chemin','allée','impasse','route','quai','lieu-dit','lieudit','faubourg','rond-point','sentier','montée','square','esplanade','ruelle'];
 const VOIE_WEAK = ['place','cours','parc','clos','domaine','villa','cité','zone','voie','résidence','hameau','promenade','traverse','carrefour','passage','za','zi','zac','tour','lotissement','centre','espace','pôle','technopole'];
 const VOIE_BUILD = ['bâtiment','batiment','bât.','bât','bat.','bat','immeuble'];
+const VOIE_ABBR = ['rte','che','chem','all','imp','bld','blvd','av','ave','pl','sq','res','lot','crs','fbg','pas','sen','qu','mtee','rle','vla','ham','dom'];
+const VABBR = new Set(VOIE_ABBR.map(fold));
 const VSTRONG = new Set(VOIE_STRONG.concat(VOIE_BUILD).map(fold));
 const ADDR_STOP = new Set(['est','sont','a','ont','sera','seront','dont','qui','que','pour','par','avec','sans','dans','ou','où','mais','ainsi','soit','depuis','selon','lequel','laquelle','lesquels']);
 const APART = ['de','du','des','de la',"de l'","d'",'la','le','les',"l'",'aux','au'];
@@ -503,12 +580,24 @@ R('email', `[\\p{L}\\p{N}._%+\\-]+@[\\p{L}\\p{N}\\-]+(?:\\.[\\p{L}\\p{N}\\-]+)*\
 R('telfr', `(?<![\\d+])(?:(?:\\+|00)33[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?[1-9]|0[1-9])(?:[\\s.\\-]?\\d{2}){4}(?!\\d)`);
 R('telch', `(?<![\\d+])(?:\\+|00)41[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?\\d{2}[\\s.\\-]?\\d{3}(?:[\\s.\\-]?\\d{2}){2}(?!\\d)`);
 R('iban', `(?<![A-Z0-9])[A-Z]{2}\\d{2}(?:[ \\u00a0]?[A-Z0-9]{4}){2,7}(?:[ \\u00a0]?[A-Z0-9]{1,4})?(?![A-Z0-9])`);
-R('bic', `(?<![\\p{L}])BIC${HSO}:?${HSO}([A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?)(?![A-Z0-9])`);
+R('bic', `(?<![\\p{L}])(?:BIC|SWIFT|${K('banque')})${WS}:?${WS}([A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?)(?![A-Za-z0-9])`);
 R('nir', `(?<!\\d)[12][\\s.]?\\d{2}[\\s.]?(?:0[1-9]|1[0-2]|[2-9]\\d)[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3}[\\s.]?\\d{2}(?!\\d)${CURR}`);
 R('nirctx', `(?:${K('sécurité sociale')}|NIR|INSEE)[^\\n\\d]{0,25}([12][\\s.]?\\d{2}[\\s.]?\\d{2}[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3})(?![\\s.]?\\d)`);
 R('siret', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{5}(?![\\s.\\u00a0]?\\d)${CURR}`);
 R('siren', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}(?![\\s.\\u00a0]?\\d)${CURR}`);
-R('fiscal', `(?<!\\d[\\s.]?)[0-3]\\d(?:[\\s\\u00a0]?\\d){11}(?![\\s.]?\\d)${CURR}`);
+/* numéro fiscal : 13 chiffres, écrits d'un bloc ou groupés 2 2 3 3 3 comme sur les avis d'impôt (où il peut être suivi du numéro de feuillet) */
+R('fiscal', `(?<!\\d)[0-3]\\d${G1}\\d{2}${G1}\\d{3}${G1}\\d{3}${G1}\\d{3}(?!\\d)|(?<!\\d[\\s.]?)[0-3]\\d(?:[\\s\\u00a0]?\\d){11}(?![\\s.]?\\d)${CURR}`);
+R('fiscalctx', `(?<![\\p{L}])(?:${K('numéro')}|[Nn][°ºo]\\.?|${K('identifiant')})${HSO}${K('fiscal')}[^\\n\\d]{0,24}?((?:[0-9OoQIl|SB]${HSO}){12}[0-9OoQIl|SB])(?![0-9])`);
+/* avis d'impôt : référence de l'avis, numéro FIP, identifiant du service, numéro de télédéclarant */
+R('refavis', `(?<![\\p{L}\\d])\\d{2}${G1}\\d{2}${G1}[A-Z0-9]\\d{6}${G1}\\d{2}(?![\\p{L}\\d])`);
+R('refavisctx', `${K('référence de l')}['’]${HSO}${K('avis')}${WS}:?${WS}([A-Z0-9](?:${HSO}[A-Z0-9]){8,16})(?![\\p{L}\\d])`);
+R('fip', `(?<![\\p{L}\\d])\\d{3}${G1}\\d{2}${G1}\\d{2,3}${G1}\\d{9,11}${G1}\\d${G1}[A-Z](?![\\p{L}\\d])`);
+R('fipctx', `(?<![\\p{L}])(?:${K('numéro')}${HS}|N°${HSO})?FIP${WS}:?${WS}(\\d(?:${HSO}[A-Z0-9]){12,24})(?![\\p{L}\\d])`);
+R('servicectx', `(?<![\\p{L}])${K('identifiant')}${HS}(?:${K('du')}${HS})?${K('service')}${WS}:?${WS}(\\d{5,7})(?!\\d)`);
+R('teledecl', `(?<![\\p{L}])(?:${K('télédéclarant')}|${K("numéro d'accès en ligne")}|${K('numéro d’accès en ligne')})[^\\n\\d]{0,20}(\\d(?:${HSO}\\d){5,9})(?!\\d)`);
+/* code-barres 2D-Doc : il reprend en clair le nom, le numéro fiscal et la référence de l'avis */
+R('doc2dfont', `(?<![\\p{L}])[A-Z]{80,}(?![\\p{L}])`);
+R('doc2d', `(?<![\\p{L}\\p{N}])2D${HSO}[-\\u2010\\u2011]?${HSO}DOC(?![\\p{L}\\p{N}])`);
 R('contrat', `(?<![\\p{L}])(?:${alt(['contrat','police','adhésion','compte','dossier','client','référence','réf.','souscription'])})[^\\n]{0,40}?(?<![\\p{L}])(?:n°|N°|nº|no\\.?|${K('numéro')}|num\\.)${HSO}:?${HSO}([A-Z0-9][A-Z0-9\\-\\/.]{2,30}[A-Z0-9])`);
 R('cadastre', `(?<![\\p{L}])(?:${K('section')}|${K('cadastré')}e?s?(?:${HS}${K('section')})?)${HS}([A-Z]{1,2})${HSO}(?:n°|N°|nº|no|${K('numéros')}|${K('numéro')}|nos|n°s)?${HSO}(\\d{1,5}(?:${HSO}(?:,|et|à|&)${HSO}(?:n°)?${HSO}\\d{1,5})*)`);
 R('publi1', `(?<![\\p{L}])${K('volume')}${HS}\\d{3,4}${HSO}P?,?${HSO}(?:n°|N°|nº|${K('numéro')})${HSO}\\d{1,6}`);
@@ -518,9 +607,9 @@ R('birth2', `(?<![\\p{L}])[nN][ée]e?s?${HS}(?:à|a)${HS}(${COMMUNE})(?:${HSO}\\
 R('birth3', `${K('naissance')}${HSO}:?${HSO}(?:${K('le')}${HS})?(${DATE})`);
 R('birthplace', `${K('lieu de naissance')}${HSO}:?${HSO}(${COMMUNE})`);
 R('date', `(?<![\\p{L}\\d])(${DATE})`);
-R('adresse', `(?<![\\p{L}\\d])(\\d{1,4}${HSO}(?:(?:${alt(['bis','ter','quater'])})|[A-D](?![\\p{L}]))?${HSO},?${HSO})?(${alt(VOIE_STRONG.concat(VOIE_WEAK, VOIE_BUILD))})(?![\\p{L}])((?:${HS}[\\p{L}0-9'’][\\p{L}0-9'’\\-.]*){1,9})`);
+R('adresse', `(?<![\\p{L}\\d])(\\d{1,4}${HSO}(?:(?:${alt(['bis','ter','quater'])})|[A-D](?![\\p{L}]))?${HSO},?${HSO})?(${alt(VOIE_STRONG.concat(VOIE_WEAK, VOIE_BUILD, VOIE_ABBR))})(?![\\p{L}])((?:${HS}[\\p{L}0-9'’][\\p{L}0-9'’\\-.]*){1,9})`);
 R('bp', `(?<![\\p{L}])(?:BP|CS|B\\.P\\.)${HSO}\\d{1,6}(?!\\d)`);
-R('cp', `(?<!\\d[\\s.\\u00a0]?)(\\d{2})(\\d{3})${HS}(?!${STOPCOM})(${COMMUNE})(?:${HS}${K('cedex')}(?:${HSO}\\d{1,2})?)?(?=[ \\t\\u00a0]*(?:[,;()\\n\\r]|$))`);
+R('cp', `(?<!\\d[ .\\u00a0]?)(\\d{2})(\\d{3})${HS}(?!${STOPCOM})(${COMMUNE})(?:${HS}${K('cedex')}(?:${HSO}\\d{1,2})?)?(?=[ \\t\\u00a0]*(?:[,;()\\n\\r]|\\.(?:\\s|$)|$))`);
 R('ctxcom', `(?<![\\p{L}])(?:${alt(['demeurant','domicilié','domiciliée','domiciliés','domiciliées','résidant','sis','sise','sises','situé','située','situés','situées','notaire','exerçant','établi','établie','fait','siège','siège social','siège social est fixé','siège est fixé','siège social est','siège est','célébré','célébrée','mariés','mariage'])})${HS}(?:${K("à la mairie d'")}|${K('à la mairie de')}|${K("sur la commune d'")}|${K('sur la commune de')}|à|au|en)${HSO}(?!${STOPCOM})(${COMMUNE})(?:${HSO}\\((\\d{2})\\d{3}\\))?`);
 R('rcs', `(?<![\\p{L}])R\\.?${HSO}C\\.?${HSO}S\\.?${HS}(?:${K('de')}${HS}|${K("d'")}${HSO})?(${COMMUNE})`);
 R('civ', `(?<![\\p{L}])((?:[Mm]onsieur|[Mm]adame|[Mm]ademoiselle|[Mm]essieurs|[Mm]esdames|MM\\.|M\\.|Mme|Mmes|Mlle|Mlles|[Dd]octeur|Dr|[Pp]rofesseur|Pr))${HS}(${NAME})`);
@@ -536,12 +625,16 @@ const CAPSTOK = `[${UP}][${UP}'’]+(?:-[${UP}][${UP}'’]+)*`;
 R('prenomNOM', `(?<![\\p{L}])(${CAPTOK}(?:${HS}${CAPTOK}){0,2})${HS}((?:(?:DE|DU|D'|D’|LE|LA|VAN|VON|DI|DA)${HSO})?${CAPSTOK}(?:${HS}${CAPSTOK})?)(?![\\p{L}])`);
 R('NOMprenom', `(?<![\\p{L}])(${CAPSTOK})${HS}(${CAPTOK}(?:${HS}${CAPTOK})?)(?![\\p{L}])`);
 R('prenomNom', `(?<![\\p{L}])(${CAPTOK})${HS}([${UP}][\\p{Ll}'’]{2,}(?:-[${UP}][\\p{Ll}'’]+)?)(?![\\p{L}])`);
+/* pièces administratives : noms tout en capitales (NOM PRENOM), nom annoncé par son intitulé */
+R('capsRun', `(?<![\\p{L}\\p{N}'’\\-])${CAPSTOK}(?:${HS}${CAPSTOK}){1,6}(?![\\p{L}\\p{N}'’\\-])`);
+R('ctxnom', `(?<![\\p{L}])(?:${alt(['nom de naissance',"nom d'usage",'nom d’usage','nom de famille','nom marital','nom et prénom','nom et prénoms','nom prénom','nom','prénom','prénoms'])})${WS}:${WS}((?:${CAPSTOK}|${CAPTOK})(?:${HS}(?:${CAPSTOK}|${CAPTOK})){0,4})(?![\\p{L}])`);
+const CAPSBREAK = new Set(['ou','et','m','mr','mme','mlle','mle','ep','epouse','nee','ne','veuve','vve','par','chez','pour']);
 const ORGKW = new Set(['conseil','conseils','patrimoine','gestion','finance','finances','immobilier','immobiliere','holding','invest','investissement','investissements','groupe','cabinet','expertise','audit','associes','partenaires','consulting','services','developpement','participations','avocats','notaires','comptable','comptables','assurances','courtage','capital','partners','advisors','family','office']);
-R('capsCP', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?=${HSO},?${HSO}\\d{5}(?!\\d|[\\s\\u00a0]\\d))`);
+R('capsCP', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?=${HSO},?${HSO}\\d{5}${HS}\\p{L})`);
 R('capsOrg', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?![\\p{L}\\p{N}])`);
 R('kwOrg', `(?<![\\p{L}])(?:[Cc]abinet|CABINET|[ÉéEe]tude|[Ee]xpert-comptable|[Cc]ommissaire aux comptes)${HS}(?!(?:[Nn]otarial|[Dd]e|[Dd]u|[Dd]es|[Ll]a|[Ll]e)(?![\\p{L}]))(${CAPTOK}|${CAPSTOK})((?:${HS}(?:&|et|de|du|des)?${HSO}(?:${CAPTOK}|${CAPSTOK})){0,3})`);
 const CAPS = new RegExp(`(?<![\\p{L}\\p{N}])[${UP}][${UP}'’\\-]{2,}(?![\\p{L}\\p{N}])`, 'gu');
-const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh').split(' '));
+const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh liberte egalite fraternite centre centres finances publiques publique public publics direction generale service services particuliers professionnels avis prelevement prelevements sociaux social suite cet cette ci jointe joint informations information complementaires complementaire nombre deductibles deductible global globale imputations imputation csg crds prel sol psol tenu elements element que avez declares declare declaree declarees qui sera rembourse remboursee remboursement automatique aucune demarche faire votre vos calcul plafond plafonds epargne detail details source marginal residence exclusive alternee part foyer declarant declarants declar feuillet reference references contact contacts numero role fip rdv doc est sip said sie sdif cdif pole tresor tresorerie somme sommes payer paye payee titre revenu revenus pension pensions rente rentes foncier fonciers fonciere foncieres mobilier mobiliers capitaux bareme quotient familial decote messagerie securisee telephone place horaires lundi mardi mercredi jeudi vendredi samedi dimanche janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre notice disponible espace virement emetteur identifiant banque etabli etablie etablissement recouvrement mise montant retenu retenue nom prenom prenoms naissance usage enfants maries mineurs majeurs celibataires handicapes handicapees personnes recueillies cas particulier difficulte oeuvres etrangers etranger proportionnel forfaitaire liberatoire deja verse verses trop soumis soumise avant apres voir attention important rappel information').split(' '));
 
 function detectRaw(doc){
   const t = doc.text, out = [];
@@ -552,21 +645,39 @@ function detectRaw(doc){
   each('telfr', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
   each('telch', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
   each('iban', m => {
-    const ctx = /IBAN/i.test(t.slice(Math.max(0, m.index - 25), m.index));
+    const ctx = /(IBAN|RIB|compte bancaire|virement|pr[ée]l[èe]vement|domiciliation)/i.test(t.slice(Math.max(0, m.index - 90), m.index));
     let v = m[0];
     while (!ibanOk(v) && /\s/.test(v)) v = v.replace(/\s*\S+$/, '');
     if (ibanOk(v)) push(m.index, m.index + v.length, 'identifiant', 'IBAN', v, 2);
-    else if (ctx) push(m.index, m.index + m[0].length, 'identifiant', 'IBAN', m[0], 2);
+    /* IBAN annoncé comme tel, IBAN français complet, ou IBAN en partie masqué par des X (avis d'impôt) : la clé ne peut pas être vérifiée */
+    else if (ctx || /^FR\d{2}/.test(m[0]) && m[0].replace(/\s/g, '').length === 27 || /^[A-Z]{2}\d{2}/.test(m[0]) && /X{3}/.test(m[0])) push(m.index, m.index + m[0].length, 'identifiant', 'IBAN', m[0], 2);
   });
   each('bic', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'BIC', m[1], 2));
-  each('nir', m => push(m.index, m.index + m[0].length, 'identifiant', 'N° de sécurité sociale', m[0], 2));
+  /* un numéro peut être coupé par un retour à la ligne, pas par plusieurs : sinon ce sont des montants empilés dans une colonne */
+  const oneLine = m => (m[0].match(/\n/g) || []).length <= 1;
+  each('nir', m => { if (oneLine(m)) push(m.index, m.index + m[0].length, 'identifiant', 'N° de sécurité sociale', m[0], 2); });
   each('nirctx', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de sécurité sociale', m[1], 2));
-  each('siret', m => { if (luhn(digits(m[0])) || /(SIRET|SIREN|RCS|R\.C\.S|immatricul)/i.test(t.slice(Math.max(0, m.index - 40), m.index))) push(m.index, m.index + m[0].length, 'identifiant', 'SIRET', m[0], 2); });
+  each('siret', m => { if (!oneLine(m)) return; if (luhn(digits(m[0])) || /(SIRET|SIREN|RCS|R\.C\.S|immatricul)/i.test(t.slice(Math.max(0, m.index - 40), m.index))) push(m.index, m.index + m[0].length, 'identifiant', 'SIRET', m[0], 2); });
   each('siren', m => {
+    if (!oneLine(m)) return;
     const ctx = /(SIREN|RCS|R\.C\.S|immatricul|num[ée]ro)/i.test(t.slice(Math.max(0, m.index - 40), m.index));
     if (luhn(digits(m[0])) || ctx) push(m.index, m.index + m[0].length, 'identifiant', 'SIREN', m[0], 2);
   });
-  each('fiscal', m => push(m.index, m.index + m[0].length, 'identifiant', 'N° fiscal', m[0], 2));
+  each('fiscal', m => { if (oneLine(m)) push(m.index, m.index + m[0].length, 'identifiant', 'N° fiscal', m[0], 2); });
+  each('fiscalctx', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° fiscal', ocrDigits(m[1]), 2));
+  each('refavis', m => push(m.index, m.index + m[0].length, 'identifiant', 'Réf. avis', m[0], 2));
+  each('refavisctx', m => { if (/\d{4}/.test(m[1].replace(/\s/g, ''))) push(g(m,1)[0], g(m,1)[1], 'identifiant', 'Réf. avis', m[1], 2); });
+  each('fip', m => {
+    push(m.index, m.index + m[0].length, 'identifiant', 'N° FIP', m[0], 2);
+    /* PDF d'origine : les valeurs du cadre « Vos références » se suivent sans leurs intitulés (rôle, deux dates, identifiant du service) */
+    const end = m.index + m[0].length, sv = /^\n\d{3}\n[^\n]{8,10}\n[^\n]{8,10}\n(\d{5})(?=\n|$)/.exec(t.slice(end, end + 60));
+    if (sv) push(end + sv[0].length - 5, end + sv[0].length, 'identifiant', 'N° de service', sv[1], 2);
+  });
+  each('fipctx', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° FIP', m[1], 2));
+  each('servicectx', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de service', m[1], 2));
+  each('teledecl', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de télédéclarant', m[1], 2));
+  each('doc2dfont', m => push(m.index, m.index + m[0].length, 'identifiant', '2D-Doc', 'code-barres 2D-Doc', 2));
+  each('doc2d', m => push(m.index, m.index + m[0].length, 'identifiant', '2D-Doc', 'code-barres 2D-Doc', 2));
   each('contrat', m => { if (/\d/.test(m[1])) push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de contrat', m[1], 2); });
   each('cadastre', m => push(g(m,1)[0], g(m,2)[1], 'identifiant', 'Parcelle', t.slice(g(m,1)[0], g(m,2)[1]), 2));
   each('publi1', m => push(m.index, m.index + m[0].length, 'identifiant', 'Réf. publication', m[0], 2));
@@ -586,6 +697,7 @@ function detectRaw(doc){
       const num = !!m[1], kw = m[2];
       const kwEnd = g(m,2)[1];
       if (!num && !VSTRONG.has(fold(kw)) && kw[0] === kw[0].toLowerCase()) return kwEnd;
+      if (VABBR.has(fold(kw)) && !VSTRONG.has(fold(kw)) && !(num && kw === kw.toUpperCase())) return kwEnd;
       const t0 = g(m,3)[0], re = /\S+/gu; let tk, last = -1;
       while ((tk = re.exec(m[3]))){
         const w = tk[0].replace(/\.+$/, '');
@@ -599,7 +711,20 @@ function detectRaw(doc){
       return end;
     });
     each('bp', m => push(m.index, m.index + m[0].length, 'adresse', '', m[0], 4));
-    each('cp', m => push(m.index, m.index + m[0].length, 'commune', '', m[3], 5, null, m[1]));
+    const cpAt = [];
+    each('cp', m => { cpAt.push(m.index); push(m.index, m.index + m[0].length, 'commune', '', m[3].replace(/[ \u00a0]+CEDEX(?:[ \u00a0]*\d{1,2})?$/i, ''), 5, null, m[1]); });
+    /* bloc d'adresse : entre la ligne de la voie et celle du code postal, le complément (lieu-dit, commune déléguée, résidence) est masqué en entier */
+    const lineOf = i => { const a = t.lastIndexOf('\n', i - 1) + 1; let b = t.indexOf('\n', i); if (b < 0) b = t.length; return [a, b]; };
+    for (const ci of cpAt){
+      let [a] = lineOf(ci), n = 0; const mid = [];
+      while (a > 0 && n < 3){
+        const [pa, pb] = lineOf(a - 1); n++; a = pa;
+        const raw = t.slice(pa, pb), line = raw.trim();
+        if (out.some(o => o.cat === 'adresse' && o.s < pb && o.e > pa)){ for (const [x, y] of mid) push(x, y, 'adresse', '', t.slice(x, y).replace(/\s+/g, ' '), 4); break; }
+        if (!line || line.length > 45 || /[:;€]/.test(line) || /\d{3}/.test(line)) break;
+        mid.push([pa + raw.length - raw.trimStart().length, pa + raw.trimEnd().length]);
+      }
+    }
     each('ctxcom', m => push(g(m,1)[0], m[2] ? m.index + m[0].length : g(m,1)[1], 'commune', '', m[1], 5, null, m[2]));
     each('rcs', m => push(g(m,1)[0], g(m,1)[1], 'commune', '', m[1], 5));
   }
@@ -621,6 +746,25 @@ function detectRaw(doc){
       push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 7);
     });
     each('notaire', m => push(g(m,1)[0], g(m,1)[1], 'notaire', '', m[1], 6));
+    /* NOM PRENOM tout en capitales : au moins un prénom connu, aucun mot du vocabulaire courant, aucune commune déjà reconnue */
+    const cpCom = new Set(); for (const o of out) if (o.cat === 'commune') fold(o.value).split(' ').forEach(w => cpCom.add(w));
+    each('capsRun', m => {
+      const toks = []; const re = /\S+/gu; let tk;
+      while ((tk = re.exec(m[0]))) toks.push({w: tk[0], s: m.index + tk.index, e: m.index + tk.index + tk[0].length});
+      let run = [];
+      const flush = () => {
+        const core = run.filter(x => !PARTICLES.has(fold(x.w)));
+        if (core.length >= 2 && core.length <= 5){
+          const pren = core.filter(x => isPrenom(x.w) && !STOP.has(fold(x.w))), oth = core.filter(x => !pren.includes(x));
+          const clean = oth.every(x => notStop(x.w) && !cpCom.has(fold(x.w)) && !/^[IVXLCDM]+$/.test(x.w));
+          if (pren.length && clean && oth.length <= 2 && (oth.length || pren.length >= 2)) push(run[0].s, run[run.length - 1].e, 'personne_auto', '', t.slice(run[0].s, run[run.length - 1].e).replace(/\s+/g, ' '), 6);
+        }
+        run = [];
+      };
+      for (const x of toks){ if (CAPSBREAK.has(fold(x.w)) || (STOP.has(fold(x.w)) && !PARTICLES.has(fold(x.w)))) flush(); else run.push(x); }
+      flush();
+    });
+    each('ctxnom', m => { if (!commonWords(m[1]) && !m[1].split(/\s+/).some(w => STOP.has(fold(w)) || ORGKW.has(fold(w)))) push(g(m,1)[0], g(m,1)[1], 'personne_auto', '', m[1].replace(/\s+/g, ' '), 6); });
   }
   each('socform', m => { const i = m[1] ? 1 : 2; push(g(m,i)[0], g(m,i)[1], 'societe', '', m[i].trim(), 6); });
   each('socquote', m => push(g(m,1)[0], g(m,1)[1], 'societe', '', m[1].trim(), 6));
@@ -710,9 +854,9 @@ function attach(raw){
 function compileEnt(e){
   if (!e.dirty) return;
   const forms = [...e.forms].filter(f => f && fold(f).length >= 2).sort((a, b) => b.length - a.length);
-  const ext = ['commune','adresse','terme','societe'].includes(e.cat);
-  e.res = forms.map(f => wordRe(f, true, false, ext)).filter(Boolean);
-  e.resOcr = forms.map(f => wordRe(f, true, fold(f).length >= 4, ext)).filter(Boolean);
+  const ext = e.cat === 'commune' ? 'c' : ['adresse','terme','societe'].includes(e.cat);
+  e.res = forms.map(f => idRe(f, false) || wordRe(f, true, false, ext)).filter(Boolean);
+  e.resOcr = forms.map(f => idRe(f, true) || wordRe(f, true, fold(f).length >= 4, ext)).filter(Boolean);
   e.dirty = false;
 }
 /* lecture par OCR : un nom mal lu (Annacy pour Annecy) est rattaché au nom connu le plus proche */
@@ -792,16 +936,19 @@ function findSuggestions(){
   const known = new Set();
   for (const e of S.ent.values()) for (const f of e.forms) fold(f).split(' ').forEach(x => known.add(x));
   const cnt = new Map();
+  /* un mot qui existe aussi en minuscules dans les pièces est un mot courant, pas un nom */
+  const lower = new Set();
+  S.docs.forEach(d => { for (const w of d.text.match(/(?<![\p{L}])\p{Ll}[\p{Ll}'’\-]{2,}/gu) || []) lower.add(fold(w)); });
   S.docs.forEach((d, i) => {
     const taken = S.res[i].taken; CAPS.lastIndex = 0; let m;
     while ((m = CAPS.exec(d.text))){
       const w = m[0]; const f = fold(w);
       const f2 = f.replace(/^[dl]'/, '');
-      if (taken[m.index] || STOP.has(f) || STOP.has(f2) || known.has(f) || /^[IVXLCDM]+$/.test(w) || f.replace(/[^a-z]/g, '').length < 3) continue;
+      if (taken[m.index] || STOP.has(f) || STOP.has(f2) || known.has(f) || lower.has(f) || lower.has(f2) || /^[IVXLCDM]+$/.test(w) || /^X+[O0]?$/.test(w) || f.replace(/[^a-z]/g, '').length < 3 || f.split(/[ \-]/).every(x => STOP.has(x) || lower.has(x))) continue;
       cnt.set(w, (cnt.get(w) || 0) + 1);
     }
   });
-  [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 40).forEach(([w]) => {
+  [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15).forEach(([w]) => {
     const key = 'sg|' + fold(w);
     const e = S.ent.get(key) || makeEnt(key, 'suggestion', '', 'Nom ' + nextNum('Nom'), w);
     if (!e.forms.has(w)){ e.forms.add(w); e.dirty = true; }
@@ -827,61 +974,71 @@ function control(){
     const ib = (out.match(new RegExp(RX.iban.source, 'gu')) || []).filter(ibanOk); if (ib.length) issues.push(`${d.name} contient encore un IBAN`);
     const sir = (out.match(new RegExp(RX.siren.source, 'gu')) || []).filter(x => luhn(digits(x))); if (sir.length) issues.push(`${d.name} contient encore un numéro qui ressemble à un SIREN : ${sir[0]}`);
     if (d.scanned) issues.push(`${d.name} : au moins une page n'a pas pu être lue, ne la transmettez pas telle quelle`);
-    if (d.ocr) infos.push(`${d.name} a été lu par reconnaissance de caractères (fiabilité ${d.conf} %) : une erreur de lecture peut déformer un nom, relisez cette pièce avec attention.`);
+    if (d.ocr) infos.push(`${d.name} est un scan (lecture fiable à ${d.conf} %) : relisez cette pièce.`);
   });
-  const sugg = [...S.ent.values()].filter(e => e.cat === 'suggestion' && !e.enabled).length;
-  if (sugg) infos.push(`${sugg} mot(s) en capitales non reconnu(s) restent visibles : vérifiez s'il s'agit de noms`);
-  infos.push('Relisez le résultat : l\'outil aide, il ne remplace pas votre relecture.');
   const box = $('#control');
   box.className = 'control ' + (issues.length ? 'ko' : 'ok');
-  box.innerHTML = (issues.length ? `<strong>Contrôle final : ${issues.length} point(s) à revoir</strong><ul>${issues.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<strong>Contrôle final : aucune donnée identifiante détectée dans le résultat</strong>')
-    + `<ul>${infos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  box.innerHTML = (issues.length ? `<strong>Contrôle final : ${issues.length} point(s) à revoir</strong><ul>${issues.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : 'Contrôle final : aucune donnée identifiante détectée.')
+    + (infos.length ? `<ul>${infos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '');
   return issues;
 }
 
 /* ---------------- affichage ---------------- */
 function renderEnts(){
   const box = $('#ents'); box.innerHTML = '';
-  const groups = {};
-  for (const e of S.ent.values()){ if (e.cat !== 'personne' && e.cat !== 'societe' && e.cat !== 'terme' && e.count === 0 && e.cat !== 'suggestion') continue; (groups[e.cat] = groups[e.cat] || []).push(e); }
+  const groups = {}; let total = 0;
+  for (const e of S.ent.values()){ if (e.count === 0 && e.cat !== 'suggestion' && (e.auto || (e.cat !== 'personne' && e.cat !== 'societe' && e.cat !== 'terme'))) continue; if (e.enabled && e.count) total++; (groups[e.cat] = groups[e.cat] || []).push(e); }
+  $('#nEnts').textContent = total + (total > 1 ? ' éléments masqués' : ' élément masqué');
   for (const cat of CAT_ORDER){
     const list = groups[cat]; if (!list || !list.length) continue;
     const gdiv = document.createElement('div'); gdiv.className = 'grp';
-    gdiv.innerHTML = `<h4>${esc(CATS[cat].name)}</h4>`;
+    gdiv.innerHTML = `<h3>${esc(CATS[cat].name)}</h3>`;
     for (const e of list){
       const row = document.createElement('div'); row.className = 'ent';
       const dateLike = cat === 'naissance' || cat === 'date';
-      const forms = cat === 'date' ? 'chaque date devient mois et année' : [...(e.forms.size ? e.forms : [e.primary])].join(' · ');
-      row.innerHTML = `<input type="checkbox" ${e.enabled ? 'checked' : ''} title="Masquer"><input type="text" value="${esc(e.label)}" ${dateLike ? 'disabled' : ''}><span class="cnt" title="Occurrences">${cat === 'suggestion' ? e.forms.size ? sugCount(e) : '' : e.count}</span><div class="forms" title="${esc(forms)}">${esc(forms)}</div>`;
-      const [cb, inp] = row.querySelectorAll('input');
+      const word = [...e.forms][0] || e.primary || '';
+      const open = cat === 'suggestion' && !e.enabled;   /* mot proposé, pas encore masqué : on montre le mot lui-même */
+      const forms = open ? 'non masqué' : cat === 'date' ? 'mois et année' : cat === 'illisible' ? 'scan' : SURFACE.has(cat) ? [...(e.forms.size ? e.forms : [e.primary])].join(', ') : (e.primary || '');
+      row.innerHTML = `<input type="checkbox" ${e.enabled ? 'checked' : ''} aria-label="Masquer ${esc(open ? word : e.label)}">`
+        + (open ? `<span class="mot">${esc(word)}</span>` : `<input type="text" class="lab" value="${esc(e.label)}" style="width:${labW(e.label)}" aria-label="Libellé" ${dateLike || cat === 'illisible' ? 'disabled' : ''}>`)
+        + `<span class="val" title="${esc(forms)}">${esc(forms)}</span><span class="cnt" title="Occurrences">${cat === 'suggestion' ? e.forms.size ? sugCount(e) : '' : e.count}</span>`;
+      const cb = row.querySelector('input[type=checkbox]'), inp = row.querySelector('.lab');
       cb.onchange = () => { e.enabled = cb.checked; setOver(e.key, {enabled: cb.checked}); refresh(false); };
-      inp.oninput = debounce(() => { e.label = inp.value.trim() || e.label; e.userLabel = true; setOver(e.key, {label: e.label}); refresh(false, true); }, 250);
+      if (inp) inp.addEventListener('input', () => { inp.style.width = labW(inp.value); });
+      if (inp) inp.oninput = debounce(() => { e.label = inp.value.trim() || e.label; e.userLabel = true; setOver(e.key, {label: e.label}); refresh(false, true); }, 250);
       gdiv.appendChild(row);
     }
     box.appendChild(gdiv);
   }
 }
+function labW(t){ MCTX.font = '600 14.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'; return Math.ceil(MCTX.measureText(t || 'x').width + 14) + 'px'; }
 function sugCount(e){ let n = 0; const re = wordRe([...e.forms][0], true); S.docs.forEach(d => { n += (d.text.match(re) || []).length; }); return n; }
 function setOver(key, o){ S.over.set(key, Object.assign(S.over.get(key) || {}, o)); }
-function renderTabs(){
-  const box = $('#tabs'); box.innerHTML = '';
-  S.docs.forEach((d, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'tab' + (i === S.cur ? ' on' : ''); b.textContent = d.name.length > 34 ? d.name.slice(0, 32) + '…' : d.name; b.onclick = () => { S.cur = i; renderTabs(); renderView(); }; box.appendChild(b); });
-}
+function renderTabs(){ renderDocs(); }
 function renderView(){
-  const d = S.docs[S.cur], r = S.res[S.cur]; if (!d || !r) { $('#view').textContent = ''; return; }
+  const d = S.docs[S.cur], r = S.res[S.cur], v = $('#view');
+  $('#docName').textContent = d ? d.name : '';
+  v.className = 'doc ' + S.view;
+  if (!d || !r) { v.textContent = ''; return; }
   let html = '', pos = 0;
   if (S.view === 'res'){
-    for (const m of r.map){ const e = S.ent.get(m.key); html += esc(r.out.slice(pos, m.ns)) + `<mark class="c-${CATS[e.cat].c}" title="${esc(d.text.slice(m.os, m.oe))}">${esc(r.out.slice(m.ns, m.ne))}</mark>`; pos = m.ne; }
+    for (const m of r.map){ html += esc(r.out.slice(pos, m.ns)) + `<mark title="${esc(d.text.slice(m.os, m.oe))}">${esc(r.out.slice(m.ns, m.ne).replace(/^\[|\]$/g, ''))}</mark>`; pos = m.ne; }
     html += esc(r.out.slice(pos));
   } else {
-    for (const m of r.map){ const e = S.ent.get(m.key); html += esc(d.text.slice(pos, m.os)) + `<mark class="c-${CATS[e.cat].c}" title="${esc(r.out.slice(m.ns, m.ne))}">${esc(d.text.slice(m.os, m.oe))}</mark>`; pos = m.oe; }
+    for (const m of r.map){ html += esc(d.text.slice(pos, m.os)) + `<mark title="${esc(r.out.slice(m.ns, m.ne))}">${esc(d.text.slice(m.os, m.oe))}</mark>`; pos = m.oe; }
     html += esc(d.text.slice(pos));
   }
-  $('#view').innerHTML = html;
+  v.innerHTML = html;
+}
+/* ce qui est à l'écran : dépôt tant qu'il n'y a pas de pièce, atelier ensuite */
+function show(){
+  const has = S.docs.length > 0, anon = !$('#vAnon').classList.contains('hidden');
+  $('#vide').classList.toggle('hidden', has); $('#atelier').classList.toggle('hidden', !has);
+  $('#expZip').classList.toggle('hidden', !(has && S.analyzed && anon)); $('#bas').classList.toggle('hidden', !(has && S.analyzed && anon));
 }
 function refresh(full, keepPanel){
   computeAll();
-  if (full) findSuggestions();
+  if (full && opt('oSugg')) findSuggestions();
   if (!keepPanel) renderEnts();
   renderTabs(); renderView(); control();
   if (!keepPanel) renderExpList();
@@ -891,7 +1048,7 @@ function renderExpList(){
   S.docs.forEach((d, i) => {
     const li = document.createElement('li');
     const canPdf = (d.type === 'pdf' && !d.scanned) || d.type === 'image';
-    li.innerHTML = `<div><strong>${esc(docBase(i))}</strong> <span class="meta">${esc(d.name)}</span></div><div class="row"><button class="ghost" type="button" data-k="txt">Texte (.txt)</button>${canPdf ? '<button class="go" type="button" data-k="pdf">PDF caviardé</button>' : ''}</div>`;
+    li.innerHTML = `<span title="${esc(d.name)}">${esc(d.name)}</span><div class="row"><button class="btn small ghost" type="button" data-k="txt">Texte</button>${canPdf ? '<button class="btn small ghost" type="button" data-k="pdf">PDF caviardé</button>' : ''}</div>`;
     li.querySelector('[data-k=txt]').onclick = () => download(enc(S.res[i].out), docBase(i) + '.txt', 'text/plain;charset=utf-8');
     const bp = li.querySelector('[data-k=pdf]');
     if (bp) bp.onclick = async () => {
@@ -917,12 +1074,13 @@ function layoutPage(tc){
     const fs = Math.hypot(it.transform[2], it.transform[3]) || it.height || 10;
     if (last && it.str){
       if (Math.abs(y - last.y) > fs * 0.5) pt += '\n';
+      else if (x < last.x - fs * 0.5){ if (!/\n$/.test(pt)) pt += '\n'; }   /* retour en arrière sur la même ligne : autre champ (numéro fiscal après le numéro de feuillet) */
       else if (x - last.xe > fs * 0.15 && !/\s$/.test(pt) && !/^\s/.test(it.str)) pt += ' ';
     }
     const s = pt.length; pt += it.str;
     if (it.str){
-      items.push({s, e: pt.length, x, y, w: it.width, h: fs, str: it.str, fn: it.fontName, fam: (tc.styles[it.fontName] || {}).fontFamily || 'sans-serif'});
-      last = {y, xe: x + it.width};
+      items.push({s, e: pt.length, x, y, w: it.width, h: fs, str: it.str, fn: it.fontName, fam: (tc.styles[it.fontName] || {}).fontFamily || 'sans-serif', rot: Math.abs(it.transform[1]) > 0.01 || Math.abs(it.transform[2]) > 0.01 || it.transform[0] <= 0});
+      last = {y, x, xe: x + it.width};
     }
     if (it.hasEOL){ if (!/\n$/.test(pt)) pt += '\n'; last = null; }
   }
@@ -969,7 +1127,7 @@ async function readPdf(file){
         const scale = OCR_SCALE, vp = page.getViewport({scale});
         const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
         const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
-        await page.render({canvasContext: ctx, viewport: vp}).promise;
+        await page.render({canvasContext: ctx, viewport: vp, intent: 'print'}).promise;
         const r = await ocrCanvas(cv, `${file.name}, page ${p} sur ${pdf.numPages}`);
         pt = r.pt; pg = {ocr: true, scale, items: r.items}; nOcr++; confSum += r.conf;
       } catch (err){ console.error(err); failed = true; pt = ''; pg = {items: []}; }
@@ -993,7 +1151,34 @@ async function readImage(file){
   return {type: 'image', text: r.pt + '\n', pages, lowconf: lowConf(pages), blob: file, ocr: true, conf, scanned: false, meta: `Image lue par reconnaissance de caractères (fiabilité ${conf} %)`};
 }
 const OCR_SCALE = 3, LOW_CONF = 60;
-function lowConf(pages){ const out = []; for (const pg of pages) if (pg.ocr) for (const it of pg.items) if (it.conf < LOW_CONF && /[\p{L}\p{N}]/u.test(it.str || 'x')) out.push({s: pg.offset + it.s, e: pg.offset + it.e}); return out; }
+/* un mot mal lu n'est masqué que s'il peut cacher un nom ou un identifiant : initiale en capitale hors vocabulaire courant, ou lettres et chiffres mêlés.
+   Les montants, les mots en minuscules et les intitulés suivis de points de conduite restent lisibles. */
+function riskyWord(str, sure){
+  if (/[.…·_]{4,}|…{2,}/.test(String(str || ''))) return false;   /* intitulé suivi de points de conduite : une ligne de tableau, pas un nom */
+  const c = String(str || '').replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+  if (!c) return false;
+  const letters = c.replace(/[^\p{L}]/gu, ''), f = fold(c);
+  if (/\d/.test(c)) return letters.length >= 1 && c.length >= 4 && !/^\d+(?:h|e|er|ème|eme|°)\d*$/i.test(c);
+  if (letters.length < 3 || c[0] === c[0].toLowerCase()) return false;
+  if (STOP.has(f) || sure.has(f) || f.split(/[ '\-]/).every(w => STOP.has(w) || sure.has(w) || w.length < 2)) return false;
+  const w = f.replace(/[^a-z]/g, ''), known = x => STOP.has(x) || sure.has(x);
+  /* collage de mots courants (BASEIMPOSABLE) */
+  const ok = new Uint8Array(w.length + 1); ok[0] = 1;
+  for (let i = 0; i < w.length; i++) if (ok[i]) for (let j = i + 3; j <= w.length; j++) if (known(w.slice(i, j))) ok[j] = 1;
+  if (ok[w.length]) return false;
+  /* à une ou deux lettres d'un mot courant (Déductions, Feuilletn) */
+  if (w.length >= 5){
+    const max = w.length >= 8 ? 2 : 1;
+    for (const set of [STOP, sure]) for (const x of set) if (x.length >= 4 && Math.abs(x.length - w.length) <= max && lev(w, x, max) <= max) return false;
+  }
+  return true;
+}
+function lowConf(pages){
+  const sure = new Set(), out = [];
+  for (const pg of pages) if (pg.ocr) for (const it of pg.items) if (it.conf >= 80 && it.str) sure.add(fold(it.str.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')));
+  for (const pg of pages) if (pg.ocr) for (const it of pg.items) if (it.conf < LOW_CONF && riskyWord(it.str, sure)) out.push({s: pg.offset + it.s, e: pg.offset + it.e});
+  return out;
+}
 function withTimeout(pr, ms, msg){ return Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error(msg)), ms))]); }
 let ocrWorker = null, ocrLabel = '';
 async function getOcr(){
@@ -1016,22 +1201,33 @@ async function ocrCanvas(cv, label){
   if (!ocrWorker) busy('Préparation de la reconnaissance des caractères');
   const w = await getOcr();
   busy(`Reconnaissance des caractères : ${label}`);
-  const {data} = await withTimeout(w.recognize(cv, {}, {text: true, blocks: true}), 180000, 'Reconnaissance trop longue sur ' + label);
+  const read = async psm => { await w.setParameters({tessedit_pageseg_mode: psm}); return (await withTimeout(w.recognize(cv, {}, {text: true, blocks: true}), 180000, 'Reconnaissance trop longue sur ' + label)).data; };
   let pt = ''; const items = [];
-  for (const b of data.blocks || []) for (const par of b.paragraphs || []){
-    for (const line of par.lines || []){
-      let first = true;
-      for (const wd of line.words || []){
-        const t = (wd.text || '').trim(); if (!t) continue;
-        if (!first) pt += ' ';
-        first = false;
-        const s = pt.length; pt += t;
-        items.push({s, e: pt.length, box: [wd.bbox.x0, wd.bbox.y0, wd.bbox.x1, wd.bbox.y1], conf: wd.confidence});
+  const add = (data, keep) => {
+    for (const b of data.blocks || []) for (const par of b.paragraphs || []){
+      let any = false;
+      for (const line of par.lines || []){
+        let first = true, prev = null;
+        for (const wd of line.words || []){
+          const t = (wd.text || '').trim(); if (!t || (keep && !keep(wd, t))) continue;
+          /* grand blanc entre deux mots : deux colonnes lues sur la même ligne, à ne pas recoller (adresse à gauche, texte à droite) */
+          if (!first) pt += prev && wd.bbox.x0 - prev.x1 > 2.5 * Math.max(prev.y1 - prev.y0, wd.bbox.y1 - wd.bbox.y0, 8) ? COLSEP : ' ';
+          first = false; prev = wd.bbox;
+          const s = pt.length; pt += t;
+          items.push({s, e: pt.length, str: t, box: [wd.bbox.x0, wd.bbox.y0, wd.bbox.x1, wd.bbox.y1], conf: wd.confidence});
+        }
+        if (!first){ pt += '\n'; any = true; }
       }
-      pt += '\n';
+      if (any && !keep) pt += '\n';
     }
-    pt += '\n';
-  }
+  };
+  /* première lecture, ligne par ligne sur toute la largeur de la page */
+  const data = await read('6');
+  add(data);
+  /* seconde lecture en « texte épars » : elle rattrape les mots que la première a sautés (blocs en colonnes, encadrés), pour qu'ils puissent être masqués */
+  const n0 = items.length;
+  const seen = wd => { const b = wd.bbox; for (let i = 0; i < n0; i++){ if (items[i].conf < LOW_CONF && wd.confidence >= 70) continue; /* un mot mal lu à la première lecture ne compte pas */ const q = items[i].box, ix = Math.min(b.x1, q[2]) - Math.max(b.x0, q[0]), iy = Math.min(b.y1, q[3]) - Math.max(b.y0, q[1]); if (ix > 0 && iy > 0 && ix * iy > 0.25 * (b.x1 - b.x0) * (b.y1 - b.y0)) return true; } return false; };
+  try { add(await read('11'), (wd, t) => wd.confidence >= 50 && (t.match(/[\p{L}\p{N}]/gu) || []).length >= 2 && !/(.)\1{3}/.test(t) && !seen(wd)); } catch (err){ console.error(err); }
   return {pt: pt.replace(/\n+$/, '\n'), items, conf: data.confidence || 0};
 }
 function readDocx(bytes){
@@ -1073,22 +1269,33 @@ async function addFiles(list){
       S.docs.push(Object.assign({id: ++docSeq, name: f.name}, r));
     } catch (err){ console.error(err); toast('Lecture impossible : ' + f.name); }
   }
-  busy(); renderDocs();
+  busy(); await run();
 }
 function renderDocs(){
   const ul = $('#docs'); ul.innerHTML = '';
-  S.docs.forEach(d => {
-    const li = document.createElement('li');
-    li.innerHTML = `<div><strong>${esc(d.name)}</strong> <span class="meta">${esc(d.meta || '')}, ${d.text.length.toLocaleString('fr-FR')} caractères</span>${d.scanned ? '<div class="warn">Au moins une page n\'a pas pu être lue.</div>' : ''}${d.ocr ? '<div class="warn">Lue par reconnaissance de caractères : relisez attentivement le résultat.</div>' : ''}</div><button class="icon" type="button">Retirer</button>`;
-    li.querySelector('button').onclick = () => { S.docs = S.docs.filter(x => x !== d); renderDocs(); if (S.analyzed) analyze(); };
+  $('#nDocs').textContent = S.docs.length + (S.docs.length > 1 ? ' pièces' : ' pièce');
+  S.docs.forEach((d, i) => {
+    const li = document.createElement('li'); if (i === S.cur) li.className = 'on';
+    const kind = d.type === 'pdf' ? (d.pages ? d.pages.length + (d.pages.length > 1 ? ' pages' : ' page') : 'PDF') : d.type === 'image' ? 'photo' : d.type === 'docx' ? 'Word' : 'texte';
+    const meta = kind + (d.scanned ? ', page illisible' : d.ocr && d.type === 'pdf' ? ', scan' : '');
+    li.innerHTML = `<button class="sel" type="button" title="${esc(d.name)}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/></svg><span class="nom">${esc(d.name)}</span><span class="meta">${esc(meta)}</span></button><button class="x" type="button" title="Retirer" aria-label="Retirer ${esc(d.name)}">✕</button>`;
+    li.querySelector('.sel').onclick = () => { S.cur = i; renderDocs(); renderView(); };
+    li.querySelector('.x').onclick = () => { S.docs = S.docs.filter(x => x !== d); if (S.cur >= S.docs.length) S.cur = 0; run(); };
     ul.appendChild(li);
   });
-  $('#analyze').disabled = !S.docs.length; $('#prefill').disabled = !S.docs.length;
-  $('#analyzeHint').textContent = S.docs.length ? '' : 'Ajoutez au moins une pièce.';
 }
 
 /* ---------------- analyse ---------------- */
 function analyze(){
+  /* sans foyer saisi à la main, il est détecté d'office : une même personne garde le même libellé dans toutes les pièces */
+  const manual = [...document.querySelectorAll('#tPersons tbody tr')].some(tr => !tr.dataset.auto && [...tr.querySelectorAll('[data-f=prenoms],[data-f=nom],[data-f=naissance]')].some(i => i.value.trim()));
+  if (!S.docs.length){
+    /* plus aucune pièce : le foyer détecté (ou celui de l'exemple) repart avec elles */
+    document.querySelectorAll('#tPersons tr[data-auto], #tSocs tr[data-auto], #tPersons tr[data-ex], #tSocs tr[data-ex]').forEach(tr => tr.remove());
+    $('#terms').value = $('#terms').value.split('\n').filter(l => l.trim() !== EX_TERM).join('\n');
+    S.over = new Map();
+  }
+  else if (!manual) prefill(true);
   S.ent = new Map(); S.counters = {};
   buildDico();
   for (const d of S.docs){
@@ -1100,8 +1307,13 @@ function analyze(){
   }
   if (S.cur >= S.docs.length) S.cur = 0;
   refresh(true);
-  S.analyzed = true;
-  $('#s3').classList.remove('hidden'); $('#s4').classList.remove('hidden');
+  S.analyzed = S.docs.length > 0;
+  show();
+}
+async function run(){
+  if (S.docs.length){ busy('Analyse des pièces'); await tick(); }
+  try { analyze(); } catch (err){ console.error(err); toast('Analyse impossible : ' + err.message); }
+  busy();
 }
 
 /* ---------------- export ---------------- */
@@ -1116,7 +1328,7 @@ function safeName(s){
   const forms = [];
   for (const e of S.ent.values()) if (e.enabled && SURFACE.has(e.cat)) for (const f of e.forms) if (fold(f).length >= 3) forms.push([f, e.label]);
   forms.sort((a, b) => b[0].length - a[0].length);
-  for (const [f, lab] of forms){ const re = wordRe(f, false); if (re) r = r.replace(re, lab); }
+  for (const [f, lab] of forms){ const pt = pat(f, false); if (pt) r = r.replace(new RegExp('(?<![\\p{L}\\p{N}])' + pt + '(?![\\p{L}\\p{N}])', 'giu'), lab); }
   return r.replace(/\.[a-z0-9]{2,4}$/i, '').replace(/[\[\]]/g, '').replace(/\d{5,}/g, '').replace(/[^\p{L}\p{N}_-]+/gu, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'piece';
 }
 function buildPdf(pages){
@@ -1143,15 +1355,135 @@ function buildPdf(pages){
   return outb;
 }
 const MCTX = document.createElement('canvas').getContext('2d');
-function drawOcrBoxes(ctx, pg, spans, f){
+/* ---- calage des masques sur l'encre de la page : la taille de police annoncée par un PDF ne dit pas où sont vraiment les lettres ---- */
+function inkMap(ctx, W, H){
+  const d = ctx.getImageData(0, 0, W, H).data, lum = new Uint8Array(W * H);
+  for (let i = 0, j = 0; j < lum.length; i += 4, j++) lum[j] = (d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8;
+  return {lum, W, H};
+}
+/* bande verticale réellement occupée par une ligne de texte, à partir de sa ligne de base */
+function snapBand(im, X0, X1, yb, Hf){
+  const {lum, W, H} = im;
+  const xa = Math.max(0, Math.floor(X0) - 3), xb = Math.min(W - 1, Math.ceil(X1) + 3);
+  const yt = Math.max(0, Math.floor(yb - 1.15 * Hf)), yd = Math.min(H - 1, Math.ceil(yb + 0.45 * Hf));
+  if (xb - xa < 2 || yd - yt < 2) return null;
+  const hist = new Uint32Array(32);
+  for (let y = yt; y <= yd; y++) for (let x = xa, o = y * W + xa; x <= xb; x++, o++) hist[lum[o] >> 3]++;
+  let bg = 0; for (let i = 1; i < 32; i++) if (hist[i] > hist[bg]) bg = i;
+  bg = bg * 8 + 4;
+  const ink = (x, y) => Math.abs(lum[y * W + x] - bg) > 48;
+  const row = y => { for (let x = xa; x <= xb; x++) if (ink(x, y)) return true; return false; };
+  const y0 = Math.round(yb); let seed = -1;
+  for (let k = 1; k <= Math.max(3, 0.5 * Hf) && seed < 0; k++) if (y0 - k >= yt && row(y0 - k)) seed = y0 - k;
+  if (seed < 0) return null;
+  const gap = Math.max(2, Math.round(0.07 * Hf));
+  let top = seed, miss = 0;
+  for (let y = seed - 1; y >= yt; y--){ if (row(y)){ top = y; miss = 0; } else if (++miss > gap) break; }
+  let bot = seed; miss = 0;
+  for (let y = seed + 1; y <= yd; y++){ if (row(y)){ bot = y; miss = 0; } else if (++miss > gap) break; }
+  return {top, bot, xa, xb, ink};
+}
+/* découpe d'une ligne en mots d'après les blancs entre les lettres : les plus larges sont les espaces */
+function wordBoxes(band, str){
+  const {top, bot, xa, xb, ink} = band, runs = []; let st = -1;
+  for (let x = xa; x <= xb + 1; x++){
+    let v = false; if (x <= xb) for (let y = top; y <= bot; y++) if (ink(x, y)){ v = true; break; }
+    if (v && st < 0) st = x; else if (!v && st >= 0){ runs.push([st, x - 1]); st = -1; }
+  }
+  if (!runs.length) return null;
+  const words = [...str.matchAll(/\S+/gu)].map(m => ({a: m.index, b: m.index + m[0].length}));
+  if (!words.length) return null;
+  if (words.length === 1) return {words, boxes: [[runs[0][0], runs[runs.length - 1][1]]]};
+  const gaps = []; for (let i = 1; i < runs.length; i++) gaps.push({i, w: runs[i][0] - runs[i - 1][1] - 1});
+  const need = words.length - 1;
+  if (gaps.length < need) return null;
+  const sorted = gaps.slice().sort((p, q) => q.w - p.w);
+  const kth = sorted[need - 1].w, next = sorted[need] ? sorted[need].w : 0;
+  if (kth < 2 || kth < next * 1.35 + 1) return null;
+  const cut = sorted.slice(0, need).map(x => x.i).sort((p, q) => p - q), boxes = []; let from = 0;
+  for (const c of cut){ boxes.push([runs[from][0], runs[c - 1][1]]); from = c; }
+  boxes.push([runs[from][0], runs[runs.length - 1][1]]);
+  return {words, boxes};
+}
+/* code-barres 2D-Doc d'une page en image : pavé dense et à peu près carré, près de sa mention « 2D-DOC » */
+function find2dDoc(im, bx){
+  const {lum, W, H} = im, lw = Math.max(12, bx[2] - bx[0]), cx = (bx[0] + bx[2]) / 2, cy = (bx[1] + bx[3]) / 2, R = lw * 5;
+  const x0 = Math.max(0, Math.round(cx - R)), x1 = Math.min(W, Math.round(cx + R)), y0 = Math.max(0, Math.round(cy - R)), y1 = Math.min(H, Math.round(cy + R));
+  const cs = Math.max(6, Math.round(lw / 4.5)), gw = Math.floor((x1 - x0) / cs), gh = Math.floor((y1 - y0) / cs);
+  if (gw < 4 || gh < 4) return null;
+  const dense = new Uint8Array(gw * gh), dark = new Uint16Array(gw * gh);
+  for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++){
+    let n = 0;
+    for (let y = 0; y < cs; y++){ let o = (y0 + gy * cs + y) * W + x0 + gx * cs; for (let x = 0; x < cs; x++, o++) if (lum[o] < 110) n++; }
+    dark[gy * gw + gx] = n; const r = n / (cs * cs); dense[gy * gw + gx] = r >= 0.15 && r <= 0.9 ? 1 : 0;
+  }
+  let best = null;
+  for (let i = 0; i < dense.length; i++){
+    if (dense[i] !== 1) continue;
+    const q = [i]; dense[i] = 2; let a = gw, b = -1, c = gh, d = -1, n = 0, dk = 0;
+    while (q.length){
+      const k = q.pop(), gx = k % gw, gy = (k - gx) / gw; n++; dk += dark[k];
+      if (gx < a) a = gx; if (gx > b) b = gx; if (gy < c) c = gy; if (gy > d) d = gy;
+      for (const [ux, uy] of [[gx - 1, gy], [gx + 1, gy], [gx, gy - 1], [gx, gy + 1]]) if (ux >= 0 && ux < gw && uy >= 0 && uy < gh && dense[uy * gw + ux] === 1){ dense[uy * gw + ux] = 2; q.push(uy * gw + ux); }
+    }
+    const bw = (b - a + 1) * cs, bh = (d - c + 1) * cs;
+    if (bw < 1.3 * lw || bh < 1.3 * lw || bw / bh < 0.6 || bw / bh > 1.7 || n / ((b - a + 1) * (d - c + 1)) < 0.55 || dk / (n * cs * cs) < 0.3) continue;
+    if (!best || n > best.n) best = {n, r: [x0 + a * cs - cs, y0 + c * cs - cs, x0 + (b + 1) * cs + cs, y0 + (d + 1) * cs + cs]};
+  }
+  return best ? best.r : null;
+}
+/* codes-barres 2D (2D-Doc, QR code) n'importe où sur la page : pavé à peu près carré, à moitié noir, dont chaque ligne et chaque colonne alterne sans cesse noir et blanc */
+function findCodes(im){
+  const {lum, W, H} = im, cs = Math.max(6, Math.round(W / 110)), gw = Math.floor(W / cs), gh = Math.floor(H / cs), out = [];
+  const dense = new Uint8Array(gw * gh), dark = new Uint16Array(gw * gh);
+  for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++){
+    let n = 0;
+    for (let y = 0; y < cs; y++){ let o = (gy * cs + y) * W + gx * cs; for (let x = 0; x < cs; x++, o++) if (lum[o] < 110) n++; }
+    dark[gy * gw + gx] = n; const r = n / (cs * cs); dense[gy * gw + gx] = r >= 0.2 && r <= 0.85 ? 1 : 0;
+  }
+  const flips = (x0, y0, dx, dy, len) => { let n = 0, prev = lum[y0 * W + x0] < 110; for (let k = 1; k < len; k++){ const v = lum[(y0 + k * dy) * W + x0 + k * dx] < 110; if (v !== prev){ n++; prev = v; } } return n; };
+  for (let i = 0; i < dense.length; i++){
+    if (dense[i] !== 1) continue;
+    const q = [i]; dense[i] = 2; let a = gw, b = -1, c = gh, d = -1, n = 0, dk = 0;
+    while (q.length){
+      const k = q.pop(), gx = k % gw, gy = (k - gx) / gw; n++; dk += dark[k];
+      if (gx < a) a = gx; if (gx > b) b = gx; if (gy < c) c = gy; if (gy > d) d = gy;
+      for (const [ux, uy] of [[gx - 1, gy], [gx + 1, gy], [gx, gy - 1], [gx, gy + 1]]) if (ux >= 0 && ux < gw && uy >= 0 && uy < gh && dense[uy * gw + ux] === 1){ dense[uy * gw + ux] = 2; q.push(uy * gw + ux); }
+    }
+    const cw = b - a + 1, ch = d - c + 1;
+    if (cw < 5 || ch < 5 || cw / ch < 0.7 || cw / ch > 1.45 || n / (cw * ch) < 0.75) continue;
+    const dr = dk / (n * cs * cs); if (dr < 0.3 || dr > 0.72) continue;
+    const x0 = a * cs, y0 = c * cs, bw = cw * cs, bh = ch * cs, need = Math.max(7, Math.round(bw / (cs * 1.2)));
+    let okR = 0, nR = 0, okC = 0, nC = 0;
+    for (let y = y0 + cs; y < y0 + bh - cs; y += 3){ nR++; if (flips(x0, y, 1, 0, bw) >= need) okR++; }
+    for (let x = x0 + cs; x < x0 + bw - cs; x += 3){ nC++; if (flips(x, y0, 0, 1, bh) >= need) okC++; }
+    if (nR && nC && okR / nR >= 0.85 && okC / nC >= 0.85) out.push([x0 - cs, y0 - cs, x0 + bw + cs, y0 + bh + cs]);
+  }
+  return out;
+}
+function maskCodes(ctx, im){ for (const r of findCodes(im)) ctx.fillRect(r[0], r[1], r[2] - r[0], r[3] - r[1]); }
+function mask2dDoc(ctx, im, bx){
+  const r = find2dDoc(im, bx), lw = bx[2] - bx[0];
+  if (r) ctx.fillRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
+  else { const side = lw * 3.8, cx = (bx[0] + bx[2]) / 2; ctx.fillRect(cx - side / 2, bx[1] - side - 2, side, side); }   /* code introuvable : pavé couvrant au-dessus de la mention */
+}
+const is2d = sp => { const e = S.ent.get(sp.key); return !!e && e.sub === '2D-Doc'; };
+function drawOcrBoxes(ctx, pg, spans, f, im){
   for (const sp of spans){
     const s = sp.s - pg.offset, e = sp.e - pg.offset;
     if (e <= 0 || s >= pg.len) continue;
+    let u = null, row = null;
+    /* les mots d'une même ligne sont couverts d'un seul tenant, sans jour entre eux */
+    const flush = () => { if (row){ const pad = Math.max(3, (row[3] - row[1]) * 0.2); ctx.fillRect((row[0] - pad) * f, (row[1] - pad) * f, (row[2] - row[0] + 2 * pad) * f, (row[3] - row[1] + 2 * pad) * f); row = null; } };
     for (const it of pg.items){
       if (it.e <= s || it.s >= e) continue;
-      const [x0, y0, x1, y1] = it.box, pad = Math.max(3, (y1 - y0) * 0.2);
-      ctx.fillRect((x0 - pad) * f, (y0 - pad) * f, (x1 - x0 + 2 * pad) * f, (y1 - y0 + 2 * pad) * f);
+      const [x0, y0, x1, y1] = it.box;
+      if (row && x0 >= row[0] && Math.min(y1, row[3]) - Math.max(y0, row[1]) > 0.5 * Math.min(y1 - y0, row[3] - row[1]) && x0 - row[2] < 3 * (row[3] - row[1])) row = [row[0], Math.min(row[1], y0), Math.max(row[2], x1), Math.max(row[3], y1)];
+      else { flush(); row = [x0, y0, x1, y1]; }
+      u = u ? [Math.min(u[0], x0 * f), Math.min(u[1], y0 * f), Math.max(u[2], x1 * f), Math.max(u[3], y1 * f)] : [x0 * f, y0 * f, x1 * f, y1 * f];
     }
+    flush();
+    if (u && im && is2d(sp)) mask2dDoc(ctx, im, u);
   }
 }
 async function redactImage(doc, spans){
@@ -1159,7 +1491,8 @@ async function redactImage(doc, spans){
   const pg = doc.pages[0], bmp = await createImageBitmap(doc.blob);
   const cv = document.createElement('canvas'); cv.width = bmp.width; cv.height = bmp.height;
   const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); ctx.drawImage(bmp, 0, 0);
-  ctx.fillStyle = '#000'; drawOcrBoxes(ctx, pg, spans, 1 / pg.scale);
+  const im = inkMap(ctx, cv.width, cv.height);
+  ctx.fillStyle = '#000'; maskCodes(ctx, im); drawOcrBoxes(ctx, pg, spans, 1 / pg.scale, im);
   const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.88));
   return buildPdf([{jpg: new Uint8Array(await blob.arrayBuffer()), w: cv.width, h: cv.height, wPt: 595, hPt: 595 * cv.height / cv.width}]);
 }
@@ -1173,21 +1506,46 @@ async function redactPdf(doc, spans){
     const scale = 2, vp = page.getViewport({scale});
     const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
     const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
-    await page.render({canvasContext: ctx, viewport: vp}).promise;
+    await page.render({canvasContext: ctx, viewport: vp, intent: 'print'}).promise;
+    const im = inkMap(ctx, cv.width, cv.height);
     ctx.fillStyle = '#000';
+    maskCodes(ctx, im);   /* un code-barres ne sert pas au bilan et reprend souvent le nom et les numéros en clair : toujours masqué dans la copie en image */
     const pg = doc.pages[p];
-    if (pg.ocr){ drawOcrBoxes(ctx, pg, spans, scale / pg.scale); }
+    if (pg.ocr){ drawOcrBoxes(ctx, pg, spans, scale / pg.scale, im); }
     else {
     const fresh = layoutPage(await page.getTextContent());
     const loadedFonts = new Set();
     document.fonts.forEach(f => { if (f.status === 'loaded') loadedFonts.add(f.family.replace(/^["']|["']$/g, '')); });
     const items = fresh.pt.length === (pg.tlen != null ? pg.tlen : pg.len) ? fresh.items : pg.items;
+    const straight = !(vp.rotation % 360), bands = new Map(), rects = [];
+    const bandOf = it => {
+      if (!bands.has(it)){
+        let bd = null;
+        if (straight && !it.rot){
+          const p0 = vp.convertToViewportPoint(it.x, it.y), p1 = vp.convertToViewportPoint(it.x + it.w, it.y);
+          bd = snapBand(im, Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), p0[1], it.h * scale);
+          if (bd) bd.wb = wordBoxes(bd, it.str);
+        }
+        bands.set(it, bd);
+      }
+      return bands.get(it);
+    };
     for (const sp of spans){
       const s = sp.s - pg.offset, e = sp.e - pg.offset;
       if (e <= 0 || s >= pg.len) continue;
+      const code = is2d(sp);
       for (const it of items){
         if (it.e <= s || it.s >= e) continue;
         const a = Math.max(s, it.s) - it.s, b = Math.min(e, it.e) - it.s;
+        const bd = code ? null : bandOf(it);
+        if (bd && bd.wb){
+          /* masque calé sur les mots réellement dessinés */
+          const hit = bd.wb.words.map((w, i) => (w.a < b && w.b > a ? i : -1)).filter(i => i >= 0);
+          if (!hit.length) continue;
+          const bx = bd.wb.boxes;
+          rects.push([bx[hit[0]][0] - 3, bd.top - 3, bx[hit[hit.length - 1]][1] + 3, bd.bot + 3]);
+          continue;
+        }
         const own = it.fn && loadedFonts.has(it.fn);
         MCTX.font = own ? '100px "' + it.fn + '"' : '100px ' + it.fam;
         const full = MCTX.measureText(it.str).width || 1;
@@ -1195,13 +1553,20 @@ async function redactPdf(doc, spans){
         const x0 = it.x + it.w * MCTX.measureText(it.str.slice(0, a)).width / full - pad;
         const x1 = it.x + it.w * MCTX.measureText(it.str.slice(0, b)).width / full + pad;
         const r = vp.convertToViewportRectangle([x0, it.y - it.h * 0.3, x1, it.y + it.h * 0.95]);
-        ctx.fillRect(Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.abs(r[2] - r[0]) + 4, Math.abs(r[3] - r[1]) + 4);
+        const q = [Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.max(r[0], r[2]) + 2, Math.max(r[1], r[3]) + 2];
+        if (bd){ q[1] = bd.top - 3; q[3] = bd.bot + 3; }
+        rects.push(q);
+        if (code && it.str.length < 12 && /2D/i.test(it.str)) rects.push({code: q});
       }
       for (const it of pg.ann || []){
         if (it.e <= s || it.s >= e) continue;
         const r = vp.convertToViewportRectangle(it.rect);
-        ctx.fillRect(Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.abs(r[2] - r[0]) + 4, Math.abs(r[3] - r[1]) + 4);
+        rects.push([Math.min(r[0], r[2]) - 2, Math.min(r[1], r[3]) - 2, Math.max(r[0], r[2]) + 2, Math.max(r[1], r[3]) + 2]);
       }
+    }
+    for (const r of rects){
+      if (r.code){ mask2dDoc(ctx, im, r.code); continue; }
+      ctx.fillRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
     }
     }
     const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', 0.85));
@@ -1222,15 +1587,16 @@ async function exportZip(){
       if (d.type === 'pdf' && !d.scanned && opt('oRaster')){ files[base + '-caviarde.pdf'] = await redactPdf(d, r.spans); names.push(base + '-caviarde.pdf'); }
       if (d.type === 'image' && opt('oRaster')){ files[base + '-caviarde.pdf'] = await redactImage(d, r.spans); names.push(base + '-caviarde.pdf'); }
     }
-    files['LISEZ-MOI.txt'] = enc(['Pièces pseudonymisées avec Anonymiser, par Hereditis (version ' + APP_VERSION + ').', '',
+    files['LISEZ-MOI.txt'] = enc(['Pièces anonymisées avec Anonymiser, par Hereditis (version ' + APP_VERSION + ').', '',
       'Chaque nom, société, adresse ou identifiant a été remplacé par un libellé entre crochets, par exemple [Client 1] ou [Société 1].',
       'Un même libellé désigne la même personne ou la même entité dans toutes les pièces.',
       'Les dates de naissance ont été remplacées par l\'âge à la date du traitement.',
       'Les fichiers « caviardé » sont des copies en image des PDF et des photos, dont le texte d\'origine a été supprimé.', '',
       'La table de correspondance n\'est pas jointe : elle reste chez le conseiller.', '', 'Fichiers :', ...names.map(n => ' - ' + n)].join('\r\n'));
     busy('Préparation de l\'archive'); await tick();
-    download(fflate.zipSync(files, {level: 6}), 'pieces-pseudonymisees.zip', 'application/zip');
-    toast('Archive téléchargée');
+    download(fflate.zipSync(files, {level: 6}), 'pieces-anonymisees.zip', 'application/zip');
+    toast('Pièces téléchargées');
+    $('#dlgDl').showModal();
   } catch (err){ console.error(err); toast('Export impossible : ' + err.message); }
   busy();
 }
@@ -1239,14 +1605,14 @@ function exportCsv(){
   if (!S.analyzed) return;
   const rows = [['Libellé','Catégorie','Forme principale','Autres formes','Occurrences']];
   for (const e of S.ent.values()){
-    if (!e.enabled || e.cat === 'date' || e.cat === 'illisible' || (e.count === 0 && e.cat !== 'personne' && e.cat !== 'societe')) continue;
+    if (!e.enabled || e.cat === 'date' || e.cat === 'illisible' || (e.count === 0 && (e.auto || (e.cat !== 'personne' && e.cat !== 'societe')))) continue;
     const forms = [...e.forms];
     let primary = e.primary || forms[0] || '';
     if (e.cat === 'personne') primary = forms.find(f => /\s/.test(f)) || forms[0] || '';
     rows.push([e.label, CATS[e.cat].name + (e.sub && e.cat !== 'personne_auto' ? ' / ' + e.sub : ''), primary, forms.filter(f => f !== primary).join(' | '), e.count]);
   }
   download('\ufeff' + rows.map(r => r.map(csvCell).join(';')).join('\r\n'), 'table-de-correspondance-A-CONSERVER.csv', 'text/csv;charset=utf-8');
-  toast('Table téléchargée : conservez-la chez vous');
+  toast('Table téléchargée');
 }
 
 /* ---------------- rétablissement ---------------- */
@@ -1266,13 +1632,13 @@ function parseCsv(txt){
 const xmlEsc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 async function restore(){
   const tf = $('#rTable').files[0], df = $('#rDoc').files[0], box = $('#rOut');
-  if (!tf || !df){ box.innerHTML = '<div class="alert">Choisissez la table de correspondance et le document.</div>'; return; }
+  if (!tf || !df){ box.innerHTML = '<div class="msg">Choisissez la table de correspondance et le bilan reçu.</div>'; return; }
   const rows = parseCsv(await tf.text());
   const map = new Map();
   for (const r of rows.slice(1)) if (r[0] && r[2] && !/^âge/.test(r[0].trim())) map.set(r[0].trim(), r[2].trim());
-  if (!map.size){ box.innerHTML = '<div class="alert">Table de correspondance illisible.</div>'; return; }
+  if (!map.size){ box.innerHTML = '<div class="msg">Table de correspondance illisible.</div>'; return; }
   let n = 0; const missing = new Set();
-  const rep = (s, x) => s.replace(/\[([^\[\]<>\n]{1,60})\]/g, (m, lab) => { const v = map.get(lab.trim()); if (v){ n++; return x ? xmlEsc(v) : v; } if (/^(Client|Personne|Tiers|Famille|Société|Notaire|Adresse|Commune|SIREN|SIRET|IBAN|N°|Parcelle|Courriel|Téléphone|Terme|Nom)\b/.test(lab)) missing.add(lab); return m; });
+  const rep = (s, x) => s.replace(/\[([^\[\]<>\n]{1,60})\]/g, (m, lab) => { const v = map.get(lab.trim()); if (v){ n++; return x ? xmlEsc(v) : v; } if (/^(Client|Personne|Tiers|Famille|Société|Notaire|Adresse|Commune|SIREN|SIRET|IBAN|BIC|N°|Réf|Parcelle|Courriel|Téléphone|Terme|Nom)(?![\p{L}])/u.test(lab)) missing.add(lab); return m; });
   const ext = df.name.split('.').pop().toLowerCase();
   const outName = df.name.replace(/(\.[^.]+)$/, '-noms-retablis$1');
   try {
@@ -1285,12 +1651,12 @@ async function restore(){
       const types = {docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pptx:'application/vnd.openxmlformats-officedocument.presentationml.presentation', xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'};
       download(fflate.zipSync(files, {level: 6}), outName, types[ext]);
     } else download(rep(await df.text(), false), outName, 'text/plain;charset=utf-8');
-    box.innerHTML = `<div class="okbox">${n} libellé(s) remplacé(s) par les vrais noms. Fichier téléchargé : ${esc(outName)}.</div>` + (missing.size ? `<div class="alert" style="margin-top:8px">Libellés absents de la table : ${esc([...missing].join(', '))}</div>` : '');
-  } catch (err){ console.error(err); box.innerHTML = '<div class="alert">Document illisible : ' + esc(err.message) + '</div>'; }
+    box.innerHTML = `<div class="msg">${n} libellé(s) remplacé(s). Fichier téléchargé : ${esc(outName)}.</div>` + (missing.size ? `<div class="msg">Libellés absents de la table : ${esc([...missing].join(', '))}</div>` : '');
+  } catch (err){ console.error(err); box.innerHTML = '<div class="msg">Document illisible : ' + esc(err.message) + '</div>'; }
 }
 
 /* ---------------- détection du foyer ---------------- */
-function prefill(){
+function prefill(quiet){
   if (!S.docs.length) return;
   S.ent = new Map(); S.counters = {}; buildDico();
   const CAPSW = /^[A-ZÀ-ÝÆŒ][A-ZÀ-ÝÆŒ'’\-]+$/;
@@ -1301,6 +1667,12 @@ function prefill(){
       if (sp.cat !== 'personne_auto') continue;
       const toks = sp.value.split(/\s+/).filter(t => !PARTICLES.has(fold(t)));
       let caps = toks.filter(t => CAPSW.test(t)), firsts = toks.filter(t => !CAPSW.test(t));
+      if (!firsts.length && caps.length >= 2){
+        /* tout en capitales : les prénoms connus sont les prénoms, le reste est le nom ; si tout est prénom, le premier mot est le nom */
+        const pr = caps.filter(t => isPrenom(t) && !STOP.has(fold(t)));
+        if (pr.length === caps.length){ firsts = caps.slice(1); caps = caps.slice(0, 1); }
+        else { firsts = pr; caps = caps.filter(t => !pr.includes(t)); }
+      }
       if (!caps.length && firsts.length >= 2) caps = [firsts.pop()];
       if (!caps.length || !firsts.length || !isPrenom(firsts[0])) continue;
       let nom = caps.join(' '), naissance = '';
@@ -1319,23 +1691,28 @@ function prefill(){
       people.set(key, p);
     }
   });
+  /* « Bertrand Jean-Marc » lu sans son nom n'est pas une personne de plus quand « Bertrand Jean-Marc LEFORESTIER » existe */
+  for (const [k, p] of [...people]){
+    const mine = fold(p.prenoms + ' ' + p.nom).split(' ');
+    if ([...people.values()].some(q => q !== p && mine.every(t => fold(q.prenoms).split(' ').includes(t)))) people.delete(k);
+  }
   const have = new Set(readRows('#tPersons').filter(r => r.nom || r.naissance).map(r => fold((r.prenoms || '').split(/\s+/)[0] || '') + '|' + fold(r.naissance || r.nom)));
   [...document.querySelectorAll('#tPersons tbody tr')].forEach(tr => { const o = {}; tr.querySelectorAll('[data-f]').forEach(i => o[i.dataset.f] = i.value.trim()); if (!o.prenoms && !o.nom && !o.naissance) tr.remove(); });
   let n = $('#tPersons tbody').children.length, added = 0;
   [...people.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([k, p]) => {
     if (have.has(k)) return;
     n++; added++;
-    personRow({label: 'Personne ' + letter(n), civ: p.civ, prenoms: p.prenoms, nom: p.nom, naissance: p.naissance});
+    personRow({label: 'Personne ' + letter(n), civ: p.civ, prenoms: p.prenoms, nom: p.nom, naissance: p.naissance}, quiet);
   });
   const haveS = new Set(readRows('#tSocs').filter(r => r.denom).map(r => fold(r.denom)));
   [...document.querySelectorAll('#tSocs tbody tr')].forEach(tr => { if (!tr.querySelector('[data-f=denom]').value.trim()) tr.remove(); });
   let ns = $('#tSocs tbody').children.length, addedS = 0;
-  [...socs.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([k, so]) => { if (haveS.has(k)) return; ns++; addedS++; socRow({label: 'Société ' + ns, denom: so.denom}); });
+  [...socs.entries()].sort((a, b) => b[1].n - a[1].n).forEach(([k, so]) => { if (haveS.has(k)) return; ns++; addedS++; socRow({label: 'Société ' + ns, denom: so.denom}, quiet); });
   if (!$('#tPersons tbody').children.length) personRow({label: 'Client 1'});
   if (!$('#tSocs tbody').children.length) socRow({label: 'Société 1'});
   S.ent = new Map(); S.counters = {};
-  toast(`${added} personne(s) et ${addedS} société(s) ajoutées au foyer : vérifiez-les, puis analysez`);
-  $('#s1').scrollIntoView({behavior: 'smooth'});
+  if (quiet) return;
+  toast(`${added} personne(s) et ${addedS} société(s) ajoutées au foyer`);
 }
 
 /* ---------------- exemple fictif ---------------- */
@@ -1368,47 +1745,61 @@ Contact : bertrand.leforestier@exemple.fr, 06 12 34 56 78.
 Numéro fiscal de Monsieur : 3012345678901.
 
 Fait à Annecy, le 15 octobre 2026.`;
+const EX_TERM = 'Chalet Les Gentianes => Résidence secondaire';
 function loadExample(){
   $('#tPersons tbody').innerHTML = ''; $('#tSocs tbody').innerHTML = '';
   personRow({label: 'Client 1', civ: 'M', prenoms: 'Bertrand Jean-Marc', nom: 'LEFORESTIER'});
   personRow({label: 'Client 2', civ: 'F', prenoms: 'Hélène Marie', nom: 'LEFORESTIER', naissance: 'VARENNES'});
   socRow({label: 'Société 1', denom: 'LES GENTIANES'});
-  $('#terms').value = 'Chalet Les Gentianes => Résidence secondaire';
+  document.querySelectorAll('#tPersons tbody tr, #tSocs tbody tr').forEach(tr => { tr.dataset.ex = '1'; });
+  $('#terms').value = EX_TERM;
   S.docs = S.docs.filter(d => !d.example);
   S.docs.push({id: ++docSeq, name: 'Exemple fictif, extrait de statuts.txt', type: 'txt', text: EXEMPLE, meta: 'Texte', example: true});
-  renderDocs();
-  toast('Exemple chargé : cliquez sur « Analyser les pièces »');
+  S.cur = S.docs.length - 1;
+  return run();
 }
 
 /* ---------------- câblage ---------------- */
-personRow({label: 'Client 1'}); personRow({label: 'Client 2'}); socRow({label: 'Société 1'});
+personRow({label: 'Client 1'}); socRow({label: 'Société 1'});
 $('#addPerson').onclick = () => personRow({label: 'Client ' + ($('#tPersons tbody').children.length + 1)});
 $('#addSoc').onclick = () => socRow({label: 'Société ' + ($('#tSocs tbody').children.length + 1)});
-$('#pick').onclick = () => $('#file').click();
+$('#pick').onclick = $('#pick2').onclick = () => $('#file').click();
 $('#file').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
-const drop = $('#drop');
-['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
-['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
-drop.addEventListener('drop', e => addFiles([...e.dataTransfer.files]));
-window.addEventListener('dragover', e => e.preventDefault()); window.addEventListener('drop', e => e.preventDefault());
-$('#showPaste').onclick = () => $('#pasteBox').classList.toggle('hidden');
+/* dépôt par glisser : la zone de dépôt, puis toute la fenêtre une fois dans l'atelier */
+let dragN = 0;
+window.addEventListener('dragenter', e => { e.preventDefault(); dragN++; document.body.classList.add('glisse'); });
+window.addEventListener('dragleave', () => { if (--dragN <= 0){ dragN = 0; document.body.classList.remove('glisse'); } });
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => { e.preventDefault(); dragN = 0; document.body.classList.remove('glisse'); if (!$('#vAnon').classList.contains('hidden') && e.dataTransfer && e.dataTransfer.files.length) addFiles([...e.dataTransfer.files]); });
+document.querySelectorAll('dialog').forEach(d => { d.querySelectorAll('[data-close]').forEach(b => b.onclick = () => d.close()); d.addEventListener('click', e => { if (e.target === d) d.close(); }); });
+$('#showPaste').onclick = () => $('#pasteBox').showModal();
 $('#pasteAdd').onclick = () => {
   const t = $('#pasteText').value; if (!t.trim()) return;
   S.docs.push({id: ++docSeq, name: ($('#pasteName').value.trim() || 'Texte collé ' + (S.docs.length + 1)), type: 'txt', text: t.replace(/\r\n?/g, '\n'), meta: 'Texte collé'});
-  $('#pasteText').value = ''; $('#pasteName').value = ''; $('#pasteBox').classList.add('hidden'); renderDocs();
+  $('#pasteText').value = ''; $('#pasteName').value = ''; $('#pasteBox').close(); S.cur = S.docs.length - 1; run();
 };
 $('#example').onclick = loadExample;
-$('#prefill').onclick = prefill;
-$('#analyze').onclick = () => { analyze(); $('#s3').scrollIntoView({behavior: 'smooth'}); };
+$('#addForm').onsubmit = e => {
+  e.preventDefault();
+  const v = $('#addTerm').value.trim(); if (!v) return;
+  const ta = $('#terms'); ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n' : '') + v;
+  $('#addTerm').value = ''; run();
+};
+$('#openFoyer').onclick = () => $('#dlgFoyer').showModal();
+$('#openDl').onclick = () => $('#dlgDl').showModal();
+$('#prefill').onclick = () => { document.querySelectorAll('#tPersons tr[data-auto], #tSocs tr[data-auto]').forEach(tr => tr.remove()); prefill(); };
+$('#analyze').onclick = () => { $('#dlgFoyer').close(); run(); };
 $('#vRes').onclick = () => { S.view = 'res'; $('#vRes').classList.add('on'); $('#vOrig').classList.remove('on'); renderView(); };
 $('#vOrig').onclick = () => { S.view = 'orig'; $('#vOrig').classList.add('on'); $('#vRes').classList.remove('on'); renderView(); };
-$('#expZip').onclick = exportZip;
+$('#expZip').onclick = $('#expZipM').onclick = exportZip;
 $('#expCsv').onclick = exportCsv;
 $('#rGo').onclick = restore;
+const mode = retab => { $('#vAnon').classList.toggle('hidden', retab); $('#vRetab').classList.toggle('hidden', !retab); $('#mAnon').classList.toggle('on', !retab); $('#mRetab').classList.toggle('on', retab); show(); };
+$('#mAnon').onclick = () => mode(false); $('#mRetab').onclick = () => mode(true);
 $('#wipe').onclick = () => { if (confirm('Effacer toutes les pièces et la saisie ?')) location.reload(); };
 if (!pdfjs) toast('Lecture des PDF indisponible dans ce navigateur');
 updateCheck(new URLSearchParams(location.search).get('v'), /^https?:$/.test(location.protocol) && location.href.startsWith(ONLINE_URL));
-window.__anon = {updateCheck, S, analyze, computeAll, control, exportCsv, exportZip, loadExample};
+window.__anon = {updateCheck, S, analyze, run, computeAll, control, exportCsv, exportZip, loadExample, redactPdf, redactImage, detectRaw, prefill, ocrCanvas};
 })();
 </script>
 </body>
