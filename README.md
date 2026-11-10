@@ -6,25 +6,24 @@ Les pièces de vos clients, sans leurs noms.
 
 **[Ouvrir l'outil](https://hereditis.github.io/anonymiser/)** · **[Télécharger pour un usage hors ligne](https://hereditis.github.io/anonymiser/Anonymiser.html)** · **[Guide d'installation (PDF)](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf)**
 
-Anonymiser est un outil gratuit proposé par Hereditis aux conseillers en gestion de patrimoine. Il pseudonymise les pièces d'un dossier (statuts, actes notariés, relevés, liasses, avis d'imposition) avant leur transmission à un tiers : chaque nom, société, adresse ou identifiant est remplacé par un libellé comme `[Client 1]` ou `[Société 1]`, le même dans toutes les pièces.
+Anonymiser est un outil gratuit proposé par Hereditis aux conseillers en gestion de patrimoine. Il anonymise les pièces d'un dossier (statuts, actes notariés, relevés, liasses, avis d'imposition) avant leur transmission à un tiers : chaque nom, société, adresse ou identifiant est remplacé par un libellé comme `[Client 1]` ou `[Société 1]`, le même dans toutes les pièces.
 
 Tout se passe dans le navigateur, sur le poste du conseiller. Aucune pièce n'est envoyée sur Internet.
 
 ## Utilisation
 
-En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, avec le bouton « Télécharger pour un usage hors ligne » de la page en ligne : le fichier `Anonymiser.html` s'ouvre ensuite d'un double-clic dans Chrome, Edge, Firefox ou Safari (version de 2023 ou plus récente).
+En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, avec le lien « Version hors ligne » de la page en ligne : le fichier `Anonymiser.html` s'ouvre ensuite d'un double-clic dans Chrome, Edge, Firefox ou Safari (version de 2023 ou plus récente).
 
 Pour les utilisateurs peu familiers de l'informatique, un [guide d'installation illustré](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf) explique pas à pas comment télécharger et ouvrir le fichier ; il existe aussi en [version Word](docs/Aide-installer-Anonymiser.docx) à adapter.
 
-1. **Le foyer** : saisissez les personnes et les sociétés du dossier, ou laissez l'outil les trouver avec « Détecter le foyer ».
-2. **Les pièces** : déposez des PDF (avec texte ou scannés), des photos, des fichiers Word ou du texte.
-3. **Vérifier** : décochez ce qui ne doit pas être masqué, cochez les propositions utiles, ajustez les libellés.
-4. **Exporter** : téléchargez les pièces pseudonymisées et, pour les PDF et les photos, une copie caviardée en image. La table de correspondance reste chez vous.
-5. **Rétablir** : à réception du bilan, l'outil remet les vrais noms dans le document Word, PowerPoint ou Excel, avec votre table de correspondance.
+1. **Déposer** : glissez des PDF (avec texte ou scannés), des photos, des fichiers Word ou collez un texte. L'analyse suit d'elle-même, le foyer est détecté dans les pièces.
+2. **Vérifier** : à gauche, ce qui est masqué ; à droite, la pièce avant et après. Décochez ce qui ne doit pas l'être, ajoutez un nom ou un numéro, modifiez un libellé.
+3. **Télécharger** : les pièces anonymisées et, pour les PDF et les photos, une copie caviardée en image. La table de correspondance se télécharge à part et reste chez vous.
+4. **Remettre les noms** : à réception du bilan, l'outil remet les vrais noms dans le document Word, PowerPoint ou Excel, avec votre table de correspondance.
 
 ## Mises à jour
 
-La version en ligne est toujours la plus récente. Le fichier téléchargé, lui, ne consulte jamais Internet : le bouton « Vérifier les mises à jour » de son en-tête ouvre la version en ligne en lui transmettant seulement le numéro de version utilisé, et celle-ci indique s'il faut télécharger la nouvelle. Pour être prévenu par mail, suivez le dépôt sur GitHub (Watch, puis Releases).
+La version en ligne est toujours la plus récente. Le fichier téléchargé, lui, ne consulte jamais Internet : le lien « Mises à jour » de son en-tête ouvre la version en ligne en lui transmettant seulement le numéro de version utilisé, et celle-ci indique s'il faut télécharger la nouvelle. Pour être prévenu par mail, suivez le dépôt sur GitHub (Watch, puis Releases).
 
 ## Confidentialité : comment le vérifier
 
@@ -40,20 +39,22 @@ Rien n'est conservé à la fermeture de l'onglet : ni pièce, ni saisie, ni cook
 
 ## Ce que l'outil détecte
 
-- Personnes : le foyer saisi, les noms précédés de Monsieur, Madame ou Maître, et les noms précédés ou suivis d'un prénom connu (environ 3 200 prénoms).
+- Personnes : les noms précédés de Monsieur, Madame ou Maître, les noms précédés ou suivis d'un prénom connu (environ 3 200 prénoms), y compris tout en capitales, les noms annoncés par « Nom de naissance : », et le foyer saisi à la main.
 - Noms de famille partagés par plusieurs membres du foyer, rattachés au bon conjoint quand la civilité le permet.
 - Sociétés : forme juridique (SCI, SARL, SAS…), dénomination entre guillemets, nom en capitales suivi d'un code postal ou contenant un mot de métier, nom après « cabinet » ou « étude ».
 - Adresses, communes (le département est conservé) et lieux de naissance.
-- Identifiants : SIREN et SIRET (clé de contrôle vérifiée), IBAN (clé vérifiée), BIC, numéro de sécurité sociale, numéro fiscal, numéros de contrat, parcelles cadastrales, références de publication foncière.
+- Identifiants : SIREN et SIRET (clé de contrôle vérifiée), IBAN (clé vérifiée, ou en partie masqué), BIC, numéro de sécurité sociale, numéro fiscal, référence d'avis d'impôt, numéro FIP, numéros de contrat, parcelles cadastrales, références de publication foncière.
+- Codes-barres 2D-Doc et QR codes, noircis dans la copie en image.
 - Courriels et numéros de téléphone français et suisses.
 - Dates de naissance, remplacées par l'âge.
-- Pièces scannées : lecture par reconnaissance de caractères en français, rattachement des noms mal lus au nom connu le plus proche, masquage des mots illisibles.
+- Pièces scannées : deux lectures par reconnaissance de caractères en français, rattachement des noms mal lus au nom connu le plus proche, masquage des mots mal lus qui peuvent cacher un nom.
 
 Un contrôle final relit le résultat et signale ce qui pourrait encore identifier une personne.
 
 ## Limites
 
-- L'outil aide à la pseudonymisation, il ne remplace pas la relecture du conseiller.
+- L'outil aide à l'anonymisation, il ne remplace pas la relecture du conseiller.
+- Sur une pièce scannée, un mot que la reconnaissance de caractères ne lit pas du tout (texte barré, tampon, tache) reste visible dans la copie en image.
 - L'écriture manuscrite n'est pas lue.
 - Une personne citée sans civilité ni prénom connu peut échapper à la détection : elle apparaît alors dans les « mots en capitales à vérifier » si son nom est écrit en capitales.
 - La copie caviardée d'un PDF est une image : le texte n'y est plus sélectionnable.

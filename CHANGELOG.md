@@ -1,5 +1,39 @@
 # Journal des versions
 
+## 0.6 (10 novembre 2026)
+
+Avis d'impôt et pièces administratives :
+
+- Numéro fiscal masqué partout, y compris quand il est suivi d'un autre chiffre (numéro de feuillet, valeur voisine) ; référence de l'avis, numéro FIP, identifiant du service et numéro de télédéclarant reconnus.
+- Noms écrits tout en capitales (NOM PRENOM), noms annoncés par « Nom de naissance : ».
+- IBAN en partie masqué par l'administration, BIC annoncé par « Identifiant de la banque ».
+- Code-barres 2D-Doc et QR codes noircis dans la copie en image : ils reprennent en clair le nom et les numéros.
+- Adresses postales abrégées (RTE, CHE, IMP...), ligne de complément entre la voie et le code postal, commune suivie de « LE VIEUX », code postal en fin de phrase.
+- Un numéro ajouté à la main est retrouvé quels que soient les espaces, les points ou les tirets.
+- Les montants empilés dans une colonne ne sont plus pris pour un numéro ; « CENTRE DES FINANCES PUBLIQUES » n'est plus pris pour une adresse.
+- Le nom du client est aussi retiré du nom des fichiers exportés quand il y est collé par un tiret (statuts-dupont.pdf).
+
+Copie caviardée :
+
+- Les masques sont calés sur les lettres réellement dessinées, mot par mot, au lieu de la taille de police annoncée par le PDF.
+- Le rendu des pages ne s'arrête plus si l'onglet passe en arrière-plan.
+
+Pièces scannées :
+
+- Seconde lecture en « texte épars » qui rattrape les mots sautés par la première (mises en page en colonnes, encadrés).
+- Deux colonnes lues sur une même ligne ne sont plus recollées.
+- Un mot mal lu n'est masqué que s'il peut cacher un nom ou un identifiant : les intitulés et les montants restent lisibles.
+
+Interface :
+
+- Un seul écran : on dépose les pièces, l'analyse suit d'elle-même, les éléments masqués sont à gauche, l'aperçu à droite, un bouton pour télécharger.
+- Le foyer est détecté d'office ; un champ suffit pour ajouter un nom ou un numéro. Le tableau du foyer et les options sont dans « Foyer et réglages ».
+- « Remettre les noms » a son onglet. La table de correspondance est proposée après le téléchargement des pièces.
+- Couleurs d'Hereditis (noir, blanc, or), mise en page pour téléphone.
+- Le mot « anonymiser » remplace « pseudonymiser » dans l'outil ; l'archive s'appelle `pieces-anonymisees.zip`.
+
+À refaire avec cette version : les captures du guide d'installation (`npm run aide`).
+
 ## 0.5 (2 novembre 2026)
 
 - Guide d'installation illustré pour les non-informaticiens, en PDF et en Word (`docs/`), avec ses sources (`aide/`).
