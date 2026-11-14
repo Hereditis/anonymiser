@@ -1,6 +1,6 @@
 {
   "name": "anonymiser",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Anonymiser : les pièces de vos clients sans leurs noms, traitées sur votre poste, par Hereditis",
   "license": "SEE LICENSE IN LICENSE",

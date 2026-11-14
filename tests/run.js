@@ -186,6 +186,81 @@ function leaks(out, words){ return words.filter(w => out.toLowerCase().includes(
   await page.waitForFunction(() => window.__anon.S.docs.length === 0);
   check('dernière pièce retirée : retour à l\'écran de dépôt', await page.isVisible('#vide') && !(await page.isVisible('#expZip')));
 
+  // 10. Noms de famille qui sont aussi des prénoms, prénoms courants chez les enfants
+  await page.goto(PAGE);
+  await paste('noms-prenoms', `Sophie Laurent represente la société.
+Marie Bernard a signé le compromis.
+Le donateur Paul Thomas, demeurant à Annecy.
+Claire Robert et Luc Simon sont associés.
+Sophie LAURENT, gérante.
+LAURENT Sophie, gérante.
+Ambre Lenoir, fille du donateur.`);
+  const np = await out(0);
+  const NPL = ['Laurent', 'LAURENT', 'Bernard', 'Thomas', 'Robert', 'Simon', 'Ambre', 'Lenoir'];
+  check('noms qui sont aussi des prénoms, prénoms récents : masqués sans civilité', leaks(np, NPL).length === 0, leaks(np, NPL).join(', '));
+  check('noms qui sont aussi des prénoms : le texte autour reste lisible', np.includes('a signé le compromis') && np.includes('sont associés'));
+  await page.goto(PAGE);
+  await paste('deux-martin', 'Jade Martin et Élise Martin.');
+  const jm = await out(0);
+  check('deux personnes du même nom : deux libellés distincts', /^\[(Personne|Tiers) [A-Z]+\] et \[(Personne|Tiers) [A-Z]+\]\.$/.test(jm.trim()) && new Set(jm.match(/\[[^\]]+\]/g)).size === 2, jm);
+
+  // 11. Jeu d'essai d'Anonyfiles (MIT, Simon Grossi), passé sans règle personnalisée
+  /* écarts assumés : une société sans forme juridique ni mot de métier (règle manuelle chez Anonyfiles aussi),
+     une date d'acte (seule la date de naissance devient un âge), un prénom isolé sans nom,
+     et deux masquages par prudence : un IBAN collé à du texte, une référence qui reprend le prénom d'une personne masquée (AMBRE-2026) */
+  const SKIP = {absent: ['Beta Services', 'Alpha Audit', '25 juin 2026'], isolated: {mobile_standalone_first_names: ['Pierre', 'Ambre']}, preserved: ['FR7630006000011234567890189bis', 'AMBRE-2026']};
+  for (const c of JSON.parse(fs.readFileSync(FX('anonyfiles-corpus.json'), 'utf8'))){
+    await page.goto(PAGE);
+    await paste(c.id, c.input);
+    const o = await out(0);
+    const must = c.expect.absent_literals.filter(w => !SKIP.absent.includes(w) && !(SKIP.isolated[c.id] || []).includes(w));
+    const keep = (c.expect.preserved_literals || []).filter(w => !SKIP.preserved.includes(w));
+    check(`corpus Anonyfiles, ${c.id} : rien d'identifiant visible`, leaks(o, must).length === 0, leaks(o, must).join(', '));
+    check(`corpus Anonyfiles, ${c.id} : faux positifs évités`, keep.every(w => o.includes(w)), keep.filter(w => !o.includes(w)).join(', '));
+  }
+
+  // 12. FEC fictif collé : colonnes conservées, comptes de tiers masqués, pas de faux téléphone
+  const FEC = [
+    'JournalCode\tJournalLib\tEcritureNum\tEcritureDate\tCompteNum\tCompteLib\tCompAuxNum\tCompAuxLib\tPieceRef\tPieceDate\tEcritureLib\tDebit\tCredit\tEcritureLet\tDateLet\tValidDate\tMontantdevise\tIdevise',
+    'BQ\tBanque\t1\t20250131\t455100\tAssociés comptes courants\tDUVERNAY\tDUVERNAY MATHIEU\tVIR01\t20250131\tApport CCA M. Duvernay\t\t15000,00\t\t\t20250131\t\t',
+    'OD\tOpérations diverses\t2\t20250228\t421000\tPersonnel rémunérations dues\tFAVRELLE\tFAVRELLE CLAIRE\tPAIE02\t20250228\tSalaire février Claire Favrelle\t\t2450,00\t\t\t20250228\t\t',
+    'AC\tAchats\t3\t20250315\t401000\tFournisseurs\tSOMMETCONS\tSOMMET CONSEIL\tF2025-118\t20250315\tHonoraires SOMMET CONSEIL\t\t1800,00\t\t\t20250315\t\t',
+    'VT\tVentes\t4\t20250320\t411000\tClients\tLEROUXJP\tLEROUX JEAN-PAUL\tFA0042\t20250320\tFacture Leroux Jean-Paul\t3600,00\t\t\t\t20250320\t\t',
+  ].join('\n');
+  await page.goto(PAGE);
+  await paste('fec', FEC);
+  const fe = await out(0);
+  const FEL = ['DUVERNAY', 'FAVRELLE', 'SOMMET', 'LEROUX', 'Leroux', 'Duvernay', 'Favrelle'];
+  check('FEC : noms et comptes de tiers masqués', leaks(fe, FEL).length === 0, leaks(fe, FEL).join(', '));
+  const feLines = fe.replace(/\n+$/, '').split('\n');
+  check('FEC : 18 colonnes sur chaque ligne', feLines.length === 5 && feLines.every(l => l.split('\t').length === 18), feLines.map(l => l.split('\t').length).join(' '));
+  check('FEC : aucune référence ni date prise pour un téléphone', !fe.includes('Téléphone') && fe.includes('VIR01\t20250131'));
+  check('FEC : montants et comptes intacts', ['15000,00', '2450,00', '1800,00', '3600,00', '455100', '421000'].every(x => fe.includes(x)));
+
+  // 13. Classeur Excel fictif : feuilles lues, dates remises en clair, colonnes conservées
+  const { zipSync, strToU8 } = require('fflate');
+  const NSX = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
+  const xlsx = zipSync({
+    '[Content_Types].xml': strToU8('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/xml"/></Types>'),
+    'xl/workbook.xml': strToU8(`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="${NSX}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Patrimoine Duvernay" sheetId="1" r:id="rId1"/></sheets></workbook>`),
+    'xl/_rels/workbook.xml.rels': strToU8('<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'),
+    'xl/sharedStrings.xml': strToU8(`<?xml version="1.0" encoding="UTF-8"?><sst xmlns="${NSX}"><si><t>Titulaire</t></si><si><t>Date de naissance</t></si><si><t>Support</t></si><si><t>Valeur</t></si><si><r><t>Mathieu </t></r><r><t>DUVERNAY</t></r></si><si><t>Claire FAVRELLE</t></si></sst>`),
+    'xl/styles.xml': strToU8(`<?xml version="1.0" encoding="UTF-8"?><styleSheet xmlns="${NSX}"><cellXfs count="2"><xf numFmtId="0"/><xf numFmtId="14" applyNumberFormat="1"/></cellXfs></styleSheet>`),
+    'xl/worksheets/sheet1.xml': strToU8(`<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="${NSX}"><sheetData>
+<row r="1"><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c><c r="C1" t="s"><v>2</v></c><c r="D1" t="s"><v>3</v></c></row>
+<row r="2"><c r="A2" t="s"><v>4</v></c><c r="B2" s="1"><v>25000</v></c><c r="C2" t="inlineStr"><is><t>Assurance vie luxembourgeoise</t></is></c><c r="D2"><v>250000</v></c></row>
+<row r="3"><c r="A3" t="s"><v>5</v></c><c r="B3" s="1"><v>26500</v></c><c r="D3"><v>120000</v></c></row>
+<row r="5"><c r="A5" t="inlineStr"><is><t>IBAN FR76 3000 6000 0112 3456 7890 189</t></is></c></row>
+</sheetData></worksheet>`),
+  });
+  await page.goto(PAGE);
+  await page.setInputFiles('#file', [{ name: 'patrimoine-duvernay.xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', buffer: Buffer.from(xlsx) }]);
+  await page.waitForFunction(() => window.__anon.S.docs.length === 1, null, { timeout: 60000 }); await ready();
+  const xl = await out(0);
+  check('Excel : noms masqués, y compris dans le nom de la feuille', leaks(xl, ['DUVERNAY', 'Duvernay', 'FAVRELLE', 'Mathieu', 'FR76 3000']).length === 0, leaks(xl, ['DUVERNAY', 'Duvernay', 'FAVRELLE', 'Mathieu', 'FR76 3000']).join(', '));
+  check('Excel : dates de naissance remises en clair puis converties en âge, montants intacts', !/\b25000\b|\b26500\b|\/19[67]\d\b/.test(xl) && (xl.match(/\[âge : \d+ ans\]/g) || []).length === 2 && xl.includes('250000') && xl.includes('120000') && xl.includes('Assurance vie luxembourgeoise'), xl);
+  check('Excel : colonnes conservées', xl.split('\n').filter(l => /250000|120000/.test(l)).every(l => l.split('\t').length === 4), xl);
+
   // 8. Version et vérification des mises à jour
   await page.goto(PAGE);
   const upd = await page.evaluate(() => ({ href: document.querySelector('#updBtn').href, ver: document.querySelector('#verLabel').textContent }));

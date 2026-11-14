@@ -202,7 +202,7 @@ kbd{font:12px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid
 <main id="contenu">
 <section id="vAnon">
   <div class="plein" id="vide">
-    <div class="drop" id="drop"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg><h1>Déposez les pièces du dossier</h1><button class="btn small ghost" id="pick" type="button">Choisir des fichiers</button><span class="note">PDF, scans, photos, Word</span>
+    <div class="drop" id="drop"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg><h1>Déposez les pièces du dossier</h1><button class="btn small ghost" id="pick" type="button">Choisir des fichiers</button><span class="note">PDF, scans, photos, Word, Excel</span>
       <div class="sous"><button class="lien" id="showPaste" type="button">Coller un texte</button><button class="lien" id="example" type="button">Essayer avec un exemple</button></div>
     </div>
   </div>
@@ -236,7 +236,7 @@ kbd{font:12px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid
   </div>
 </section>
 </main>
-<input type="file" id="file" multiple accept=".pdf,.docx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff" class="hidden">
+<input type="file" id="file" multiple accept=".pdf,.docx,.xlsx,.txt,.md,.csv,.tsv,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff" class="hidden">
 
 <dialog id="pasteBox" class="etroit">
   <h2>Coller un texte</h2>
@@ -577,8 +577,10 @@ const ADDR_STOP = new Set(['est','sont','a','ont','sera','seront','dont','qui','
 const APART = ['de','du','des','de la',"de l'","d'",'la','le','les',"l'",'aux','au'];
 const ANAME = ['de','du','des','la','le','les',"l'","d'",'et','aux','au','sur','sous','en'];
 R('email', `[\\p{L}\\p{N}._%+\\-]+@[\\p{L}\\p{N}\\-]+(?:\\.[\\p{L}\\p{N}\\-]+)*\\.[A-Za-z]{2,}`);
-R('telfr', `(?<![\\d+])(?:(?:\\+|00)33[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?[1-9]|0[1-9])(?:[\\s.\\-]?\\d{2}){4}(?!\\d)`);
-R('telch', `(?<![\\d+])(?:\\+|00)41[\\s.\\-]?(?:\\(0\\)[\\s.\\-]?)?\\d{2}[\\s.\\-]?\\d{3}(?:[\\s.\\-]?\\d{2}){2}(?!\\d)`);
+/* un numéro de téléphone ne franchit ni une tabulation ni un retour à la ligne (colonnes d'un tableur, d'un FEC), et ne suit pas une lettre (VIR01 suivi d'une date) */
+const TSEP = '[ \\u00a0\\u202f.\\-]';
+R('telfr', `(?<![\\p{L}\\d+])(?:(?:\\+|00)33${TSEP}?(?:\\(0\\)${TSEP}?)?[1-9]|0[1-9])(?:${TSEP}?\\d{2}){4}(?!\\d)`);
+R('telch', `(?<![\\p{L}\\d+])(?:\\+|00)41${TSEP}?(?:\\(0\\)${TSEP}?)?\\d{2}${TSEP}?\\d{3}(?:${TSEP}?\\d{2}){2}(?!\\d)`);
 R('iban', `(?<![A-Z0-9])[A-Z]{2}\\d{2}(?:[ \\u00a0]?[A-Z0-9]{4}){2,7}(?:[ \\u00a0]?[A-Z0-9]{1,4})?(?![A-Z0-9])`);
 R('bic', `(?<![\\p{L}])(?:BIC|SWIFT|${K('banque')})${WS}:?${WS}([A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?)(?![A-Za-z0-9])`);
 R('nir', `(?<!\\d)[12][\\s.]?\\d{2}[\\s.]?(?:0[1-9]|1[0-2]|[2-9]\\d)[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3}[\\s.]?\\d{2}(?!\\d)${CURR}`);
@@ -636,11 +638,39 @@ R('kwOrg', `(?<![\\p{L}])(?:[Cc]abinet|CABINET|[ÉéEe]tude|[Ee]xpert-comptable|
 const CAPS = new RegExp(`(?<![\\p{L}\\p{N}])[${UP}][${UP}'’\\-]{2,}(?![\\p{L}\\p{N}])`, 'gu');
 const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh liberte egalite fraternite centre centres finances publiques publique public publics direction generale service services particuliers professionnels avis prelevement prelevements sociaux social suite cet cette ci jointe joint informations information complementaires complementaire nombre deductibles deductible global globale imputations imputation csg crds prel sol psol tenu elements element que avez declares declare declaree declarees qui sera rembourse remboursee remboursement automatique aucune demarche faire votre vos calcul plafond plafonds epargne detail details source marginal residence exclusive alternee part foyer declarant declarants declar feuillet reference references contact contacts numero role fip rdv doc est sip said sie sdif cdif pole tresor tresorerie somme sommes payer paye payee titre revenu revenus pension pensions rente rentes foncier fonciers fonciere foncieres mobilier mobiliers capitaux bareme quotient familial decote messagerie securisee telephone place horaires lundi mardi mercredi jeudi vendredi samedi dimanche janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre notice disponible espace virement emetteur identifiant banque etabli etablie etablissement recouvrement mise montant retenu retenue nom prenom prenoms naissance usage enfants maries mineurs majeurs celibataires handicapes handicapees personnes recueillies cas particulier difficulte oeuvres etrangers etranger proportionnel forfaitaire liberatoire deja verse verses trop soumis soumise avant apres voir attention important rappel information').split(' '));
 
+/* tableau (export CSV, FEC, classeur Excel) : chaque cellule est lue comme une ligne, pour qu'aucune détection ne franchisse une colonne ; un caractère pour un, les positions ne bougent pas */
+const cells = text => text.replace(/\t/g, '\n');
+function isTabular(text){
+  const lines = text.split('\n').filter(l => l.trim());
+  const tabbed = lines.filter(l => (l.match(/\t/g) || []).length >= 2).length;
+  return tabbed >= 2 && tabbed >= lines.length / 2;
+}
 function detectRaw(doc){
-  const t = doc.text, out = [];
+  const t = doc.tab ? cells(doc.text) : doc.text, out = [];
   const push = (s, e, cat, sub, value, prio, rep, dept) => { if (e > s) out.push({s, e, cat, sub, value, prio, rep, dept}); };
   const each = (name, fn) => { const re = RX[name]; re.lastIndex = 0; let m; while ((m = re.exec(t))){ const nx = fn(m); if (typeof nx === 'number' && nx > m.index) re.lastIndex = nx; else if (!m[0].length) re.lastIndex++; } };
   const g = (m, i) => m.indices[i];
+  /* tableau : l'intitulé de colonne donne le sens des cellules en dessous.
+     FEC (fichier des écritures comptables) : le code d'un compte de tiers reprend souvent le nom (LEROUXJP), la colonne CompAuxNum est masquée en entier.
+     Colonne « date de naissance » : chaque date devient un âge, comme dans un texte. Un nouvel en-tête (autre feuille) remet les colonnes à zéro. */
+  if (doc.tab){
+    let aux = -1, birth = [], pos = 0;
+    for (const line of doc.text.split('\n')){
+      const cs = line.split('\t');
+      const at = k => pos + cs.slice(0, k).reduce((n, c) => n + c.length + 1, 0) + cs[k].indexOf(cs[k].trim());
+      const hAux = cs.findIndex(c => /^CompAuxNum$/i.test(c.trim())), hBirth = cs.map((c, k) => /naissance/i.test(c) && c.trim().length <= 40 ? k : -1).filter(k => k >= 0);
+      if (hAux >= 0 || hBirth.length){ aux = hAux; birth = hBirth; }
+      else if (/^Feuille : /.test(line) && !line.includes('\t')){ aux = -1; birth = []; }
+      else {
+        if (aux >= 0 && cs.length > aux && cs[aux].trim()) push(at(aux), at(aux) + cs[aux].trim().length, 'identifiant', 'Compte de tiers', cs[aux].trim(), 2);
+        for (const k of birth){
+          const v = (cs[k] || '').trim(), d = v && /\d{4}/.test(v) ? parseDate(v) : null;
+          if (d) push(at(k), at(k) + v.length, 'naissance', '', v, 3, `[âge : ${ageAt(d)} ans]`);
+        }
+      }
+      pos += line.length + 1;
+    }
+  }
   each('email', m => push(m.index, m.index + m[0].length, 'contact', 'Courriel', m[0], 2));
   each('telfr', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
   each('telch', m => push(m.index, m.index + m[0].length, 'contact', 'Téléphone', m[0], 2));
@@ -731,18 +761,20 @@ function detectRaw(doc){
   if (opt('oCiv')){
     each('civ', m => push(g(m,2)[0], g(m,2)[1], 'personne_auto', m[1], m[2], 6));
     const notStop = w => { const f = fold(w); return !STOP.has(f) && !ORGKW.has(f) && !PRENOMS.has(f) && f.length >= 2; };
+    /* beaucoup de noms de famille sont aussi des prénoms (Laurent, Bernard, Thomas, Robert, Simon) : placés après un prénom, ils sont pris pour un nom ; masquer « Jean Pierre » par excès ne coûte rien */
+    const nomOk = w => { const f = fold(w); return !STOP.has(f) && !ORGKW.has(f) && f.length >= 2; };
     each('prenomNOM', m => {
       const firsts = m[1].split(/\s+/), noms = m[2].split(/\s+/).filter(x => !/^(DE|DU|D'|D’|LE|LA|VAN|VON|DI|DA)$/.test(x));
-      if (!isPrenom(firsts[0]) || !noms.length || !noms.every(notStop)) return;
+      if (!isPrenom(firsts[0]) || !noms.length || !noms.every(nomOk)) return;
       push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 6);
     });
     each('NOMprenom', m => {
       const firsts = m[2].split(/\s+/);
-      if (!notStop(m[1]) || !isPrenom(firsts[0])) return;
+      if (!nomOk(m[1]) || !isPrenom(firsts[0])) return;
       push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 6);
     });
     each('prenomNom', m => {
-      if (!isPrenom(m[1]) || !notStop(m[2]) || MOIS_F.includes(fold(m[2]))) return g(m,1)[1];
+      if (!isPrenom(m[1]) || !(notStop(m[2]) || nomOk(m[2]) && isPrenom(m[2]) && fold(m[2]).length >= 3) || MOIS_F.includes(fold(m[2]))) return g(m,1)[1];
       push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 7);
     });
     each('notaire', m => push(g(m,1)[0], g(m,1)[1], 'notaire', '', m[1], 6));
@@ -888,13 +920,13 @@ function fuzzyOcr(text, cand){
     }
   }
 }
-function computeText(text, raw, ocr){
-  const cand = [];
+function computeText(text, raw, ocr, tab){
+  const cand = [], scan = tab ? cells(text) : text;
   for (const sp of raw){ const e = S.ent.get(sp.key); if (e && e.enabled) cand.push(sp); }
   for (const e of S.ent.values()){
     if (!e.enabled || !SURFACE.has(e.cat)) continue;
     compileEnt(e);
-    for (const re of (ocr ? e.resOcr : e.res)){ re.lastIndex = 0; let m; while ((m = re.exec(text))){ cand.push({s: m.index, e: m.index + m[0].length, key: e.key, prio: 1}); if (!m[0].length) re.lastIndex++; } }
+    for (const re of (ocr ? e.resOcr : e.res)){ re.lastIndex = 0; let m; while ((m = re.exec(scan))){ cand.push({s: m.index, e: m.index + m[0].length, key: e.key, prio: 1}); if (!m[0].length) re.lastIndex++; } }
   }
   if (ocr) fuzzyOcr(text, cand);
   cand.sort((a, b) => (b.e - b.s) - (a.e - a.s) || a.prio - b.prio || a.s - b.s);
@@ -917,7 +949,9 @@ function computeText(text, raw, ocr){
   for (const c of merged){
     out += text.slice(pos, c.s);
     const e = S.ent.get(c.key);
-    const rep = c.rep || ('[' + e.label + ']');
+    let rep = c.rep || ('[' + e.label + ']');
+    /* dans un tableau, un même libellé dans deux cellules voisines garde ses colonnes : le fichier rendu a le même nombre de colonnes */
+    if (tab && text.slice(c.s, c.e).includes('\t')){ const one = rep; rep = text.slice(c.s, c.e).split('\t').map(x => x.trim() ? one : x).join('\t'); }
     map.push({os: c.s, oe: c.e, ns: out.length, ne: out.length + rep.length, key: c.key});
     out += rep; pos = c.e;
   }
@@ -927,7 +961,7 @@ function computeText(text, raw, ocr){
 function computeAll(){
   for (const e of S.ent.values()) e.count = 0;
   S.res = S.docs.map(d => {
-    const r = computeText(d.text, d.attached || [], d.ocr);
+    const r = computeText(d.text, d.attached || [], d.ocr, d.tab);
     for (const sp of r.spans) S.ent.get(sp.key).count++;
     return r;
   });
@@ -1255,6 +1289,54 @@ function readDocx(bytes){
   }
   return {type: 'docx', text, meta: 'Word'};
 }
+/* classeur Excel : chaque feuille devient un tableau, cellules séparées par des tabulations ; les dates stockées en nombre de jours sont remises en clair (jj/mm/aaaa) */
+function readXlsx(bytes){
+  const files = fflate.unzipSync(bytes, {filter: f => /^xl\/(workbook\.xml|_rels\/workbook\.xml\.rels|sharedStrings\.xml|styles\.xml|worksheets\/[^/]+\.xml)$/.test(f.name)});
+  const NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
+  const xml = n => files[n] ? new DOMParser().parseFromString(new TextDecoder().decode(files[n]), 'application/xml') : null;
+  const kids = (el, name) => el ? [...el.getElementsByTagNameNS(NS, name)] : [];
+  const wb = xml('xl/workbook.xml');
+  if (!wb) throw new Error('classeur illisible');
+  const d1904 = kids(wb, 'workbookPr').some(p => /^(1|true)$/.test(p.getAttribute('date1904') || ''));
+  const rels = {};
+  const rx = xml('xl/_rels/workbook.xml.rels');
+  if (rx) for (const r of rx.getElementsByTagName('Relationship')) rels[r.getAttribute('Id')] = r.getAttribute('Target').replace(/^\/?(xl\/)?/, 'xl/');
+  const shared = kids(xml('xl/sharedStrings.xml'), 'si').map(si => kids(si, 't').filter(t => t.parentNode.localName !== 'rPh').map(t => t.textContent).join(''));
+  const styles = xml('xl/styles.xml'), fmts = {};
+  for (const f of kids(styles, 'numFmt')) fmts[f.getAttribute('numFmtId')] = f.getAttribute('formatCode') || '';
+  const isDateFmt = id => { const n = +id; if ([14,15,16,17,22].includes(n) || (n >= 27 && n <= 36) || (n >= 50 && n <= 58)) return true; const c = (fmts[id] || '').replace(/"[^"]*"|\[[^\]]*\]|\\./g, ''); return /[dy]/i.test(c); };
+  const xfs = kids(kids(styles, 'cellXfs')[0], 'xf').map(x => isDateFmt(x.getAttribute('numFmtId') || '0'));
+  const two = n => String(n).padStart(2, '0');
+  const asDate = v => { const ms = Math.round(+v * 86400000) + (d1904 ? Date.UTC(1904, 0, 1) : Date.UTC(1899, 11, 30)); const dt = new Date(ms); return isNaN(dt) ? v : two(dt.getUTCDate()) + '/' + two(dt.getUTCMonth() + 1) + '/' + dt.getUTCFullYear(); };
+  const col = ref => { let n = 0; for (const ch of String(ref).replace(/\d+$/, '')) n = n * 26 + ch.charCodeAt(0) - 64; return n - 1; };
+  const parts = [];
+  for (const sh of kids(wb, 'sheet')){
+    const target = rels[sh.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id') || sh.getAttribute('r:id')];
+    const ws = target && xml(target);
+    if (!ws) continue;
+    const lines = [];
+    for (const row of kids(ws, 'row')){
+      const vals = [];
+      for (const c of kids(row, 'c')){
+        const i = c.getAttribute('r') ? col(c.getAttribute('r')) : vals.length, t = c.getAttribute('t') || 'n';
+        const v = kids(c, 'v')[0]?.textContent ?? '';
+        let s;
+        if (t === 's') s = shared[+v] ?? '';
+        else if (t === 'inlineStr') s = kids(c, 't').map(x => x.textContent).join('');
+        else if (t === 'b') s = v === '1' ? 'VRAI' : v === '0' ? 'FAUX' : v;
+        else if (t === 'd') s = /^\d{4}-\d{2}-\d{2}/.test(v) ? v.slice(8, 10) + '/' + v.slice(5, 7) + '/' + v.slice(0, 4) : v;
+        else if (t === 'n' && v !== '' && xfs[+(c.getAttribute('s') || 0)]) s = asDate(v);
+        else s = v;
+        while (vals.length < i) vals.push('');
+        vals[i] = String(s).replace(/[\t\r\n]+/g, ' ');
+      }
+      while (vals.length && !vals[vals.length - 1].trim()) vals.pop();
+      if (vals.length) lines.push(vals.join('\t'));
+    }
+    if (lines.length) parts.push('Feuille : ' + sh.getAttribute('name') + '\n' + lines.join('\n'));
+  }
+  return {type: 'xlsx', text: parts.join('\n\n') + '\n', meta: 'Excel', tab: true};
+}
 async function addFiles(list){
   for (const f of list){
     const ext = (f.name.split('.').pop() || '').toLowerCase();
@@ -1263,8 +1345,9 @@ async function addFiles(list){
       let r;
       if (ext === 'pdf') r = await readPdf(f);
       else if (ext === 'docx') r = readDocx(new Uint8Array(await f.arrayBuffer()));
+      else if (ext === 'xlsx') r = readXlsx(new Uint8Array(await f.arrayBuffer()));
       else if (['jpg','jpeg','png','webp','heic','heif','tif','tiff'].includes(ext)) r = await readImage(f);
-      else if (['txt','md','csv'].includes(ext)) r = {type: 'txt', text: (await f.text()).replace(/\r\n?/g, '\n'), meta: 'Texte'};
+      else if (['txt','md','csv','tsv'].includes(ext)){ const text = (await f.text()).replace(/\r\n?/g, '\n'); r = {type: 'txt', text, meta: 'Texte', tab: isTabular(text)}; }
       else { toast(f.name + ' : format non pris en charge'); continue; }
       S.docs.push(Object.assign({id: ++docSeq, name: f.name}, r));
     } catch (err){ console.error(err); toast('Lecture impossible : ' + f.name); }
@@ -1276,7 +1359,7 @@ function renderDocs(){
   $('#nDocs').textContent = S.docs.length + (S.docs.length > 1 ? ' pièces' : ' pièce');
   S.docs.forEach((d, i) => {
     const li = document.createElement('li'); if (i === S.cur) li.className = 'on';
-    const kind = d.type === 'pdf' ? (d.pages ? d.pages.length + (d.pages.length > 1 ? ' pages' : ' page') : 'PDF') : d.type === 'image' ? 'photo' : d.type === 'docx' ? 'Word' : 'texte';
+    const kind = d.type === 'pdf' ? (d.pages ? d.pages.length + (d.pages.length > 1 ? ' pages' : ' page') : 'PDF') : d.type === 'image' ? 'photo' : d.type === 'docx' ? 'Word' : d.type === 'xlsx' ? 'Excel' : d.tab ? 'tableau' : 'texte';
     const meta = kind + (d.scanned ? ', page illisible' : d.ocr && d.type === 'pdf' ? ', scan' : '');
     li.innerHTML = `<button class="sel" type="button" title="${esc(d.name)}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/></svg><span class="nom">${esc(d.name)}</span><span class="meta">${esc(meta)}</span></button><button class="x" type="button" title="Retirer" aria-label="Retirer ${esc(d.name)}">✕</button>`;
     li.querySelector('.sel').onclick = () => { S.cur = i; renderDocs(); renderView(); };
@@ -1775,7 +1858,8 @@ document.querySelectorAll('dialog').forEach(d => { d.querySelectorAll('[data-clo
 $('#showPaste').onclick = () => $('#pasteBox').showModal();
 $('#pasteAdd').onclick = () => {
   const t = $('#pasteText').value; if (!t.trim()) return;
-  S.docs.push({id: ++docSeq, name: ($('#pasteName').value.trim() || 'Texte collé ' + (S.docs.length + 1)), type: 'txt', text: t.replace(/\r\n?/g, '\n'), meta: 'Texte collé'});
+  const text = t.replace(/\r\n?/g, '\n');
+  S.docs.push({id: ++docSeq, name: ($('#pasteName').value.trim() || 'Texte collé ' + (S.docs.length + 1)), type: 'txt', text, meta: 'Texte collé', tab: isTabular(text)});
   $('#pasteText').value = ''; $('#pasteName').value = ''; $('#pasteBox').close(); S.cur = S.docs.length - 1; run();
 };
 $('#example').onclick = loadExample;

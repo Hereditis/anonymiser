@@ -16,7 +16,7 @@ En ligne, en ouvrant la page publiée par Hereditis. Ou hors ligne, avec le lien
 
 Pour les utilisateurs peu familiers de l'informatique, un [guide d'installation illustré](https://hereditis.github.io/anonymiser/Aide-installer-Anonymiser.pdf) explique pas à pas comment télécharger et ouvrir le fichier ; il existe aussi en [version Word](docs/Aide-installer-Anonymiser.docx) à adapter.
 
-1. **Déposer** : glissez des PDF (avec texte ou scannés), des photos, des fichiers Word ou collez un texte. L'analyse suit d'elle-même, le foyer est détecté dans les pièces.
+1. **Déposer** : glissez des PDF (avec texte ou scannés), des photos, des fichiers Word ou Excel, un export CSV, ou collez un texte. L'analyse suit d'elle-même, le foyer est détecté dans les pièces.
 2. **Vérifier** : à gauche, ce qui est masqué ; à droite, la pièce avant et après. Décochez ce qui ne doit pas l'être, ajoutez un nom ou un numéro, modifiez un libellé.
 3. **Télécharger** : les pièces anonymisées et, pour les PDF et les photos, une copie caviardée en image. La table de correspondance se télécharge à part et reste chez vous.
 4. **Remettre les noms** : à réception du bilan, l'outil remet les vrais noms dans le document Word, PowerPoint ou Excel, avec votre table de correspondance.
@@ -39,14 +39,15 @@ Rien n'est conservé à la fermeture de l'onglet : ni pièce, ni saisie, ni cook
 
 ## Ce que l'outil détecte
 
-- Personnes : les noms précédés de Monsieur, Madame ou Maître, les noms précédés ou suivis d'un prénom connu (environ 3 200 prénoms), y compris tout en capitales, les noms annoncés par « Nom de naissance : », et le foyer saisi à la main.
+- Personnes : les noms précédés de Monsieur, Madame ou Maître, les noms précédés ou suivis d'un prénom connu (environ 4 300 prénoms), y compris tout en capitales et quand le nom de famille est aussi un prénom (Laurent, Bernard, Thomas), les noms annoncés par « Nom de naissance : », et le foyer saisi à la main.
 - Noms de famille partagés par plusieurs membres du foyer, rattachés au bon conjoint quand la civilité le permet.
 - Sociétés : forme juridique (SCI, SARL, SAS…), dénomination entre guillemets, nom en capitales suivi d'un code postal ou contenant un mot de métier, nom après « cabinet » ou « étude ».
 - Adresses, communes (le département est conservé) et lieux de naissance.
 - Identifiants : SIREN et SIRET (clé de contrôle vérifiée), IBAN (clé vérifiée, ou en partie masqué), BIC, numéro de sécurité sociale, numéro fiscal, référence d'avis d'impôt, numéro FIP, numéros de contrat, parcelles cadastrales, références de publication foncière.
 - Codes-barres 2D-Doc et QR codes, noircis dans la copie en image.
 - Courriels et numéros de téléphone français et suisses.
-- Dates de naissance, remplacées par l'âge.
+- Dates de naissance, remplacées par l'âge, y compris dans une colonne « date de naissance » d'un tableau.
+- Tableaux (classeur Excel, export CSV, FEC) : chaque cellule est analysée séparément et le fichier rendu garde ses colonnes ; dans un FEC, les codes de comptes de tiers sont masqués.
 - Pièces scannées : deux lectures par reconnaissance de caractères en français, rattachement des noms mal lus au nom connu le plus proche, masquage des mots mal lus qui peuvent cacher un nom.
 
 Un contrôle final relit le résultat et signale ce qui pourrait encore identifier une personne.
@@ -57,6 +58,9 @@ Un contrôle final relit le résultat et signale ce qui pourrait encore identifi
 - Sur une pièce scannée, un mot que la reconnaissance de caractères ne lit pas du tout (texte barré, tampon, tache) reste visible dans la copie en image.
 - L'écriture manuscrite n'est pas lue.
 - Une personne citée sans civilité ni prénom connu peut échapper à la détection : elle apparaît alors dans les « mots en capitales à vérifier » si son nom est écrit en capitales.
+- Un prénom cité seul, sans nom ni civilité (« leurs enfants Pierre et Ambre »), peut rester visible : ajoutez-le à la main.
+- Une société sans forme juridique, sans mot de métier et écrite en minuscules (« Alpha Audit ») peut échapper à la détection.
+- Un classeur Excel est rendu en texte, une tabulation entre les colonnes (un copier-coller dans Excel le remet en tableau) : les formules et la mise en forme ne sont pas reprises.
 - La copie caviardée d'un PDF est une image : le texte n'y est plus sélectionnable.
 
 ## Construire et tester

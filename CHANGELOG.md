@@ -1,5 +1,26 @@
 # Journal des versions
 
+## 0.7 (14 novembre 2026)
+
+Personnes :
+
+- Un nom de famille qui est aussi un prénom (Laurent, Bernard, Thomas, Robert, Simon...) est reconnu après un prénom, en minuscules comme en capitales : « Sophie Laurent » et « Sophie LAURENT » ne passent plus en clair sans civilité.
+- Liste de prénoms portée de 3 251 à 4 272 : ajout des prénoms de la liste des ministères sociaux (paquet @socialgouv/match-entities), dont des prénoms courants chez les enfants comme Jade ou Ambre ; les particules et les mots courants (Saint, France, Mai, Juste...) sont écartés.
+- Deux personnes du même nom (Jade Martin et Élise Martin) reçoivent deux libellés distincts.
+
+Tableaux :
+
+- Classeurs Excel (.xlsx) acceptés en entrée : toutes les feuilles sont lues, les dates stockées en nombre de jours sont remises en clair, la pièce anonymisée est rendue en texte avec une tabulation entre les colonnes.
+- Export CSV, fichier tabulé ou FEC (fichier des écritures comptables) : chaque cellule est analysée séparément, aucune détection ne franchit une colonne et le fichier rendu garde le même nombre de colonnes.
+- Colonne « date de naissance » : chaque date devient un âge, comme dans un texte.
+- FEC : la colonne CompAuxNum (code du compte de tiers, qui reprend souvent le nom) est masquée en entier.
+- Un numéro de téléphone ne franchit plus une tabulation ni un retour à la ligne, et ne commence plus juste après une lettre : « VIR01 » suivi d'une date n'est plus pris pour un téléphone.
+
+Tests :
+
+- Jeu d'essai d'Anonyfiles (Simon Grossi, licence MIT) ajouté aux tests de bout en bout, avec les écarts assumés documentés dans `tests/run.js`.
+- Nouveaux cas : noms qui sont aussi des prénoms, FEC fictif, classeur Excel fictif.
+
 ## 0.6 (10 novembre 2026)
 
 Avis d'impôt et pièces administratives :
