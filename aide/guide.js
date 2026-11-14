@@ -91,8 +91,8 @@ const children = [
   tip('Astuce :', ['si vous avez reçu ce guide par mail ou en PDF, il suffit de cliquer sur l\'adresse ci-dessus.']),
 
   step('2', 'Cliquez sur le bouton de téléchargement'),
-  p(['En haut à droite de la page, cliquez sur ', btn('Télécharger pour un usage hors ligne'), '.'], { keepNext: true, spacing: { after: 140, line: 300 } }),
-  img('etape1.png'),
+  p(['En haut à droite de la page, cliquez sur ', btn('Version hors ligne'), '.'], { keepNext: true, spacing: { after: 140, line: 300 } }),
+  img('etape1.png', 400),
   p(['Le téléchargement prend quelques secondes (le fichier pèse environ 6 Mo, comme quelques photos).']),
   tip('Si une question s\'affiche :', ['le navigateur peut demander où enregistrer le fichier ou s\'il faut autoriser le téléchargement. Choisissez ', b('Enregistrer'), ' ou ', b('Autoriser'), '.']),
 
@@ -108,9 +108,9 @@ const children = [
   p(['C\'est terminé. Vous pouvez déposer vos pièces et suivre les étapes affichées à l\'écran.']),
 
   step('+', 'De temps en temps : vérifiez les mises à jour'),
-  p(['Le fichier téléchargé ne se met pas à jour tout seul, puisqu\'il ne se connecte jamais à Internet. Une fois par mois environ, cliquez sur ', btn('Vérifier les mises à jour'), ' en haut à droite.'], { keepNext: true, spacing: { after: 140, line: 300 } }),
-  img('etape5.png'),
-  p(['Une page s\'ouvre et vous indique en vert que votre version est la plus récente, ou en orange qu\'une nouvelle version existe. Dans ce cas, téléchargez-la (étapes 2 à 4) et jetez l\'ancien fichier à la corbeille.']),
+  p(['Le fichier téléchargé ne se met pas à jour tout seul, puisqu\'il ne se connecte jamais à Internet. Une fois par mois environ, cliquez sur ', btn('Mises à jour'), ' en haut à droite.'], { keepNext: true, spacing: { after: 140, line: 300 } }),
+  img('etape5.png', 400),
+  p(['Une page s\'ouvre et vous indique en vert que votre version est la plus récente, ou en orange qu\'une nouvelle version existe. Dans ce cas, téléchargez-la (étapes 2 à 4) et jetez l\'ancien fichier à la corbeille. Le numéro de votre version figure tout en bas de la page.']),
 
   new Paragraph({ pageBreakBefore: true, spacing: { after: 160 }, children: [new TextRun({ text: 'Questions fréquentes', bold: true, size: 34, color: INK })] }),
 
@@ -118,6 +118,8 @@ const children = [
     'Faites un ', b('clic droit'), ' sur le fichier (sur Mac : clic en maintenant la touche ctrl), choisissez ', b('Ouvrir avec'), ', puis votre navigateur : Chrome, Edge, Safari ou Firefox.']),
   ...faq('Je ne trouve pas le fichier.', [
     'Ouvrez le dossier ', b('Téléchargements'), ' : sur Windows, depuis l\'Explorateur de fichiers (icône de dossier jaune dans la barre des tâches) ; sur Mac, depuis le Finder (icône du visage bleu dans le Dock). Vous pouvez aussi taper « Anonymiser » dans la recherche de votre ordinateur.']),
+  ...faq('La page en ligne affiche encore l\'ancienne version.', [
+    'Le navigateur garde la page en mémoire quelques minutes après une mise à jour. Rechargez-la en forçant : ', b('Ctrl + F5'), ' sur Windows, ', b('Cmd + Maj + R'), ' sur Mac avec Chrome ou Firefox, ', b('Cmd + Option + R'), ' avec Safari.']),
   ...faq('Le navigateur affiche un avertissement au téléchargement.', [
     'Certains navigateurs préviennent par principe pour tout fichier de page web téléchargé. Vérifiez que l\'adresse de la page commence bien par hereditis.github.io, puis choisissez ', b('Conserver'), '.']),
   ...faq('Suis-je obligé de télécharger le fichier ?', [

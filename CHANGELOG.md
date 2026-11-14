@@ -21,6 +21,12 @@ Tests :
 - Jeu d'essai d'Anonyfiles (Simon Grossi, licence MIT) ajouté aux tests de bout en bout, avec les écarts assumés documentés dans `tests/run.js`.
 - Nouveaux cas : noms qui sont aussi des prénoms, FEC fictif, classeur Excel fictif.
 
+Guide d'installation :
+
+- Captures refaites sur la 0.7 (elles dataient de la 0.5), recadrées sur les boutons pour rester lisibles.
+- Libellés des boutons alignés sur l'outil : « Version hors ligne » et « Mises à jour ».
+- Où lire le numéro de version, et nouvelle question : « La page en ligne affiche encore l'ancienne version ».
+
 ## 0.6 (10 novembre 2026)
 
 Avis d'impôt et pièces administratives :

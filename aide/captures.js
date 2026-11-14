@@ -25,7 +25,8 @@ fs.mkdirSync(OUT, { recursive: true });
     Object.assign(t.style, { position: 'fixed', left: Math.max(10, r.left - 120) + 'px', top: (r.bottom + 18) + 'px', background: '#D7443E', color: '#fff', font: '700 18px Arial', padding: '8px 14px', borderRadius: '8px', zIndex: 99 });
     document.body.appendChild(t);
   }, [sel, label]);
-  const clip = { x: 0, y: 0, width: 1280, height: 168 };
+  // Moitié droite de l'en-tête seulement : le bouton reste lisible une fois l'image réduite à la largeur de la page
+  const clip = { x: 920, y: 0, width: 360, height: 96 };
 
   // Version en ligne : bouton de téléchargement
   await p.evaluate(() => window.__anon.updateCheck(null, true));
