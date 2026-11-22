@@ -261,6 +261,42 @@ Ambre Lenoir, fille du donateur.`);
   check('Excel : dates de naissance remises en clair puis converties en âge, montants intacts', !/\b25000\b|\b26500\b|\/19[67]\d\b/.test(xl) && (xl.match(/\[âge : \d+ ans\]/g) || []).length === 2 && xl.includes('250000') && xl.includes('120000') && xl.includes('Assurance vie luxembourgeoise'), xl);
   check('Excel : colonnes conservées', xl.split('\n').filter(l => /250000|120000/.test(l)).every(l => l.split('\t').length === 4), xl);
 
+  // 14. Contrôle final : « même personne ? », nom très court, personne à vérifier
+  await page.goto(PAGE);
+  await paste('meme-personne', `Monsieur Thibaut Dupont, né le 4 mai 1961, demeurant à Annecy.
+Plus loin, Thibault Dupont signe la donation au profit de sa fille Ambre Dupont.
+Louis Martin et sa fille Louise Martin sont présents.
+Il détient aussi des actions Pierre Fabre.
+Interlocuteur : M. Li, gérant.`);
+  const ctl = await page.evaluate(() => document.getElementById('control').innerText);
+  check('même personne ? : deux graphies proches signalées', /Thibaut Dupont.*Thibault Dupont|Thibault Dupont.*Thibaut Dupont/.test(ctl) && (await page.$$('#control button[data-same]')).length === 1, ctl);
+  check('même personne ? : Louis et Louise ne sont pas confondus', !/Louise? Martin.*Louise? Martin/.test(ctl), ctl);
+  check('nom très court signalé', ctl.includes('« Li »') && ctl.includes('nom très court'), ctl);
+  const doute = await page.evaluate(() => [...document.querySelectorAll('#ents .ent')].filter(r => r.querySelector('.dt')).map(r => r.querySelector('.val').textContent));
+  check('personne citée à côté de mots de société : à vérifier, en tête de liste', doute.length === 1 && doute[0].includes('Pierre Fabre') && (await page.evaluate(() => document.querySelector('#ents .grp .ent .dt') !== null)), JSON.stringify(doute));
+  const avant = await out(0);
+  await page.click('#control button[data-same]');
+  await page.waitForTimeout(200);
+  const apres = await out(0);
+  const labs = s => (s.split('\n').slice(0, 2).join('\n').match(/\[Personne [A-Z]+\]/g) || []);
+  check('même personne : un seul libellé après confirmation', new Set(labs(apres)).size === 2 && new Set(labs(avant)).size === 3 && !(await page.evaluate(() => document.getElementById('control').innerText)).includes('Même personne ?'), apres.split('\n').slice(0, 2).join(' / '));
+  await page.goto(PAGE);
+  await paste('deux-personnes', 'Monsieur Thibaut Dupont et Monsieur Thibault Dupont, cousins.');
+  await page.click('#control button[data-diff]');
+  await page.waitForTimeout(200);
+  check('deux personnes : la question disparaît, les libellés restent distincts', !(await page.evaluate(() => document.getElementById('control').innerText)).includes('Même personne ?') && new Set((await out(0)).match(/\[[^\]]+\]/g)).size === 2, await out(0));
+
+  // 15. Nom annoncé par son contexte, sans prénom ni civilité
+  await page.goto(PAGE);
+  await paste('contexte', `Les époux Leforestier ont acquis la maison en 2004.
+Le dossier a été transmis par Gaillard, notaire à Thônes.
+Les consorts DUVERNAY sont en indivision.
+La succession a été réglée en mai 2025 ; indivision Successorale.
+L'Étude, notaire à Annecy, a reçu l'acte.`);
+  const cx = await out(0);
+  check('époux, consorts, « X, notaire » : nom masqué', leaks(cx, ['Leforestier', 'Gaillard', 'DUVERNAY']).length === 0, leaks(cx, ['Leforestier', 'Gaillard', 'DUVERNAY']).join(', '));
+  check('succession, indivision, Étude : mots courants intacts', cx.includes('indivision Successorale') && cx.includes("L'Étude, notaire") && cx.includes('réglée en mai 2025'), cx);
+
   // 8. Version et vérification des mises à jour
   await page.goto(PAGE);
   const upd = await page.evaluate(() => ({ href: document.querySelector('#updBtn').href, ver: document.querySelector('#verLabel').textContent }));
