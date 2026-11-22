@@ -39,7 +39,7 @@ Rien n'est conservé à la fermeture de l'onglet : ni pièce, ni saisie, ni cook
 
 ## Ce que l'outil détecte
 
-- Personnes : les noms précédés de Monsieur, Madame ou Maître, les noms précédés ou suivis d'un prénom connu (environ 4 300 prénoms), y compris tout en capitales et quand le nom de famille est aussi un prénom (Laurent, Bernard, Thomas), les noms annoncés par « Nom de naissance : », et le foyer saisi à la main.
+- Personnes : les noms précédés de Monsieur, Madame ou Maître, les noms précédés ou suivis d'un prénom connu (environ 4 300 prénoms), y compris tout en capitales et quand le nom de famille est aussi un prénom (Laurent, Bernard, Thomas), les noms annoncés par « Nom de naissance : » ou par leur contexte (« les époux Leforestier », « les consorts Duvernay », « Gaillard, notaire »), et le foyer saisi à la main.
 - Noms de famille partagés par plusieurs membres du foyer, rattachés au bon conjoint quand la civilité le permet.
 - Sociétés : forme juridique (SCI, SARL, SAS…), dénomination entre guillemets, nom en capitales suivi d'un code postal ou contenant un mot de métier, nom après « cabinet » ou « étude ».
 - Adresses, communes (le département est conservé) et lieux de naissance.
@@ -50,14 +50,19 @@ Rien n'est conservé à la fermeture de l'onglet : ni pièce, ni saisie, ni cook
 - Tableaux (classeur Excel, export CSV, FEC) : chaque cellule est analysée séparément et le fichier rendu garde ses colonnes ; dans un FEC, les codes de comptes de tiers sont masqués.
 - Pièces scannées : deux lectures par reconnaissance de caractères en français, rattachement des noms mal lus au nom connu le plus proche, masquage des mots mal lus qui peuvent cacher un nom.
 
-Un contrôle final relit le résultat et signale ce qui pourrait encore identifier une personne.
+Un contrôle final relit le résultat et signale ce qui pourrait encore identifier une personne. Il pose aussi deux questions de relecture :
+
+- **Même personne ?** Deux graphies très proches (Thibaut et Thibault Dupont, DUPONT Jean et Jean Dupont) ont reçu deux libellés : un clic les réunit sous un seul, ou confirme qu'il s'agit de deux personnes. Louis et Louise, Pascal et Pascale ne sont jamais rapprochés.
+- **Nom très court** (Li, Ba) : à vérifier à l'œil, car le contrôle automatique ne cherche pas les mots de moins de trois lettres.
+
+Dans la liste de gauche, une personne trouvée à côté d'un mot de société ou de marque (« des actions Pierre Fabre ») porte la mention « à vérifier » et passe en tête de sa rubrique.
 
 ## Limites
 
 - L'outil aide à l'anonymisation, il ne remplace pas la relecture du conseiller.
 - Sur une pièce scannée, un mot que la reconnaissance de caractères ne lit pas du tout (texte barré, tampon, tache) reste visible dans la copie en image.
 - L'écriture manuscrite n'est pas lue.
-- Une personne citée sans civilité ni prénom connu peut échapper à la détection : elle apparaît alors dans les « mots en capitales à vérifier » si son nom est écrit en capitales.
+- Une personne citée sans civilité, sans prénom connu et sans contexte (« Duvernay a signé ») peut échapper à la détection : elle apparaît alors dans les « mots en capitales à vérifier » si son nom est écrit en capitales.
 - Un prénom cité seul, sans nom ni civilité (« leurs enfants Pierre et Ambre »), peut rester visible : ajoutez-le à la main.
 - Une société sans forme juridique, sans mot de métier et écrite en minuscules (« Alpha Audit ») peut échapper à la détection.
 - Un classeur Excel est rendu en texte, une tabulation entre les colonnes (un copier-coller dans Excel le remet en tableau) : les formules et la mise en forme ne sont pas reprises.

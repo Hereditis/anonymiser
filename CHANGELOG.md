@@ -1,5 +1,21 @@
 # Journal des versions
 
+## 0.8 (22 novembre 2026)
+
+Relecture :
+
+- Contrôle final, question « Même personne ? » : deux graphies très proches d'un nom (Thibaut et Thibault Dupont, DUPONT Jean et Jean Dupont) qui ont reçu deux libellés sont signalées ; « Même personne » les réunit sous un seul libellé, « Deux personnes » retire la question. Les couples masculin et féminin (Louis et Louise, Pascal et Pascale) ne sont pas rapprochés. Idée reprise du rapport d'anonymisation de la Cour de cassation.
+- Contrôle final : un nom de une ou deux lettres (Li, Ba) est signalé, le contrôle automatique ne cherchant pas les mots de moins de trois lettres.
+- Indice de confiance : une personne trouvée à côté d'un mot de société ou de marque (« des actions Pierre Fabre ») porte la mention « à vérifier » et passe en tête de sa rubrique ; les mots de contexte (« née », « demeurant », « donataire ») confirment au contraire une personne. Idée reprise de l'analyseur Presidio.
+
+Personnes :
+
+- Nom de famille annoncé par son contexte, sans prénom ni civilité : « les époux Leforestier », « les consorts Duvernay », « la famille Martin », « veuve Dupont », « Gaillard, notaire ». « Succession » et « indivision » sont écartés, souvent suivis d'un adjectif.
+
+Tests :
+
+- Nouveaux cas : même personne (réunion et refus), Louis et Louise, nom très court, personne à vérifier, noms annoncés par leur contexte et pièges (« indivision Successorale », « L'Étude, notaire »).
+
 ## 0.7 (14 novembre 2026)
 
 Personnes :

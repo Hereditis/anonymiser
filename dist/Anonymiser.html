@@ -86,6 +86,7 @@ h1,h2{margin:0;font-weight:500;letter-spacing:-.015em;line-height:1.2}
 .ent .mot{font-weight:600}
 .ent .val{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ent .cnt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.ent .dt{font-weight:600;color:var(--goldd);margin-right:6px}
 .pied{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 20px}
 .pied .lien{font-size:13.5px}
 .vue{padding:22px 34px 40px;min-width:0;display:flex;flex-direction:column;gap:14px}
@@ -97,6 +98,7 @@ h1,h2{margin:0;font-weight:500;letter-spacing:-.015em;line-height:1.2}
 .control{max-width:860px;width:100%;margin:0 auto;font-size:14px;color:var(--ink2);border-left:2px solid var(--gold);padding:2px 0 2px 14px}
 .control.ok{border-left-color:var(--line);color:var(--muted)}
 .control ul{margin:4px 0 0;padding-left:18px}
+.control .lien{font-size:13.5px;margin-left:10px}
 pre.doc{margin:0 auto;max-width:860px;width:100%;background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(17,17,17,.04);padding:34px 38px;white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#333;min-height:60vh;tab-size:4}
 pre.doc mark{background:#111111;color:#fff;font-size:11.5px;padding:2px 6px;border-radius:2px;white-space:nowrap}
 pre.doc.orig mark{background:var(--tint);color:var(--ink);font-size:inherit;padding:1px 2px;white-space:normal;box-shadow:inset 0 -1.5px 0 var(--gold)}
@@ -631,7 +633,7 @@ const $ = (s, r) => (r || document).querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pdfjs = window.pdfjsLib || window['pdfjs-dist/build/pdf'];
 /* version et mises à jour : la page ne consulte jamais Internet d'elle-même ; le bouton ouvre la version en ligne, qui compare */
-const APP_VERSION = '0.7', BUILD_DATE = '14 novembre 2026';
+const APP_VERSION = '0.8', BUILD_DATE = '22 novembre 2026';
 const ONLINE_URL = 'https://hereditis.github.io/anonymiser/';
 function cmpVer(a, b){ const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < Math.max(x.length, y.length); i++){ const d = (x[i] || 0) - (y[i] || 0); if (d) return d; } return 0; }
 function updateCheck(fromVersion, online){
@@ -958,6 +960,9 @@ R('prenomNom', `(?<![\\p{L}])(${CAPTOK})${HS}([${UP}][\\p{Ll}'’]{2,}(?:-[${UP}
 /* pièces administratives : noms tout en capitales (NOM PRENOM), nom annoncé par son intitulé */
 R('capsRun', `(?<![\\p{L}\\p{N}'’\\-])${CAPSTOK}(?:${HS}${CAPSTOK}){1,6}(?![\\p{L}\\p{N}'’\\-])`);
 R('ctxnom', `(?<![\\p{L}])(?:${alt(['nom de naissance',"nom d'usage",'nom d’usage','nom de famille','nom marital','nom et prénom','nom et prénoms','nom prénom','nom','prénom','prénoms'])})${WS}:${WS}((?:${CAPSTOK}|${CAPTOK})(?:${HS}(?:${CAPSTOK}|${CAPTOK})){0,4})(?![\\p{L}])`);
+/* nom de famille annoncé par son contexte, sans prénom ni civilité : « les époux Leforestier », « la famille Martin », « Gaillard, notaire » ; pas « succession » ni « indivision », souvent suivis d'un adjectif (indivision Successorale) */
+R('ctxfam', `(?<![\\p{L}])(?:[EÉeé]poux|[Cc]onsorts|[Ff]amille|[Hh]éritiers|[Vv]euve|Vve)${HS}(?:de${HS}|d['’])?(${CAPSTOK}|${CAPTOK})(?:${HS}(${CAPSTOK}|${CAPTOK}))?(?![\\p{L}])`);
+R('notpost', `(?<![\\p{L}])(${CAPSTOK}|${CAPTOK}),${HS}(?:notaires?|NOTAIRES?)(?![\\p{L}])`);
 const CAPSBREAK = new Set(['ou','et','m','mr','mme','mlle','mle','ep','epouse','nee','ne','veuve','vve','par','chez','pour']);
 const ORGKW = new Set(['conseil','conseils','patrimoine','gestion','finance','finances','immobilier','immobiliere','holding','invest','investissement','investissements','groupe','cabinet','expertise','audit','associes','partenaires','consulting','services','developpement','participations','avocats','notaires','comptable','comptables','assurances','courtage','capital','partners','advisors','family','office']);
 R('capsCP', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?=${HSO},?${HSO}\\d{5}${HS}\\p{L})`);
@@ -1106,6 +1111,14 @@ function detectRaw(doc){
       push(m.index, m.index + m[0].length, 'personne_auto', '', m[0].replace(/\s+/g, ' '), 7);
     });
     each('notaire', m => push(g(m,1)[0], g(m,1)[1], 'notaire', '', m[1], 6));
+    const NOTPOST_NON = new Set(['etude','office','scp','selarl','selas','sas','cabinet','societe','maitre','chambre','conseil','notaire','notaires']);
+    each('notpost', m => { if (nomOk(m[1]) && !NOTPOST_NON.has(fold(m[1])) && !PRENOMS.has(fold(m[1])) && !commonWords(m[1])) push(g(m,1)[0], g(m,1)[1], 'notaire', '', m[1], 6); });
+    each('ctxfam', m => {
+      if (!nomOk(m[1]) || commonWords(m[1]) || MOIS_F.includes(fold(m[1]))) return;
+      /* « famille Martin Dupont » : le second mot n'est pris que s'il est lui aussi un nom (pas « Martin Patrimoine ») */
+      const two = m[2] && nomOk(m[2]) && !commonWords(m[2]);
+      push(g(m,1)[0], two ? g(m,2)[1] : g(m,1)[1], 'personne_auto', '', two ? m[1] + ' ' + m[2] : m[1], 6);
+    });
     /* NOM PRENOM tout en capitales : au moins un prénom connu, aucun mot du vocabulaire courant, aucune commune déjà reconnue */
     const cpCom = new Set(); for (const o of out) if (o.cat === 'commune') fold(o.value).split(' ').forEach(w => cpCom.add(w));
     each('capsRun', m => {
@@ -1139,7 +1152,22 @@ function detectRaw(doc){
 
 /* un mot du vocabulaire comptable ou juridique n'est jamais pris pour un nom ou une commune */
 function commonWords(v){ const ws = fold(v).split(' ').filter(w => w && !PARTICLES.has(w) && w !== '&'); return ws.length > 0 && ws.every(w => STOP.has(w)); }
-function attach(raw){
+/* indice de confiance d'une personne trouvée sans foyer : 3 sûr (civilité, mot de contexte), 2 probable, 1 à vérifier (voisinage d'une société ou d'une marque).
+   Les mots autour comptent comme dans Presidio : « née », « demeurant », « donateur » confirment, « Patrimoine », « Laboratoires » font douter. */
+const CTX_PERS_AV = /(?<!\p{L})(?:n[ée]e?|épou(?:x|se)|veu(?:f|ve)|demeurant|domicili[ée]e?|fils|fille|enfants?|petit[-\s](?:fils|fille)|donat(?:eur|rice)|donataire|héritière?|associée?|gérante?|titulaire|souscript(?:eur|rice)|assurée?|bénéficiaire|signataire|nom|prénoms?|conjoint|partenaire|cliente?|mère|père|frère|sœur|soeur)(?!\p{L})[^\n.;]{0,25}$/iu;
+const CTX_PERS_AP = /^\s*,?\s*(?:(?:n[ée]e?|demeurant|domicili[ée]e?|épou(?:x|se)|veu(?:f|ve)|gérante?|associée?)(?!\p{L})|\(\s*\d{1,3}\s*ans)/iu;
+const CTX_SOC_AP = /^\s+(?:Patrimoine|Conseils?|Capital|Gestion|Immobili(?:er|ère)|Invest\p{L}*|Holding|Finances?|Partners|Groupe?|Group|Consulting|Associés|Audit|Services|Laboratoires?|Pharma\p{L}*|Cosm\p{L}+|Assurances?|Expertise|Avocats|Notaires)(?!\p{L})/u;
+const CTX_SOC_AV = /(?<!\p{L})(?:soci[ée]t[ée]|sci|sarl|sas|sasu|eurl|marque|groupe|laboratoires?|fonds|banque|chez|actions?|titres?)\s*$/iu;
+function personConf(sp, text){
+  if (sp.sub) return 3;
+  if (!text) return 2;
+  const av = text.slice(Math.max(0, sp.s - 60), sp.s), ap = text.slice(sp.e, sp.e + 40);
+  if (CTX_SOC_AP.test(ap) || CTX_SOC_AV.test(av)) return 1;
+  if (CTX_PERS_AV.test(av) || CTX_PERS_AP.test(ap)) return 3;
+  return 2;
+}
+const setConf = (e, c) => { e.conf = Math.max(e.conf || 0, c); };
+function attach(raw, text){
   const r = [];
   for (const sp of raw){
     let e = null;
@@ -1150,6 +1178,7 @@ function attach(raw){
       e = linkPerson(sp.value, sp.sub);
       if (e){
         if (!onlyShared && !e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+        setConf(e, e.cat === 'personne' && !e.auto ? 3 : personConf(sp, text));
         r.push({s: sp.s, e: sp.e, key: e.key, prio: onlyShared && e.cat === 'personne' ? 0 : sp.prio});
         continue;
       } else {
@@ -1157,6 +1186,7 @@ function attach(raw){
         const pre = S.dico.dp.length ? 'Tiers' : 'Personne';
         e = S.ent.get(key) || makeEnt(key, 'personne_auto', '', pre + ' ' + nextNum(pre), sp.value);
         if (!e.forms.has(sp.value)){ e.forms.add(sp.value); e.dirty = true; }
+        setConf(e, personConf(sp, text));
       }
       r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
       continue;
@@ -1257,6 +1287,8 @@ function computeText(text, raw, ocr, tab){
     for (const re of (ocr ? e.resOcr : e.res)){ re.lastIndex = 0; let m; while ((m = re.exec(scan))){ cand.push({s: m.index, e: m.index + m[0].length, key: e.key, prio: 1}); if (!m[0].length) re.lastIndex++; } }
   }
   if (ocr) fuzzyOcr(text, cand);
+  /* deux graphies confirmées « même personne » dans le contrôle final : la seconde prend le libellé de la première */
+  if (S.alias && S.alias.size) for (let i = 0; i < cand.length; i++){ const k = S.alias.get(cand[i].key); if (k && S.ent.get(k)?.enabled) cand[i] = Object.assign({}, cand[i], {key: k}); }
   cand.sort((a, b) => (b.e - b.s) - (a.e - a.s) || a.prio - b.prio || a.s - b.s);
   const taken = new Uint8Array(text.length + 1), acc = [];
   for (const c of cand){
@@ -1338,11 +1370,55 @@ function control(){
     if (d.scanned) issues.push(`${d.name} : au moins une page n'a pas pu être lue, ne la transmettez pas telle quelle`);
     if (d.ocr) infos.push(`${d.name} est un scan (lecture fiable à ${d.conf} %) : relisez cette pièce.`);
   });
+  /* nom très court (Li, Ba, Ng) : le contrôle ci-dessus ne cherche pas les mots de moins de trois lettres */
+  for (const e of S.ent.values()){
+    if (!e.enabled || !e.count || (e.cat !== 'personne_auto' && e.cat !== 'personne')) continue;
+    const f = [...e.forms].find(x => x.split(/[\s\-]+/).some(t => !/\.$/.test(t) && !PARTICLES.has(fold(t)) && /^[a-z]{1,2}$/.test(fold(t).replace(/['’]/g, ''))));
+    if (f) infos.push(`« ${f} » (${e.label}) contient un nom très court : vérifiez à l'œil ses autres apparitions dans les pièces.`);
+  }
+  const pairs = S.samePairs = samePairs();
   const box = $('#control');
-  box.className = 'control ' + (issues.length ? 'ko' : 'ok');
+  box.className = 'control ' + (issues.length || pairs.length ? 'ko' : 'ok');
   box.innerHTML = (issues.length ? `<strong>Contrôle final : ${issues.length} point(s) à revoir</strong><ul>${issues.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : 'Contrôle final : aucune donnée identifiante détectée.')
+    + (pairs.length ? `<strong>Même personne ?</strong><ul class="same">${pairs.map((p, i) => `<li>« ${esc(p.fa)} » (${esc(p.a.label)}) et « ${esc(p.fb)} » (${esc(p.b.label)}) ont reçu deux libellés.<button class="lien" data-same="${i}">Même personne</button><button class="lien" data-diff="${i}">Deux personnes</button></li>`).join('')}</ul>` : '')
     + (infos.length ? `<ul>${infos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '');
   return issues;
+}
+/* même personne ? deux graphies très proches (Thibaut et Thibault, DUPONT Jean et Jean Dupont) ont reçu deux libellés :
+   on pose la question au lieu de fusionner d'office (idée reprise du rapport d'anonymisation de la Cour de cassation) */
+function samePairs(){
+  S.distinct = S.distinct || new Set();
+  const P = [...S.ent.values()].filter(e => e.enabled && e.count && (e.cat === 'personne_auto' || e.cat === 'personne'));
+  const toks = f => fold(f).split(/[\s\-]+/).map(t => t.replace(/[^a-z]/g, '')).filter(t => t && !PARTICLES.has(t));
+  /* Louis et Louise, Pascal et Pascale, Jean et Jeanne : deux prénoms, pas une faute de frappe */
+  const genre = (a, b) => { const [x, y] = a.length < b.length ? [a, b] : [b, a]; return ['e', 'le', 'ne', 'te'].some(s => y === x + s); };
+  const close = (a, b) => { if (a === b) return 0; if (genre(a, b)) return 9; const m = Math.min(a.length, b.length), max = m >= 9 ? 2 : m >= 4 ? 1 : 0; return lev(a, b, max) <= max ? 1 : 9; };
+  const near = (ta, tb) => { if (ta.length !== tb.length || !ta.length) return false; let diff = 0; for (let k = 0; k < ta.length; k++){ const c = close(ta[k], tb[k]); if (c === 9) return false; diff += c; } return diff > 0; };
+  const out = [];
+  for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++){
+    const A = P[i], B = P[j];
+    if (A.cat === 'personne' && B.cat === 'personne' && !A.auto && !B.auto) continue;   /* deux personnes du foyer saisies à la main sont distinctes */
+    const key = [A.key, B.key].sort().join('~');
+    if (S.distinct.has(key)) continue;
+    let hit = null;
+    for (const fa of A.forms){ for (const fb of B.forms){
+      const ta = toks(fa), tb = toks(fb), sa = [...ta].sort(), sb = [...tb].sort();
+      if (near(ta, tb) || (sa.join(' ') === sb.join(' ') && ta.join(' ') !== tb.join(' ')) || near(sa, sb)){ hit = [fa, fb]; break; }
+    } if (hit) break; }
+    if (hit) out.push({a: A, b: B, fa: hit[0], fb: hit[1], key});
+  }
+  return out;
+}
+function samePerson(i, yes){
+  const p = (S.samePairs || [])[i]; if (!p) return;
+  if (!yes){ S.distinct.add(p.key); control(); return; }
+  /* garde son libellé : la personne saisie à la main, sinon celle du foyer détecté, sinon la graphie la plus fréquente */
+  const rank = e => (e.cat === 'personne' ? (e.auto ? 1 : 2) : 0) * 1e6 + e.count;
+  const [keep, gone] = rank(p.b) > rank(p.a) ? [p.b, p.a] : [p.a, p.b];
+  S.alias = S.alias || new Map();
+  S.alias.set(gone.key, keep.key);
+  for (const [k, v] of S.alias) if (v === gone.key) S.alias.set(k, keep.key);
+  refresh(false);
 }
 
 /* ---------------- affichage ---------------- */
@@ -1353,6 +1429,8 @@ function renderEnts(){
   $('#nEnts').textContent = total + (total > 1 ? ' éléments masqués' : ' élément masqué');
   for (const cat of CAT_ORDER){
     const list = groups[cat]; if (!list || !list.length) continue;
+    /* ce qu'il faut relire vient en tête ; le reste garde l'ordre des libellés (tri stable) */
+    list.sort((a, b) => (a.conf === 1 ? 0 : 1) - (b.conf === 1 ? 0 : 1));
     const gdiv = document.createElement('div'); gdiv.className = 'grp';
     gdiv.innerHTML = `<h3>${esc(CATS[cat].name)}</h3>`;
     for (const e of list){
@@ -1363,7 +1441,7 @@ function renderEnts(){
       const forms = open ? 'non masqué' : cat === 'date' ? 'mois et année' : cat === 'illisible' ? 'scan' : SURFACE.has(cat) ? [...(e.forms.size ? e.forms : [e.primary])].join(', ') : (e.primary || '');
       row.innerHTML = `<input type="checkbox" ${e.enabled ? 'checked' : ''} aria-label="Masquer ${esc(open ? word : e.label)}">`
         + (open ? `<span class="mot">${esc(word)}</span>` : `<input type="text" class="lab" value="${esc(e.label)}" style="width:${labW(e.label)}" aria-label="Libellé" ${dateLike || cat === 'illisible' ? 'disabled' : ''}>`)
-        + `<span class="val" title="${esc(forms)}">${esc(forms)}</span><span class="cnt" title="Occurrences">${cat === 'suggestion' ? e.forms.size ? sugCount(e) : '' : e.count}</span>`;
+        + `<span class="val" title="${esc(e.conf === 1 ? 'Trouvé à côté d\'un mot de société ou de marque : vérifiez qu\'il s\'agit bien d\'une personne. ' + forms : forms)}">${e.conf === 1 ? '<b class="dt">à vérifier</b>' : ''}${esc(forms)}</span><span class="cnt" title="Occurrences">${cat === 'suggestion' ? e.forms.size ? sugCount(e) : '' : e.count}</span>`;
       const cb = row.querySelector('input[type=checkbox]'), inp = row.querySelector('.lab');
       cb.onchange = () => { e.enabled = cb.checked; setOver(e.key, {enabled: cb.checked}); refresh(false); };
       if (inp) inp.addEventListener('input', () => { inp.style.width = labW(inp.value); });
@@ -1704,13 +1782,13 @@ function analyze(){
     /* plus aucune pièce : le foyer détecté (ou celui de l'exemple) repart avec elles */
     document.querySelectorAll('#tPersons tr[data-auto], #tSocs tr[data-auto], #tPersons tr[data-ex], #tSocs tr[data-ex]').forEach(tr => tr.remove());
     $('#terms').value = $('#terms').value.split('\n').filter(l => l.trim() !== EX_TERM).join('\n');
-    S.over = new Map();
+    S.over = new Map(); S.distinct = new Set(); S.alias = new Map();
   }
   else if (!manual) prefill(true);
   S.ent = new Map(); S.counters = {};
   buildDico();
   for (const d of S.docs){
-    d.attached = attach(detectRaw(d));
+    d.attached = attach(detectRaw(d), d.text);
     if (d.lowconf && d.lowconf.length){
       const e = makeEnt('il|all', 'illisible', '', 'illisible', 'mots mal lus');
       for (const x of d.lowconf) d.attached.push({s: x.s, e: x.e, key: e.key, prio: 9});
@@ -2204,6 +2282,7 @@ $('#analyze').onclick = () => { $('#dlgFoyer').close(); run(); };
 $('#vRes').onclick = () => { S.view = 'res'; $('#vRes').classList.add('on'); $('#vOrig').classList.remove('on'); renderView(); };
 $('#vOrig').onclick = () => { S.view = 'orig'; $('#vOrig').classList.add('on'); $('#vRes').classList.remove('on'); renderView(); };
 $('#expZip').onclick = $('#expZipM').onclick = exportZip;
+$('#control').onclick = ev => { const b = ev.target.closest('button[data-same],button[data-diff]'); if (b) samePerson(+(b.dataset.same ?? b.dataset.diff), b.dataset.same != null); };
 $('#expCsv').onclick = exportCsv;
 $('#rGo').onclick = restore;
 const mode = retab => { $('#vAnon').classList.toggle('hidden', retab); $('#vRetab').classList.toggle('hidden', !retab); $('#mAnon').classList.toggle('on', !retab); $('#mRetab').classList.toggle('on', retab); show(); };
