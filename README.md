@@ -46,6 +46,7 @@ Rien n'est conservé à la fermeture de l'onglet : ni pièce, ni saisie, ni cook
 - Identifiants : SIREN et SIRET (clé de contrôle vérifiée), IBAN (clé vérifiée, ou en partie masqué), BIC, numéro de sécurité sociale, numéro fiscal, référence d'avis d'impôt, numéro FIP, numéros de contrat, parcelles cadastrales, références de publication foncière.
 - Formulaires remplis puis aplatis : la valeur posée sous « Nom », « Prénom », « Date de naissance », « Adresse », « N° de contrat »... est masquée d'après son intitulé.
 - Un numéro reconnu une fois est masqué partout où il réapparaît.
+- Relevés de portefeuille : numéros de contrat, de client et de fonds dédié masqués ; les titres, leurs codes ISIN et les montants restent lisibles.
 - Codes-barres (2D-Doc, QR codes, codes à barres) et cachets de signature électronique, noircis dans la copie en image ; images posées sur une page de texte lues par reconnaissance de caractères.
 - Courriels et numéros de téléphone français et suisses.
 - Dates de naissance, remplacées par l'âge, y compris dans une colonne « date de naissance » d'un tableau.

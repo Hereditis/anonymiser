@@ -1,5 +1,37 @@
 # Journal des versions
 
+## 0.10 (23 novembre 2026)
+
+Relevés de portefeuille (états de portefeuille, informations annuelles, relevés de contrat) :
+
+- Les codes ISIN ne sont plus jamais masqués : un code de titre suivi d'un montant n'est plus pris pour un numéro fiscal, un SIREN ou un IBAN.
+- Un titre n'est plus pris pour une personne, une société ou une adresse : « MERCEDES BENZ », « JOHN DEERE CAPITAL CORP », « Equity Fund - Hong Kong », « Corp Bd UCITS ». Une ligne de relevé se reconnaît à son code ISIN, à son taux de coupon ou à un mot d'émetteur.
+- L'en-tête « Nom » d'un tableau de titres n'est plus lu comme un champ de formulaire.
+- Un montant à décimales n'est plus coupé en deux pour faire un SIREN ou un numéro fiscal.
+
+Numéros :
+
+- Numéro de contrat, de souscription ou de client écrit au-dessus de son intitulé (« U70123 / Contrat n° »), numéro de contrat sous le titre d'un relevé (« Liberté 2011-704512 »).
+- Numéro d'un fonds dédié : code du fonds d'assurance spécialisé ou du fonds interne dédié, numéro du fonds chez la banque dépositaire (« Fonds : 70412345 Banque... »).
+- Numéro de client entre parenthèses après un nom ; date seule sur la ligne voisine d'un nom, quand elle donne un âge d'adulte, traitée comme une date de naissance.
+- Un numéro annoncé par son intitulé est masqué partout, même court ; un numéro court n'est jamais cherché dans un montant.
+
+Lecture :
+
+- Page blanche (dos de feuille, intercalaire) : elle n'est plus comptée comme un scan, et la pièce n'est plus signalée « lecture fiable à 0 % ».
+- Images d'une page de texte : seuls les mots bien lus sont gardés, un logo ou une photo de bandeau ne donne plus de masques ni de texte parasite.
+- Une rue qui porte un nom de personne (« rue Jean Moulin ») n'ajoute plus cette personne au foyer.
+- Le rapprochement des mots mal lus ne porte plus sur les adresses, faites de mots courants.
+
+Moins de bruit :
+
+- « PAR ZONE GEOGRAPHIQUE » n'est plus pris pour une adresse.
+- Sigles de registres et de taxes, devises, rubriques de relevé et villes de pied de page retirés des mots à vérifier ; les mots d'une ligne de titre n'y figurent plus.
+
+Tests :
+
+- Nouveau cas : relevé de portefeuille fictif (ISIN et titres intacts, numéros masqués).
+
 ## 0.9 (23 novembre 2026)
 
 Formulaires remplis (bulletins de souscription, fiches de renseignements) :
