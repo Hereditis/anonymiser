@@ -79,6 +79,41 @@ retenu
 LA SUITE DE CET AVIS EST CI-JOINTE
 `;
 
+// Relevé de portefeuille entièrement fictif (les codes ISIN sont ceux de titres cotés, publics)
+const RELEVE = `RELEVE DE VOTRE CONTRAT
+Liberté 2011-704512
+Valorisation \u2013 31 mars 2025
+Fonds d'Assurance
+Spécialisé
+SAF70123 1.513,33 512,64 775.808,93 EUR
+Fonds : 70412345 Banque Privée du Lac (Suisse) S.A.
+PAR ZONE GEOGRAPHIQUE
+Obligations
+Nom ISIN Quantité Devise Prix Total en EUR
+3.25% MERCEDES BENZ JAN32
+DE000A3LSYH6 000,00
+50 EUR 100,39 51 781,88
+4.9 JOHN DEERE CAPITAL CORP
+BONDS 2024-31 US0378331005 50 000,00
+3.0% WURTH FIN.INT 24/31 SR XS2911681083 000,00
+50 EUR 99,86 521,92
+Ubs (Lux) Equity Fund - Hong Kong -B-
+ISIN: FR0000120271
+Vos références
+EFR7001234
+Souscription n°
+U70123
+Contrat n°
+4170012
+Client n°
+12 chemin des Gentianes
+73000 CHAMBERY (FR)
+3012345678901 (FR)
+14/03/1961
+DUVERNAY MATHIEU (4170012)
+STATEMENT-20251231-U70123-fr-EFR7001234-CLI-4170012-LIF
+`;
+
 let failures = 0;
 function check(label, ok, detail){
   console.log((ok ? 'OK    ' : 'ECHEC ') + label + (ok || !detail ? '' : ' : ' + detail));
@@ -313,6 +348,18 @@ L'Étude, notaire à Annecy, a reçu l'acte.`);
   const [fpdf] = await Promise.all([page.waitForEvent('download', { timeout: 120000 }), page.locator('#expList [data-k=pdf]').first().click()]);
   await fpdf.saveAs(path.join(OUT, 'formulaire-caviarde.pdf'));
   check('formulaire aplati : PDF caviardé produit', fs.statSync(path.join(OUT, 'formulaire-caviarde.pdf')).size > 20000);
+
+  // 17. Relevé de portefeuille fictif : les titres et leurs codes ISIN restent lisibles, les numéros du contrat et du fonds sont masqués
+  await page.goto(PAGE);
+  await paste('releve', RELEVE);
+  const rl = await out(0);
+  check('relevé : codes ISIN intacts', ['DE000A3LSYH6', 'US0378331005', 'XS2911681083', 'FR0000120271'].every(x => rl.includes(x)), rl);
+  check('relevé : noms des titres, rubriques et banque intacts', ['MERCEDES BENZ', 'JOHN DEERE CAPITAL CORP', 'WURTH FIN.INT', 'Hong Kong', 'ZONE GEOGRAPHIQUE', 'Banque Privée du Lac'].every(x => rl.includes(x)), rl);
+  check('relevé : montants intacts', ['775.808,93', '51 781,88', '50 000,00', '99,86 521,92'].every(x => rl.includes(x)), rl);
+  const RLL = ['2011-704512', 'SAF70123', '70412345', 'EFR7001234', 'U70123', '4170012', 'DUVERNAY', 'MATHIEU', '14/03/1961', '3012345678901', 'Gentianes', 'CHAMBERY'];
+  check('relevé : numéros de contrat, de client et de fonds, nom, naissance, numéro fiscal et adresse masqués', leaks(rl, RLL).length === 0, leaks(rl, RLL).join(', '));
+  check('relevé : âge à la place de la date de naissance voisine du nom', /\[âge : \d+ ans\]/.test(rl), rl);
+  check('relevé : contrôle final au vert, sans faux IBAN', (await page.innerText('#control')).includes('aucune donnée identifiante'), await page.innerText('#control'));
 
   // 8. Version et vérification des mises à jour
   await page.goto(PAGE);
