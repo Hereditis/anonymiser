@@ -297,6 +297,23 @@ L'Étude, notaire à Annecy, a reçu l'acte.`);
   check('époux, consorts, « X, notaire » : nom masqué', leaks(cx, ['Leforestier', 'Gaillard', 'DUVERNAY']).length === 0, leaks(cx, ['Leforestier', 'Gaillard', 'DUVERNAY']).join(', '));
   check('succession, indivision, Étude : mots courants intacts', cx.includes('indivision Successorale') && cx.includes("L'Étude, notaire") && cx.includes('réglée en mai 2025'), cx);
 
+  // 16. Formulaire rempli puis aplati : les valeurs ne sont que du texte posé sous leur intitulé, la référence du document est en filigrane pivoté
+  await page.goto(PAGE);
+  await page.setInputFiles('#file', [FX('formulaire-aplati.pdf')]);
+  await page.waitForFunction(() => window.__anon.S.docs.length === 1, null, { timeout: 60000 }); await ready();
+  const fo = await out(0);
+  const FOL = ['DUVERNAY', 'Mathilde', '14/03/1961', 'Chambéry', 'CHAMBERY', 'gentianes', '73000', 'EFR7001234', 'U70123', 'PACK_70123', 'ROCHEMONT', 'ANTOINE'];
+  check('formulaire aplati : nom, prénom, naissance, adresse, numéros de contrat et référence du document masqués', leaks(fo, FOL).length === 0, leaks(fo, FOL).join(', '));
+  check('formulaire aplati : âge à la place de la date de naissance', /\[âge : \d+ ans\]/.test(fo));
+  check('formulaire aplati : intitulés, montants, pays et banque intacts', ['Nom', 'Prénom', 'Date de naissance', '450000', '1320000', 'FRANCE', 'BANQUE PRIVEE DU LAC', 'Souscripteur assuré'].every(x => fo.includes(x)), fo);
+  check('formulaire aplati : un numéro reconnu une fois est masqué partout, écrit autrement ou collé à un autre mot', !fo.includes('7001234') && /souscription \[N° de contrat 1\] et au fonds FAS-ADV-\[N° de contrat 1\]/.test(fo), fo);
+  const foyerF = await page.evaluate(() => [...document.querySelectorAll('#tPersons tbody tr')].map(tr => [...tr.querySelectorAll('[data-f]')].map(i => i.value).join('|')).join('\n'));
+  check('formulaire aplati : le nom garde ses particules dans le foyer', /Mathilde\|DUVERNAY DE LA TOUR/.test(foyerF) && /ANTOINE\|ROCHEMONT/.test(foyerF), foyerF);
+  await page.click('#openDl');
+  const [fpdf] = await Promise.all([page.waitForEvent('download', { timeout: 120000 }), page.locator('#expList [data-k=pdf]').first().click()]);
+  await fpdf.saveAs(path.join(OUT, 'formulaire-caviarde.pdf'));
+  check('formulaire aplati : PDF caviardé produit', fs.statSync(path.join(OUT, 'formulaire-caviarde.pdf')).size > 20000);
+
   // 8. Version et vérification des mises à jour
   await page.goto(PAGE);
   const upd = await page.evaluate(() => ({ href: document.querySelector('#updBtn').href, ver: document.querySelector('#verLabel').textContent }));
