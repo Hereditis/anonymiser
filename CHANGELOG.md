@@ -1,5 +1,35 @@
 # Journal des versions
 
+## 0.9 (23 novembre 2026)
+
+Formulaires remplis (bulletins de souscription, fiches de renseignements) :
+
+- Formulaire rempli puis aplati : la valeur d'un champ n'est qu'un texte posé sous son intitulé, dans une autre police. L'intitulé décide désormais : « Nom », « Prénom », « Date de naissance », « Ville de naissance », « Adresse », « Code postal », « Ville », « N° de souscription », « N° de contrat », « Dénomination sociale ». Le nom, le prénom, la date de naissance et l'adresse ne passent plus en clair faute de civilité ou de majuscules.
+- Le nom et le prénom de deux champs voisins font une seule personne, et le nom garde ses particules (« DUVERNAY DE LA TOUR »).
+- Le « Nom » d'une banque ou d'une société n'est pas pris pour une personne.
+- Nom de voie en minuscules après un numéro : « 12 chemin des gentianes ».
+
+Numéros :
+
+- Un numéro reconnu une fois (contrat, souscription, référence, IBAN, téléphone) est masqué partout où il réapparaît, écrit autrement ou collé à un autre mot (« FAS_ADV_EFR7001234 »).
+- Référence d'un document signé électroniquement (« Doc. ref. »), portée en filigrane sur chaque page.
+
+Copie caviardée :
+
+- Texte pivoté (filigrane en biais) : le masque suit la pente du texte.
+- Cachet de signature électronique : il porte le nom du signataire et n'est pas dans le texte de la page ; il est masqué en entier.
+- Image posée sur une page de texte (encadré, tampon, pièce collée) : elle est lue à part par reconnaissance de caractères, traits de tableau effacés, et ses mots sont masqués comme les autres.
+- Codes-barres à barres noircis, comme les 2D-Doc et les QR codes.
+
+Moins de masques inutiles :
+
+- Un pays (France, Luxembourg, Suisse...) n'est plus pris pour une commune, et n'est plus accroché au nom d'une commune.
+- Sigles financiers (OPCVM, FID, FAS, NIF...) retirés des mots à vérifier.
+
+Tests :
+
+- Nouvelle pièce fictive `formulaire-aplati.pdf` (formulaire aplati, filigrane pivoté, code-barres) et son cas dans `tests/run.js`.
+
 ## 0.8 (22 novembre 2026)
 
 Relecture :
