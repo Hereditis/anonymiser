@@ -633,7 +633,7 @@ const $ = (s, r) => (r || document).querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pdfjs = window.pdfjsLib || window['pdfjs-dist/build/pdf'];
 /* version et mises à jour : la page ne consulte jamais Internet d'elle-même ; le bouton ouvre la version en ligne, qui compare */
-const APP_VERSION = '0.9', BUILD_DATE = '23 novembre 2026';
+const APP_VERSION = '0.10', BUILD_DATE = '23 novembre 2026';
 const ONLINE_URL = 'https://hereditis.github.io/anonymiser/';
 function cmpVer(a, b){ const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < Math.max(x.length, y.length); i++){ const d = (x[i] || 0) - (y[i] || 0); if (d) return d; } return 0; }
 function updateCheck(fromVersion, online){
@@ -913,12 +913,12 @@ R('telfr', `(?<![\\p{L}\\d+])(?:(?:\\+|00)33${TSEP}?(?:\\(0\\)${TSEP}?)?[1-9]|0[
 R('telch', `(?<![\\p{L}\\d+])(?:\\+|00)41${TSEP}?(?:\\(0\\)${TSEP}?)?\\d{2}${TSEP}?\\d{3}(?:${TSEP}?\\d{2}){2}(?!\\d)`);
 R('iban', `(?<![A-Z0-9])[A-Z]{2}\\d{2}(?:[ \\u00a0]?[A-Z0-9]{4}){2,7}(?:[ \\u00a0]?[A-Z0-9]{1,4})?(?![A-Z0-9])`);
 R('bic', `(?<![\\p{L}])(?:BIC|SWIFT|${K('banque')})${WS}:?${WS}([A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?)(?![A-Za-z0-9])`);
-R('nir', `(?<!\\d)[12][\\s.]?\\d{2}[\\s.]?(?:0[1-9]|1[0-2]|[2-9]\\d)[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3}[\\s.]?\\d{2}(?!\\d)${CURR}`);
+R('nir', `(?<![A-Za-z])(?<!\\d,)(?<!\\d)[12][\\s.]?\\d{2}[\\s.]?(?:0[1-9]|1[0-2]|[2-9]\\d)[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3}[\\s.]?\\d{2}(?!\\d)${CURR}`);
 R('nirctx', `(?:${K('sécurité sociale')}|NIR|INSEE)[^\\n\\d]{0,25}([12][\\s.]?\\d{2}[\\s.]?\\d{2}[\\s.]?(?:\\d{2}|2[AB])[\\s.]?\\d{3}[\\s.]?\\d{3})(?![\\s.]?\\d)`);
-R('siret', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{5}(?![\\s.\\u00a0]?\\d)${CURR}`);
-R('siren', `(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}(?![\\s.\\u00a0]?\\d)${CURR}`);
+R('siret', `(?<![A-Za-z])(?<!\\d,)(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{5}(?![\\s.\\u00a0]?\\d)(?!,\\d)${CURR}`);
+R('siren', `(?<![A-Za-z])(?<!\\d,)(?<!\\d[\\s.\\u00a0]?)\\d{3}[\\s.\\u00a0]?\\d{3}[\\s.\\u00a0]?\\d{3}(?![\\s.\\u00a0]?\\d)(?!,\\d)${CURR}`);
 /* numéro fiscal : 13 chiffres, écrits d'un bloc ou groupés 2 2 3 3 3 comme sur les avis d'impôt (où il peut être suivi du numéro de feuillet) */
-R('fiscal', `(?<!\\d)[0-3]\\d${G1}\\d{2}${G1}\\d{3}${G1}\\d{3}${G1}\\d{3}(?!\\d)|(?<!\\d[\\s.]?)[0-3]\\d(?:[\\s\\u00a0]?\\d){11}(?![\\s.]?\\d)${CURR}`);
+R('fiscal', `(?<!\\d)[0-3]\\d${G1}\\d{2}${G1}\\d{3}${G1}\\d{3}${G1}\\d{3}(?!\\d)|(?<![A-Za-z])(?<!\\d,)(?<!\\d[\\s.]?)[0-3]\\d(?:[\\s\\u00a0]?\\d){11}(?![\\s.]?\\d)(?!,\\d)(?!-\\d)${CURR}`);
 R('fiscalctx', `(?<![\\p{L}])(?:${K('numéro')}|[Nn][°ºo]\\.?|${K('identifiant')})${HSO}${K('fiscal')}[^\\n\\d]{0,24}?((?:[0-9OoQIl|SB]${HSO}){12}[0-9OoQIl|SB])(?![0-9])`);
 /* avis d'impôt : référence de l'avis, numéro FIP, identifiant du service, numéro de télédéclarant */
 R('refavis', `(?<![\\p{L}\\d])\\d{2}${G1}\\d{2}${G1}[A-Z0-9]\\d{6}${G1}\\d{2}(?![\\p{L}\\d])`);
@@ -964,6 +964,25 @@ R('ctxnom', `(?<![\\p{L}])(?:${alt(['nom de naissance',"nom d'usage",'nom d’us
 R('ctxfam', `(?<![\\p{L}])(?:[EÉeé]poux|[Cc]onsorts|[Ff]amille|[Hh]éritiers|[Vv]euve|Vve)${HS}(?:de${HS}|d['’])?(${CAPSTOK}|${CAPTOK})(?:${HS}(${CAPSTOK}|${CAPTOK}))?(?![\\p{L}])`);
 R('notpost', `(?<![\\p{L}])(${CAPSTOK}|${CAPTOK}),${HS}(?:notaires?|NOTAIRES?)(?![\\p{L}])`);
 const CAPSBREAK = new Set(['ou','et','m','mr','mme','mlle','mle','ep','epouse','nee','ne','veuve','vve','par','chez','pour']);
+/* code ISIN d'un titre (deux lettres, neuf caractères, une clé) : public, utile au bilan, jamais masqué */
+function isinOk(v){ let d = ''; for (const ch of v) d += /[A-Z]/.test(ch) ? String(ch.charCodeAt(0) - 55) : ch; return luhn(d); }
+const ISIN = /(?<![A-Z0-9])[A-Z]{2}[A-Z0-9]{9}\d(?![A-Z0-9])/g;
+/* une ligne de relevé de portefeuille : code ISIN à proximité, taux de coupon juste avant, ou mot d'émetteur ou de fonds sur la ligne.
+   Les noms qui s'y trouvent sont des titres (MERCEDES BENZ, JOHN DEERE CAPITAL CORP, UBS Equity Fund - Hong Kong), pas des personnes. */
+const FIN_WORD = /(?<![\p{L}])(?:Funds?|Fonds|UCITS|ETF|SICAV|FCP|OPCVM|OPCI|Bonds?|NTS|MTN|Corp|Inc|PLC|GmbH|Equity|Leasing|Financial|Tranche|Senior|Capital\s+Corp)(?![\p{L}])/u;
+function finCue(t, s, e){
+  const a = t.lastIndexOf('\n', s - 1) + 1; let b = t.indexOf('\n', e); if (b < 0) b = t.length;
+  let c = t.indexOf('\n', b + 1); if (c < 0) c = t.length; let d2 = t.indexOf('\n', c + 1); if (d2 < 0) d2 = t.length;
+  const line = t.slice(a, b), near = t.slice(a, d2);
+  if (/(?<![\p{L}])ISIN(?![\p{L}])/.test(near)) return true;
+  ISIN.lastIndex = 0; let m; while ((m = ISIN.exec(near))) if (isinOk(m[0])) return true;
+  if (/\d(?:[.,]\d+)?\s?%?\s+$/.test(t.slice(a, s)) && /\d[.,]\d+\s?%?\s+$|\d\s?%\s+$/.test(t.slice(a, s))) return true;   /* coupon devant le nom : « 3.25% MERCEDES BENZ » */
+  return FIN_WORD.test(line);
+}
+R('numavant', `(?<![\\p{L}\\p{N}])([A-Z]{0,4}\\d[A-Z0-9\\-\\/]{3,18})[ \\t]*\\n[ \\t]*(?:(Client)|Souscription|Contrat|Police|Adh[ée]sion|Dossier)${HS}n[°ºo]\\.?(?![\\p{L}])`);
+R('contratligne', `(?<![\\p{L}])(?:CONTRAT|Contrat|POLICE|Police)(?![\\p{L}])[^\\n]{0,40}\\n[^\\n\\d]{0,30}(\\d{2,4}[-\\/]\\d{4,8})(?![\\d\\/-])`);
+R('numfonds', `(?<![\\p{L}])(?:Fonds\\s+d['’]Assurance\\s+Sp[ée]cialis[ée]|Fonds\\s+Internes?\\s+D[ée]di[ée]s?|Fonds\\s+interne\\s+collectif)\\s*(?:[-\u2013:]\\s*)?([A-Z]{2,4}\\d{4,8})(?![A-Z0-9])`);
+R('numfondsbanque', `(?<![\\p{L}])Fonds${HSO}:${HSO}(\\d{6,12})(?=${HS}\\p{Lu})`);
 const ORGFIELD = new Set(['bank','banque','banking','private','life','company','sa','ag','plc','ltd','lux','luxembourg','europe','france','international','asset','management','wealth','assurance','assurances','mutuelle','caisse','credit','societe','generale']);
 /* référence d'un document signé électroniquement, portée en filigrane sur chaque page */
 R('docref', `(?<![\\p{L}])(?:Doc\\.?\\s*r[ée]f\\.?|R[ée]f(?:[ée]rence|\\.)?\\s+(?:du\\s+)?(?:document|dossier))\\s*:?\\s*([A-Z0-9][A-Z0-9_\\-\\/]{5,30})(?![\\p{L}\\p{N}])`);
@@ -972,7 +991,7 @@ R('capsCP', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(
 R('capsOrg', `(?<![\\p{L}\\p{N}])(${CAPSTOK}(?:${HS}(?:&${HS})?${CAPSTOK}){1,4})(?![\\p{L}\\p{N}])`);
 R('kwOrg', `(?<![\\p{L}])(?:[Cc]abinet|CABINET|[ÉéEe]tude|[Ee]xpert-comptable|[Cc]ommissaire aux comptes)${HS}(?!(?:[Nn]otarial|[Dd]e|[Dd]u|[Dd]es|[Ll]a|[Ll]e)(?![\\p{L}]))(${CAPTOK}|${CAPSTOK})((?:${HS}(?:&|et|de|du|des)?${HSO}(?:${CAPTOK}|${CAPSTOK})){0,3})`);
 const CAPS = new RegExp(`(?<![\\p{L}\\p{N}])[${UP}][${UP}'’\\-]{2,}(?![\\p{L}\\p{N}])`, 'gu');
-const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh pep otc bank lux one misc ifd opc opcvm fid fas cds nif caa cfd aaaa jj ocde gep fse ucits etf sicav fcp fia fcpr fcpi fip isin lei kyc fatca crs eee ht ttc pea per perp pee perco liberte egalite fraternite centre centres finances publiques publique public publics direction generale service services particuliers professionnels avis prelevement prelevements sociaux social suite cet cette ci jointe joint informations information complementaires complementaire nombre deductibles deductible global globale imputations imputation csg crds prel sol psol tenu elements element que avez declares declare declaree declarees qui sera rembourse remboursee remboursement automatique aucune demarche faire votre vos calcul plafond plafonds epargne detail details source marginal residence exclusive alternee part foyer declarant declarants declar feuillet reference references contact contacts numero role fip rdv doc est sip said sie sdif cdif pole tresor tresorerie somme sommes payer paye payee titre revenu revenus pension pensions rente rentes foncier fonciers fonciere foncieres mobilier mobiliers capitaux bareme quotient familial decote messagerie securisee telephone place horaires lundi mardi mercredi jeudi vendredi samedi dimanche janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre notice disponible espace virement emetteur identifiant banque etabli etablie etablissement recouvrement mise montant retenu retenue nom prenom prenoms naissance usage enfants maries mineurs majeurs celibataires handicapes handicapees personnes recueillies cas particulier difficulte oeuvres etrangers etranger proportionnel forfaitaire liberatoire deja verse verses trop soumis soumise avant apres voir attention important rappel information').split(' '));
+const STOP = new Set(('sci sarl sas sasu eurl snc scp selarl selas sa sc gfa gfv gaec scea earl scm scpi opci gie rcs siren siret tva iban bic nir pacs eur euro euros cedex bp cs tel fax email article articles divers titre titres chapitre section annexe annexes acte actes donation donations statuts entre les le la des du de et ou en au aux par pour sur sous dans avec sans soussigne soussignes soussignee soussignees ont etat civil france republique francaise notaire notaires office notarial societe societes civile immobiliere capital objet siege duree gerance gerant gerants associe associes parts sociales assemblee generale ordinaire extraordinaire decision decisions unanimite majorite agrement cession cessions transmission deces dissolution liquidation exercice comptes resultat affectation dispositions generales particulieres diverses fiscales designation origine propriete prix paiement charges conditions jouissance usufruit nue pleine usufruitier usufruitiers reserve quotite disponible rapport reduction clause clauses beneficiaire beneficiaires contrat contrats assurance vie souscripteur assure montant date fait lieu signature signatures paraphe page pages total nota bene mme mlle monsieur madame mademoiselle messieurs mesdames maitre docteur vu considerant attendu ainsi il elle ils elles nous vous non oui immeuble biens bien meubles mobilier numeraire apport apports constitution fonds banque compte bancaire mandat mandataire procuration pouvoir pouvoirs regime matrimonial communaute separation mariage divorce succession heritier heritiers legataire legs testament conjoint survivant enfants enfant epoux epouse veuf veuve celibataire majeur mineur demeurant domicilie nationalite francaise profession retraite fin debut copie conforme original expedition minute repertoire enregistrement publicite fonciere service hypotheques cadastre lot lots superficie contenance ares centiares hectares resultat resultats total totaux bilan bilans actif passif exercice exercices report provisions provision dettes dette charges charge produits produit montant montants neant chiffre affaires valeur valeurs ajoutee soldes solde intermediaires intermediaire exploitation financier financiers financiere financieres exceptionnel exceptionnels exceptionnelle exceptionnelles impot impots amortissement amortissements immobilisations immobilisation immobilise capitaux propres situation nette net nets brut bruts variation variations stock stocks creances creance disponibilites tresorerie emprunts emprunt fournisseurs fournisseur clients client personnel salaires salaire cotisations cotisation sociales sociale taxes dotations dotation reprises reprise subventions subvention reserves legale statutaires liasse imprimes imprime sommaire attestation annexe annexes detaille detailles detaillee detaillees comptes annuels annuel mission presentation cerfa formulaire declaration regime simplifie reel normal designation adresse entreprise entreprises identification activite activites effectif effectifs plus moins deficit deficits benefice benefices perte pertes ecart ecarts contribution credit credits reduction reductions mecenat dons marge marges achats achat ventes vente production consommation consommations interets interet operations operation commun communes generale general generaux autres autre divers diverses frais etablissement participation participations titres titre prets pret depots cautionnements acomptes avances acompte avance factures facture ventilation releve releves calcul taux base bases imposable imposition societe sas sci regularisation regularisations comptable comptables fiscal fiscaux fiscale fiscales fiscalite cvae cfe tva is ir annee exercice conformite liste dettes engagement engagements hors date dates periode periodes ouverture cloture neant oui non materiel materiels mobilier outillage installations installation agencements agencement amenagements logiciels logiciel marques brevets fonds incorporelles incorporels corporelles corporels financieres impots taxes versements assimiles locaux bureau bureaux loyers loyer location locations entretien reparations assurance assurances honoraires publicite transports deplacements missions receptions postaux telecommunications bancaires services exterieurs sous traitance energie eau gaz electricite carburant carburants fournitures petit equipement forme denomination objet preambule expose ceci cela comparution comparant comparants presentes present qualite qualites declaration declarations garantie garanties bail baux loyer loyers taxe impot impots fiscal fiscale annee annees mois jour jours euro chf usd sasu holding group groupe ltd inc gmbh zone geographique sectorielle hong kong statement essential wealth life lif adv lbc ret pca vni tactical description nominal quantite values latentes evolution repartition devises type transaction pfl gbp jpy sek usd chf cad aud nok dkk coordonnees references sri cee corp bonds senior leasing positions valorisation operations releve mouvement mouvements unites unite prix liquidites actions obligations pep otc bank lux one misc ifd opc opcvm fid fas cds nif caa cfd aaaa jj ocde gep fse ucits etf sicav fcp fia fcpr fcpi fip isin lei kyc fatca crs eee ht ttc pea per perp pee perco liberte egalite fraternite centre centres finances publiques publique public publics direction generale service services particuliers professionnels avis prelevement prelevements sociaux social suite cet cette ci jointe joint informations information complementaires complementaire nombre deductibles deductible global globale imputations imputation csg crds prel sol psol tenu elements element que avez declares declare declaree declarees qui sera rembourse remboursee remboursement automatique aucune demarche faire votre vos calcul plafond plafonds epargne detail details source marginal residence exclusive alternee part foyer declarant declarants declar feuillet reference references contact contacts numero role fip rdv doc est sip said sie sdif cdif pole tresor tresorerie somme sommes payer paye payee titre revenu revenus pension pensions rente rentes foncier fonciers fonciere foncieres mobilier mobiliers capitaux bareme quotient familial decote messagerie securisee telephone place horaires lundi mardi mercredi jeudi vendredi samedi dimanche janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre notice disponible espace virement emetteur identifiant banque etabli etablie etablissement recouvrement mise montant retenu retenue nom prenom prenoms naissance usage enfants maries mineurs majeurs celibataires handicapes handicapees personnes recueillies cas particulier difficulte oeuvres etrangers etranger proportionnel forfaitaire liberatoire deja verse verses trop soumis soumise avant apres voir attention important rappel information').split(' '));
 
 /* tableau (export CSV, FEC, classeur Excel) : chaque cellule est lue comme une ligne, pour qu'aucune détection ne franchisse une colonne ; un caractère pour un, les positions ne bougent pas */
 const cells = text => text.replace(/\t/g, '\n');
@@ -1154,6 +1173,7 @@ function detectRaw(doc){
     const org = () => fold(v).split(' ').some(w => ORGKW.has(w) || ORGFIELD.has(w));
     if (f.kind === 'nom' || f.kind === 'prenom' || f.kind === 'nomprenom'){
       if (!opt('oCiv') || (!f.person && org())) continue;        /* « Nom » d'une banque ou d'une société : pas une personne */
+      if (/[\d%€$]/.test(v) || v.split(/\s+/).length > 6 || finCue(t, s, e)) continue;   /* « Nom » d'un titre dans un relevé */
       push(s, e, 'personne_auto', '', f.person ? f.person.prenoms + ' ' + f.person.nom : v, 1);
       out[out.length - 1].person = f.person || null; out[out.length - 1].field = true;
     }
@@ -1163,7 +1183,7 @@ function detectRaw(doc){
     else if (f.kind === 'ville' || f.kind === 'cpville'){ const c = stripCountry(v.replace(/^\d{5}\s+/, '')); if (opt('oAddr') && c && !COUNTRIES.has(fold(c))) push(s, e, 'commune', '', c, 1, null, (f.cp || v).match(/^\d{2}(?=\d{3})/)?.[0]); }
     else if (f.kind === 'cp'){ if (opt('oAddr') && /^\d{4,5}$/.test(v.replace(/\s/g, ''))){ if (f.ville && !COUNTRIES.has(fold(stripCountry(f.ville)))) push(s, e, 'commune', '', stripCountry(f.ville), 1, null, v.slice(0, 2)); else if (!f.ville) push(s, e, 'identifiant', 'Code postal', v, 2); } }
     else if (f.kind === 'contrat'){ if (/\d/.test(v)) push(s, e, 'identifiant', 'N° de contrat', v, 1); }
-    else if (f.kind === 'societe'){ push(s, e, 'societe', '', v, 1); }
+    else if (f.kind === 'societe'){ push(s, e, 'societe', '', v, 1); out[out.length - 1].field = true; }
   }
   each('docref', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'Réf. document', m[1], 2));
   if (opt('oOrg')){
@@ -1172,7 +1192,36 @@ function detectRaw(doc){
     each('capsOrg', m => { const ws = fold(m[1]).split(' '); if (ws.length <= 3 && !ws.some(w => /^(de|du|des|d'|la|le|les|et|aux|au|en|sur|l')$/.test(w)) && ws.some(w => ORGKW.has(w)) && orgOk(m[1])) push(g(m,1)[0], g(m,1)[1], 'societe', '', m[1].replace(/\s+/g, ' '), 6); });
     each('kwOrg', m => { const v = (m[1] + (m[2] || '')).replace(/\s+/g, ' ').trim(); if (orgOk(v)) push(g(m,1)[0], g(m,1)[0] + m[1].length + (m[2] || '').length, 'societe', '', v, 6); });
   }
-  return out;
+  /* numéros de contrat écrits au-dessus de leur intitulé (« U70123 / Contrat n° »), sous le titre du relevé, numéros de fonds dédiés */
+  each('numavant', m => { if (/\d{3}/.test(m[1])) push(g(m,1)[0], g(m,1)[1], 'identifiant', m[2] ? 'N° client' : 'N° de contrat', m[1], 1); });
+  each('contratligne', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de contrat', m[1], 1));
+  each('numfonds', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de fonds', m[1], 1));
+  each('numfondsbanque', m => push(g(m,1)[0], g(m,1)[1], 'identifiant', 'N° de fonds', m[1], 1));
+  const persons = out.filter(o => o.cat === 'personne_auto');
+  for (const o of persons){
+    /* numéro de client entre parenthèses après le nom : « DUVERNAY MATHIEU (4170012) » */
+    const cl = /^[ \t]*\((\d{5,10})\)/.exec(t.slice(o.e, o.e + 16));
+    if (cl) push(o.e + cl[0].length - cl[1].length - 1, o.e + cl[0].length - 1, 'identifiant', 'N° client', cl[1], 1);
+    /* date seule sur la ligne voisine d'un nom, qui donne un âge d'adulte : date de naissance d'un tableau sans intitulé sur la ligne */
+    const a = t.lastIndexOf('\n', o.s - 1), pa = a > 0 ? t.lastIndexOf('\n', a - 1) + 1 : -1;
+    const prev = pa >= 0 ? t.slice(pa, a) : '', b = t.indexOf('\n', o.e), nb = b >= 0 ? t.indexOf('\n', b + 1) : -1, next = b >= 0 ? t.slice(b + 1, nb < 0 ? t.length : nb) : '';
+    for (const [line, start] of [[prev, pa], [next, b + 1]]){
+      const dm = /^[ \t]*(\d{1,2}[\/.]\d{1,2}[\/.](?:19|20)\d{2})[ \t]*$/.exec(line), dd = dm && parseDate(dm[1]);
+      if (dd && ageAt(dd) >= 16 && ageAt(dd) <= 110 && !out.some(x => x.cat === 'naissance' && x.s < start + line.length && x.e > start)) birthDate(start + line.indexOf(dm[1]), start + line.indexOf(dm[1]) + dm[1].length, dm[1]);
+    }
+  }
+  /* garde-fous : rien d'un code ISIN, ni un titre pris pour une personne, une société ou une adresse, ni une rue qui porte un nom de personne */
+  const isins = []; ISIN.lastIndex = 0; { let m; while ((m = ISIN.exec(t))) if (isinOk(m[0])) isins.push([m.index, m.index + 12]); }
+  const addr = out.filter(o => o.cat === 'adresse');
+  return out.filter(o => {
+    if ((o.cat === 'identifiant' || o.cat === 'contact') && isins.some(([a, b]) => o.s < b && o.e > a)) return false;
+    if (o.field) return true;
+    if (o.cat === 'personne_auto' && !o.sub && addr.some(x => x.s <= o.s && x.e >= o.e)) return false;
+    if (o.cat === 'personne_auto' && !o.sub && finCue(t, o.s, o.e)) return false;
+    if (o.cat === 'societe' && finCue(t, o.s, o.e)) return false;
+    if (o.cat === 'adresse' && !/^\d/.test(o.value) && finCue(t, o.s, o.e)) return false;
+    return true;
+  });
 }
 
 /* un mot du vocabulaire comptable ou juridique n'est jamais pris pour un nom ou une commune */
@@ -1261,7 +1310,7 @@ function attach(raw, text){
     const norm = (sp.cat === 'contact' && sp.sub === 'Courriel') ? sp.value.toLowerCase() : digits(sp.value).length >= 6 ? digits(sp.value) : fold(sp.value);
     const key = 'id|' + sp.sub + '|' + norm;
     e = S.ent.get(key) || makeEnt(key, sp.cat, sp.sub, sp.sub + ' ' + nextNum(sp.sub), sp.value.replace(/\s+/g, ' '));
-    if (e.propag == null){ const c = sp.value.replace(/[^0-9A-Za-z]/g, ''), nd = (c.match(/\d/g) || []).length; e.propag = sp.sub !== 'Courriel' && sp.sub !== 'Code postal' && c.length >= 6 && (nd >= 8 || (nd >= 3 && /[A-Za-z]/.test(c))); }
+    if (e.propag == null){ const c = sp.value.replace(/[^0-9A-Za-z]/g, ''), nd = (c.match(/\d/g) || []).length; e.propag = sp.sub !== 'Courriel' && sp.sub !== 'Code postal' && (c.length >= 6 && (nd >= 8 || (nd >= 3 && /[A-Za-z]/.test(c))) || (nd >= 5 && /^(?:N° de contrat|N° client|N° de fonds|Réf\. document)$/.test(sp.sub))); }   /* un numéro annoncé par son intitulé est sûr, même court */
     r.push({s: sp.s, e: sp.e, key: e.key, prio: sp.prio});
   }
   return r;
@@ -1292,8 +1341,8 @@ const FUZZ = new RegExp(`(?<![\\p{L}\\p{N}])(?:[dDlL]['’])?([${UP}][\\p{L}\\-]
 function fuzzyOcr(text, cand){
   const toks = new Map();
   for (const e of S.ent.values()){
-    if (!e.enabled || !SURFACE.has(e.cat) || e.cat === 'suggestion') continue;
-    for (const f of e.forms) for (const t of fold(f).split(' ')) if (t.replace(/[^a-z]/g, '').length >= 6 && !STOP.has(t)) toks.set(t, e.key);
+    if (!e.enabled || !SURFACE.has(e.cat) || e.cat === 'suggestion' || e.cat === 'adresse') continue;   /* une adresse est faite de mots courants (Parc d'Activités) */
+    for (const f of e.forms) for (const t0 of fold(f).split(' ')){ const t = t0.replace(/^[dl]'/, ''); if (t.replace(/[^a-z]/g, '').length >= 6 && !STOP.has(t)) toks.set(t, e.key); }
   }
   if (!toks.size) return;
   FUZZ.lastIndex = 0; let m;
@@ -1316,7 +1365,11 @@ function computeText(text, raw, ocr, tab){
   /* un numéro reconnu une fois (contrat, référence, IBAN, téléphone) est masqué partout, même collé à un autre mot (FAS_ADV_EFR7001234) ou écrit autrement */
   for (const e of S.ent.values()){
     if (!e.enabled || !e.propag || !e.primary) continue;
-    if (!e.reProp){ const c = [...e.primary.replace(/[^0-9A-Za-z]/g, '')]; e.reProp = new RegExp('(?<![\\p{L}\\p{N}])' + c.map(ch => /\d/.test(ch) ? (OCRD[ch] ? '[' + OCRD[ch] + ']' : ch) : '[' + ch.toLowerCase() + ch.toUpperCase() + ']').join('[ ._\\-\\u00a0\\u202f]{0,2}') + '(?![\\p{L}\\p{N}])', 'gu'); }
+    if (!e.reProp){
+      /* un numéro court tout en chiffres n'est cherché que d'un seul tenant, et jamais dans un montant (4 165 031,00) */
+      const c = [...e.primary.replace(/[^0-9A-Za-z]/g, '')], short = c.length < 8 && c.every(ch => /\d/.test(ch));
+      e.reProp = new RegExp('(?<![\\p{L}\\p{N}])' + (short ? '(?<!\\d[ .,])' : '') + c.map(ch => /\d/.test(ch) ? (!short && OCRD[ch] ? '[' + OCRD[ch] + ']' : ch) : '[' + ch.toLowerCase() + ch.toUpperCase() + ']').join(short ? '' : '[ ._\\-\\u00a0\\u202f]{0,2}') + '(?![\\p{L}\\p{N}])' + (short ? '(?![.,]\\d)(?! \\d{3}(?!\\d))' : ''), 'gu');
+    }
     e.reProp.lastIndex = 0; let m;
     while ((m = e.reProp.exec(scan))){ cand.push({s: m.index, e: m.index + m[0].length, key: e.key, prio: 2}); if (!m[0].length) e.reProp.lastIndex++; }
   }
@@ -1360,6 +1413,8 @@ function computeAll(){
     return r;
   });
 }
+/* sigles de registres et de taxes, villes étrangères d'un pied de page d'assureur : pas des noms à proposer */
+const SUGSTOP = new Set('pfo secteur prime vat rpm rpr btw kbc pec iva ivass brussels bruxelles brussel milan milano geneva geneve rome roma zurich london londres luxembourg leudelange capellen leu tva rcs uid che'.split(' ').concat(['a b c']));
 function findSuggestions(){
   const known = new Set();
   for (const e of S.ent.values()) for (const f of e.forms) fold(f).split(' ').forEach(x => known.add(x));
@@ -1372,7 +1427,7 @@ function findSuggestions(){
     while ((m = CAPS.exec(d.text))){
       const w = m[0]; const f = fold(w);
       const f2 = f.replace(/^[dl]'/, '');
-      if (taken[m.index] || STOP.has(f) || STOP.has(f2) || known.has(f) || lower.has(f) || lower.has(f2) || /^[IVXLCDM]+(?:-[IVXLCDM]+)*$/.test(w) || COUNTRIES.has(f) || /^X+[O0]?$/.test(w) || f.replace(/[^a-z]/g, '').length < 3 || f.split(/[ \-]/).every(x => STOP.has(x) || lower.has(x))) continue;
+      if (taken[m.index] || finCue(d.text, m.index, m.index + w.length) || SUGSTOP.has(f) || STOP.has(f) || STOP.has(f2) || known.has(f) || lower.has(f) || lower.has(f2) || /^[IVXLCDM]+(?:-[IVXLCDM]+)*$/.test(w) || COUNTRIES.has(f) || /^X+[O0]?$/.test(w) || f.replace(/[^a-z]/g, '').length < 3 || f.split(/[ \-]/).every(x => STOP.has(x) || lower.has(x))) continue;
       cnt.set(w, (cnt.get(w) || 0) + 1);
     }
   });
@@ -1399,7 +1454,7 @@ function control(){
     }
     const strict = [['email','une adresse électronique'],['telfr','un numéro de téléphone'],['nir','un numéro de sécurité sociale']];
     for (const [k, lab] of strict){ const re = new RegExp(RX[k].source, 'gu'); const m = out.match(re); if (m) issues.push(`${d.name} contient encore ${lab} : ${m[0]}`); }
-    const ib = (out.match(new RegExp(RX.iban.source, 'gu')) || []).filter(ibanOk); if (ib.length) issues.push(`${d.name} contient encore un IBAN`);
+    const ib = (out.match(new RegExp(RX.iban.source, 'gu')) || []).filter(ibanOk).filter(x => !isinOk(x.replace(/\s/g, '').slice(0, 12)));   /* un code ISIN suivi d'un montant n'est pas un IBAN */ if (ib.length) issues.push(`${d.name} contient encore un IBAN`);
     const sir = (out.match(new RegExp(RX.siren.source, 'gu')) || []).filter(x => luhn(digits(x))); if (sir.length) issues.push(`${d.name} contient encore un numéro qui ressemble à un SIREN : ${sir[0]}`);
     if (d.scanned) issues.push(`${d.name} : au moins une page n'a pas pu être lue, ne la transmettez pas telle quelle`);
     if (d.ocr) infos.push(`${d.name} est un scan (lecture fiable à ${d.conf} %) : relisez cette pièce.`);
@@ -1612,6 +1667,19 @@ function formFields(items){
   const pairs = [];
   for (const L of labels){
     const l = L.it;
+    /* en-tête de tableau (« Nom | ISIN | Quantité | Devise ») : ce n'est pas un champ à remplir */
+    if (flat.filter(w => w !== l && w.fn === l.fn && Math.abs(w.y - l.y) <= 0.3 * l.h && !labelKind(w.str)).length >= 2){
+      /* et sous lui une colonne : au moins trois lignes de valeurs d'affilée, sans autre intitulé entre elles.
+         Une rangée d'intitulés de formulaire (« Pays de naissance | Lieu de naissance | Nationalité ») n'a qu'une valeur sous chacun. */
+      const col = flat.filter(w => w !== l && l.y - w.y > 0.4 * l.h && l.y - w.y <= 14 * l.h && w.x >= l.x - 4 && w.x <= l.x + Math.max(l.w + 10, 40)).sort((a, b) => b.y - a.y);
+      let rows = 0, last = l.y;
+      for (const w of col){
+        if (w.fn === l.fn || last - w.y > 3.2 * Math.max(l.h, w.h)) break;
+        if (last - w.y > 0.4 * w.h) rows++;
+        last = w.y;
+      }
+      if (rows >= 3) continue;
+    }
     for (const v of flat){
       if (v === l || v.fn === l.fn || !/[\p{L}\p{N}]/u.test(v.str) || labelKind(v.str) || /:\s*$/.test(v.str) || /^\s*\(.*\)\s*$/.test(v.str)) continue;   /* ni un intitulé, ni une indication comme « (JJ/MM/AAAA) » */
       const hm = Math.max(l.h, v.h), dy = l.y - v.y;
@@ -1716,9 +1784,15 @@ async function readPdf(file){
             part.getContext('2d').drawImage(cv, x0, y0, w, h, 0, 0, w, h);
             noLines(part);
             const o = await ocrCanvas(part, `${file.name}, image de la page ${p}`);
-            if (!o.pt.trim()) continue;
-            const base = pt.length + 1; pt += '\n' + o.pt;
-            for (const it of o.items) extra.push({s: base + it.s, e: base + it.e, str: it.str, conf: it.conf, box: [it.box[0] + x0, it.box[1] + y0, it.box[2] + x0, it.box[3] + y0]});
+            /* seuls les mots bien lus sont gardés : un logo ou une photo ne donne que du bruit */
+            const kept = o.items.filter(it => it.conf >= 60 && ((it.str.match(/[\p{L}\p{N}]/gu) || []).length >= 3 || /\d/.test(it.str) && it.str.length >= 2));
+            if (!kept.length) continue;
+            pt += '\n';
+            kept.forEach((it, k) => {
+              if (k) pt += /\n/.test(o.pt.slice(kept[k - 1].e, it.s)) ? '\n' : ' ';
+              const s0 = pt.length; pt += it.str;
+              extra.push({s: s0, e: pt.length, str: it.str, conf: it.conf, box: [it.box[0] + x0, it.box[1] + y0, it.box[2] + x0, it.box[3] + y0]});
+            });
           }
           if (extra.length) pg.ocrx = {scale, items: extra};
         } catch (err){ console.error(err); }
@@ -1731,7 +1805,8 @@ async function readPdf(file){
         const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
         await page.render({canvasContext: ctx, viewport: vp, intent: 'print'}).promise;
         const r = await ocrCanvas(cv, `${file.name}, page ${p} sur ${pdf.numPages}`);
-        pt = r.pt; pg = {ocr: true, scale, items: r.items}; nOcr++; confSum += r.conf;
+        /* page blanche (dos de feuille, intercalaire) : rien à lire, ce n'est pas un scan */
+        if (r.items.some(it => it.conf >= 30 && /[\p{L}\p{N}]{2}/u.test(it.str))){ pt = r.pt; pg = {ocr: true, scale, items: r.items}; nOcr++; confSum += r.conf; }
       } catch (err){ console.error(err); failed = true; pt = ''; pg = {items: []}; }
     }
     pages.push(Object.assign(pg, {offset: text.length, len: pt.length}));
@@ -1756,6 +1831,7 @@ const OCR_SCALE = 3, LOW_CONF = 60;
 /* un mot mal lu n'est masqué que s'il peut cacher un nom ou un identifiant : initiale en capitale hors vocabulaire courant, ou lettres et chiffres mêlés.
    Les montants, les mots en minuscules et les intitulés suivis de points de conduite restent lisibles. */
 function riskyWord(str, sure){
+  if (/^[A-Z]{2}[A-Z0-9]{9}\d$/.test(String(str || '').replace(/[^A-Za-z0-9]/g, ''))) return false;   /* code ISIN */
   if (/[.…·_]{4,}|…{2,}/.test(String(str || ''))) return false;   /* intitulé suivi de points de conduite : une ligne de tableau, pas un nom */
   const c = String(str || '').replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
   if (!c) return false;
@@ -1777,7 +1853,7 @@ function riskyWord(str, sure){
 }
 function lowConf(pages){
   const sure = new Set(), out = [];
-  const read = pg => pg.ocr ? pg.items : pg.ocrx ? pg.ocrx.items : [];
+  const read = pg => pg.ocr ? pg.items : [];
   for (const pg of pages) for (const it of read(pg)) if (it.conf >= 80 && it.str) sure.add(fold(it.str.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')));
   for (const pg of pages) for (const it of read(pg)) if (it.conf < LOW_CONF && riskyWord(it.str, sure)) out.push({s: pg.offset + it.s, e: pg.offset + it.e});
   return out;
